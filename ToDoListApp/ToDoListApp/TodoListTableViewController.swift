@@ -59,7 +59,7 @@ class TodoListTableViewController: UITableViewController {
         //SingletonClass.sharedInstance.todoList[indexPath.row].hascomplete = tappedItem.hascomplete
         todoListHelper.lists[indexPath.row].hascomplete = tappedItem.hascomplete
         
-        
+        tableView.moveRowAtIndexPath(indexPath, toIndexPath: NSIndexPath(forRow: todoListHelper.lists.count - 1, inSection: 0))
         
         //todoListHelper.lists = SingletonClass.sharedInstance.todoList
         //        println("diselect result is\(tappedItem.hascomplete)")
@@ -145,6 +145,11 @@ class TodoListTableViewController: UITableViewController {
     // Override to support rearranging the table view.
     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
         
+        
+        let item = todoListHelper.lists[fromIndexPath.row]
+       todoListHelper.lists.removeAtIndex(fromIndexPath.row)
+       todoListHelper.lists.insert(item, atIndex: toIndexPath.row)
+        
         //        let item = todoListHelper.lists[fromIndexPath.row - 1]
         
         //        let item = list[fromIndexPath.row - 1]
@@ -159,9 +164,9 @@ class TodoListTableViewController: UITableViewController {
     // Override to support conditional rearranging of the table view.
     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         
-        if indexPath.row == 0 {
-            return false
-        }
+//        if indexPath.row == 0 {
+//            return false
+//        }
         
         // Return NO if you do not want the item to be re-orderable.
         return true
