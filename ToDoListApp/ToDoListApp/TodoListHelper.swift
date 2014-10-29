@@ -20,19 +20,31 @@ class SingletonClass {
 
 var todoListHelper : TodoHelper = TodoHelper ()
 
-struct TodoList {
+class TodoList {
     var name = ""
     var desc = ""
     var hascomplete = false
-  
-
+    var finishTime = ""
+    
+    init()
+    {
+        
+    }
+    init(name:String,desc:String,hascomplete:Bool)
+        
+    {
+        self.name = name
+        self.desc = desc
+        self.hascomplete = hascomplete
+    }
 }
 
 
 
 class TodoHelper: NSObject {
     
-//    var hascomplete = false
+    //    var hascomplete = false
+    var currentTodo = TodoList()
 
     var lists = [TodoList]()
     
@@ -40,6 +52,8 @@ class TodoHelper: NSObject {
         
         lists.append(TodoList(name: name, desc: desc,hascomplete:complete))
     }
+    
+    
     
     
     

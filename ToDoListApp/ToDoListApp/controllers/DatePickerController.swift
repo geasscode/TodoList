@@ -11,6 +11,9 @@ import UIKit
 class DatePickerController: UIViewController {
     
     
+    var modifyDetail = ""
+    var navigationTitle = ""
+    
     
     @IBOutlet weak var datePickers: UIDatePicker!
     @IBOutlet weak var dateLabel: UILabel!
@@ -36,7 +39,6 @@ class DatePickerController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureDatePicker()
     }
     
@@ -82,8 +84,12 @@ class DatePickerController: UIViewController {
        //dateLabel.text = NSDateFormatter.localizedStringFromDate(NSDate(), dateStyle: .MediumStyle, timeStyle: .ShortStyle)
         
         dateLabel.text = dateFormatter.stringFromDate(datePickers.date)
-        let time = dateFormatter.stringFromDate(datePickers.date)
         
+        let currentTodoList  =  todoListHelper.currentTodo
+      
+
+        let time = dateFormatter.stringFromDate(datePickers.date)
+        todoListHelper.currentTodo.finishTime = time
         println("currentTime is \(time)")
         
         //        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"

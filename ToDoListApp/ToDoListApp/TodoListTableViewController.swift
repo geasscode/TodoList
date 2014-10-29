@@ -25,7 +25,11 @@ class TodoListTableViewController: UITableViewController {
     
     
     
-    
+    override func viewWillAppear(animated: Bool) // Called when the view is about to made visible. Default does nothing
+
+    {
+        todoTableView.reloadData()
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -41,7 +45,7 @@ class TodoListTableViewController: UITableViewController {
     //    }
     
     
-      func finishTime() {
+    func finishTime() {
         
         var todoList: UIStoryboard!
         todoList = UIStoryboard(name: "TodoListDate", bundle: nil)
@@ -61,7 +65,7 @@ class TodoListTableViewController: UITableViewController {
         self.presentViewController(dataPickerVC, animated: true, completion: nil)
         
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
@@ -103,6 +107,7 @@ class TodoListTableViewController: UITableViewController {
         // Configure the cell...
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "todolist")
         
+        todoListHelper.currentTodo = todoListHelper.lists[indexPath.row]
         //cell.textLabel.text = SingletonClass.sharedInstance.todoList[indexPath.row].name
         cell.textLabel.text =  todoListHelper.lists[indexPath.row].name
         
@@ -110,7 +115,10 @@ class TodoListTableViewController: UITableViewController {
         cell.detailTextLabel?.text = todoListHelper.lists[indexPath.row].desc
         cell.accessoryType =  .DisclosureIndicator
         
-        
+        if(todoListHelper.currentTodo.finishTime != "")
+        {
+             cell.detailTextLabel?.text = "预计完成时间:" + todoListHelper.currentTodo.finishTime
+        }
         //        let check = SingletonClass.sharedInstance.todoList[indexPath.row] as TodoList
         let check = todoListHelper.lists[indexPath.row] as TodoList
         
@@ -199,11 +207,17 @@ class TodoListTableViewController: UITableViewController {
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        var datePicker:DatePickerController=segue.destinationViewController as DatePickerController
-        //        datePicker.delegate=self
-        //        channelC.channelData=self.channelData
-    }
-    
+    //    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    //
+    //        var index : NSIndexPath = sender as NSIndexPath
+    //
+    //        var datePicker:DatePickerController=segue.destinationViewController as DatePickerController
+    //        datePicker.modifyDetail = todoListHelper.lists[index.row].desc
+    //        datePicker.navigationTitle = todoListHelper.lists[index.row].name
+    //
+    //        //        datePicker.delegate=self
+    //        //        channelC.channelData=self.channelData
+    //    }
+    //    
     
 }
