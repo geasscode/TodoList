@@ -40,6 +40,28 @@ class TodoListTableViewController: UITableViewController {
     //        return 0
     //    }
     
+    
+      func finishTime() {
+        
+        var todoList: UIStoryboard!
+        todoList = UIStoryboard(name: "TodoListDate", bundle: nil)
+        let dataPickerVC  = todoList.instantiateViewControllerWithIdentifier("dataPicker") as UIViewController
+        //
+        //
+        //        self.navigationController?.pushViewController(dataPickerVC, animated: true)
+        
+        
+        //返回push的上一视图：
+        //返回指定视图popToViewController
+        //self.navigationController?.popToRootViewControllerAnimated(true)
+        
+        //'Receiver (<ToDoListApp.UserAddVC: 0x7fbdd8e257c0>) has no segue with identifier 'dataPicker''
+        //只适合同一个storyboard的不同ViewController在带有箭头的成为segue那里设置identifier。
+        // self.performSegueWithIdentifier("dataPicker", sender: self)
+        self.presentViewController(dataPickerVC, animated: true, completion: nil)
+        
+    }
+
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
@@ -61,9 +83,11 @@ class TodoListTableViewController: UITableViewController {
         
         tableView.moveRowAtIndexPath(indexPath, toIndexPath: NSIndexPath(forRow: todoListHelper.lists.count - 1, inSection: 0))
         
+        finishTime()
+        
         //todoListHelper.lists = SingletonClass.sharedInstance.todoList
         //        println("diselect result is\(tappedItem.hascomplete)")
-        todoTableView.reloadData()
+        //todoTableView.reloadData()
         
     }
     override func setEditing(editing: Bool, animated: Bool) {
@@ -84,24 +108,22 @@ class TodoListTableViewController: UITableViewController {
         
         // cell.detailTextLabel?.text = SingletonClass.sharedInstance.todoList[indexPath.row].desc
         cell.detailTextLabel?.text = todoListHelper.lists[indexPath.row].desc
-        
+        cell.accessoryType =  .DisclosureIndicator
         
         
         //        let check = SingletonClass.sharedInstance.todoList[indexPath.row] as TodoList
         let check = todoListHelper.lists[indexPath.row] as TodoList
         
         
-        if check.hascomplete{
-            cell.accessoryType = .Checkmark
-            println("if method result is \(check.hascomplete)")
-            
-        }
-        else{
-            cell.accessoryType = .None
-            println("else method result is \(check.hascomplete)")
-            
-        }
-        
+        //        if check.hascomplete{
+        //  cell.accessoryType = .Checkmark
+        //
+        //        }
+        //        else{
+        //            cell.accessoryType = .None
+        //
+        //        }
+        //
         return cell
     }
     
@@ -113,9 +135,9 @@ class TodoListTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return NO if you do not want the specified item to be editable.
         
-//        if indexPath.row == 0 {
-//            return false
-//        }
+        //        if indexPath.row == 0 {
+        //            return false
+        //        }
         return true
     }
     
@@ -147,8 +169,8 @@ class TodoListTableViewController: UITableViewController {
         
         
         let item = todoListHelper.lists[fromIndexPath.row]
-       todoListHelper.lists.removeAtIndex(fromIndexPath.row)
-       todoListHelper.lists.insert(item, atIndex: toIndexPath.row)
+        todoListHelper.lists.removeAtIndex(fromIndexPath.row)
+        todoListHelper.lists.insert(item, atIndex: toIndexPath.row)
         
         //        let item = todoListHelper.lists[fromIndexPath.row - 1]
         
@@ -164,23 +186,24 @@ class TodoListTableViewController: UITableViewController {
     // Override to support conditional rearranging of the table view.
     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         
-//        if indexPath.row == 0 {
-//            return false
-//        }
+        //        if indexPath.row == 0 {
+        //            return false
+        //        }
         
         // Return NO if you do not want the item to be re-orderable.
         return true
     }
     
     
-    /*
+    
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+        var datePicker:DatePickerController=segue.destinationViewController as DatePickerController
+        //        datePicker.delegate=self
+        //        channelC.channelData=self.channelData
     }
-    */
+    
     
 }

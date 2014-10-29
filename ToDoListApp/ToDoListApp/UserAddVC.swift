@@ -42,6 +42,31 @@ class UserAddVC:UIViewController, UITextFieldDelegate {
     }
     
     
+    @IBAction func finishTimeAction(sender: UIButton) {
+        
+        var todoList: UIStoryboard!
+        todoList = UIStoryboard(name: "TodoListDate", bundle: nil)
+        let dataPickerVC  = todoList.instantiateViewControllerWithIdentifier("dataPicker") as UIViewController
+//
+//        
+//        self.navigationController?.pushViewController(dataPickerVC, animated: true)
+        
+        
+        //返回push的上一视图：
+        //返回指定视图popToViewController
+        self.navigationController?.popToRootViewControllerAnimated(true)
+        
+        //'Receiver (<ToDoListApp.UserAddVC: 0x7fbdd8e257c0>) has no segue with identifier 'dataPicker''
+        //只适合同一个storyboard的不同ViewController在带有箭头的成为segue那里设置identifier。
+       // self.performSegueWithIdentifier("dataPicker", sender: self)
+        self.presentViewController(dataPickerVC, animated: true, completion: nil)
+        
+
+        
+        
+
+        
+    }
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         self.view.endEditing(true)
     }

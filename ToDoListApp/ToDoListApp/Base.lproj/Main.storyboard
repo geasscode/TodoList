@@ -68,12 +68,23 @@
                                     <segue destination="J5k-YP-lwK" kind="show" id="uZc-z3-b27"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1J4-Tk-glF">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="完成时间">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="finishTimeAction:" destination="lw9-uK-7LB" eventType="touchUpInside" id="Cjm-zN-ucj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="gYG-sp-45N" firstAttribute="leading" secondItem="0ch-cB-TWC" secondAttribute="leadingMargin" constant="25" id="0oG-sr-ACq"/>
+                            <constraint firstItem="1J4-Tk-glF" firstAttribute="top" secondItem="NfJ-w9-6G4" secondAttribute="bottom" constant="25" id="3PC-sZ-v7E"/>
                             <constraint firstItem="gYG-sp-45N" firstAttribute="top" secondItem="iyu-D8-6ia" secondAttribute="bottom" constant="53" id="Igh-oc-bQO"/>
                             <constraint firstItem="ojB-PM-fmk" firstAttribute="top" secondItem="NfJ-w9-6G4" secondAttribute="bottom" constant="212" id="NEV-gd-pYu"/>
+                            <constraint firstItem="1J4-Tk-glF" firstAttribute="centerX" secondItem="NfJ-w9-6G4" secondAttribute="centerX" id="TGP-ni-OsI"/>
                             <constraint firstItem="aIm-ZX-kae" firstAttribute="trailing" secondItem="gYG-sp-45N" secondAttribute="trailing" id="UrF-G7-UhS"/>
                             <constraint firstItem="aIm-ZX-kae" firstAttribute="centerX" secondItem="NfJ-w9-6G4" secondAttribute="centerX" id="elI-dO-xXv"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gYG-sp-45N" secondAttribute="trailing" constant="54" id="nmD-ET-8C5"/>
@@ -81,6 +92,24 @@
                             <constraint firstItem="aIm-ZX-kae" firstAttribute="top" secondItem="gYG-sp-45N" secondAttribute="bottom" constant="26" id="uZT-Pd-EsC"/>
                             <constraint firstItem="gYG-sp-45N" firstAttribute="leading" secondItem="aIm-ZX-kae" secondAttribute="leading" id="vIA-cF-Udq"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="1J4-Tk-glF"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="3PC-sZ-v7E"/>
+                                <exclude reference="TGP-ni-OsI"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="1J4-Tk-glF"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="3PC-sZ-v7E"/>
+                                <include reference="TGP-ni-OsI"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="qe1-3E-yY1"/>
                     <connections>
