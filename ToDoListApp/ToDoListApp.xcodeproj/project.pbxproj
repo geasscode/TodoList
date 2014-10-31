@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F743606E1A01E3FC00B58E66 /* TodoListDateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F743606D1A01E3FC00B58E66 /* TodoListDateTableViewController.swift */; };
+		F74360711A02101300B58E66 /* icon-calendar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F74360701A02101300B58E66 /* icon-calendar@2x.png */; };
 		F74A338F19FFA04F00F5BA5A /* TodoListBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74A338E19FFA04F00F5BA5A /* TodoListBaseCell.swift */; };
 		F74A339219FFA1D300F5BA5A /* TodoListCheckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74A339119FFA1D300F5BA5A /* TodoListCheckCell.swift */; };
 		F74A339519FFA34800F5BA5A /* TodoListDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74A339419FFA34800F5BA5A /* TodoListDescriptor.swift */; };
@@ -38,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F743606D1A01E3FC00B58E66 /* TodoListDateTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListDateTableViewController.swift; sourceTree = "<group>"; };
+		F74360701A02101300B58E66 /* icon-calendar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-calendar@2x.png"; sourceTree = "<group>"; };
 		F74A338E19FFA04F00F5BA5A /* TodoListBaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListBaseCell.swift; sourceTree = "<group>"; };
 		F74A339119FFA1D300F5BA5A /* TodoListCheckCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListCheckCell.swift; sourceTree = "<group>"; };
 		F74A339419FFA34800F5BA5A /* TodoListDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListDescriptor.swift; sourceTree = "<group>"; };
@@ -80,6 +84,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F743606F1A020F4600B58E66 /* image */ = {
+			isa = PBXGroup;
+			children = (
+				F74360701A02101300B58E66 /* icon-calendar@2x.png */,
+			);
+			path = image;
+			sourceTree = "<group>";
+		};
 		F74A338D19FFA03800F5BA5A /* cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +109,7 @@
 				F79610EA19FF74C800F7EC51 /* TodoListTableViewController.swift */,
 				F79610EB19FF74C800F7EC51 /* UserAddVC.swift */,
 				F7F7D84F1A00855F00D3B7B9 /* DatePickerController.swift */,
+				F743606D1A01E3FC00B58E66 /* TodoListDateTableViewController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -132,6 +145,7 @@
 		F79610C619FF737600F7EC51 /* ToDoListApp */ = {
 			isa = PBXGroup;
 			children = (
+				F743606F1A020F4600B58E66 /* image */,
 				F7F7D84C1A0082CB00D3B7B9 /* Views */,
 				F74A339319FFA30D00F5BA5A /* descriptor */,
 				F74A339019FFA10900F5BA5A /* controllers */,
@@ -263,6 +277,7 @@
 				F79610CF19FF737600F7EC51 /* Main.storyboard in Resources */,
 				F7F7D84E1A0082D800D3B7B9 /* TodoListDate.storyboard in Resources */,
 				F79610D419FF737600F7EC51 /* LaunchScreen.xib in Resources */,
+				F74360711A02101300B58E66 /* icon-calendar@2x.png in Resources */,
 				F79610D119FF737600F7EC51 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,6 +305,7 @@
 				F74A339219FFA1D300F5BA5A /* TodoListCheckCell.swift in Sources */,
 				F74A339519FFA34800F5BA5A /* TodoListDescriptor.swift in Sources */,
 				F79610CA19FF737600F7EC51 /* AppDelegate.swift in Sources */,
+				F743606E1A01E3FC00B58E66 /* TodoListDateTableViewController.swift in Sources */,
 				F74A338F19FFA04F00F5BA5A /* TodoListBaseCell.swift in Sources */,
 				F74A339719FFA35F00F5BA5A /* TodoListRowDescriptor.swift in Sources */,
 				F7F7D8501A00855F00D3B7B9 /* DatePickerController.swift in Sources */,

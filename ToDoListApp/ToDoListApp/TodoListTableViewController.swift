@@ -26,7 +26,7 @@ class TodoListTableViewController: UITableViewController {
     
     
     override func viewWillAppear(animated: Bool) // Called when the view is about to made visible. Default does nothing
-
+        
     {
         todoTableView.reloadData()
     }
@@ -49,7 +49,11 @@ class TodoListTableViewController: UITableViewController {
         
         var todoList: UIStoryboard!
         todoList = UIStoryboard(name: "TodoListDate", bundle: nil)
-        let dataPickerVC  = todoList.instantiateViewControllerWithIdentifier("dataPicker") as UIViewController
+        
+        
+        let dataPickerVC  = todoList.instantiateViewControllerWithIdentifier("todoListTime") as UIViewController
+        
+        //        let dataPickerVC  = todoList.instantiateViewControllerWithIdentifier("dataPicker") as UIViewController
         //
         //
         //        self.navigationController?.pushViewController(dataPickerVC, animated: true)
@@ -62,7 +66,9 @@ class TodoListTableViewController: UITableViewController {
         //'Receiver (<ToDoListApp.UserAddVC: 0x7fbdd8e257c0>) has no segue with identifier 'dataPicker''
         //只适合同一个storyboard的不同ViewController在带有箭头的成为segue那里设置identifier。
         // self.performSegueWithIdentifier("dataPicker", sender: self)
-        self.presentViewController(dataPickerVC, animated: true, completion: nil)
+        //使用self.presentViewController意味着导航条会失效，弄了很长时间才发现。
+        self.navigationController?.pushViewController(dataPickerVC, animated: true)
+//        self.presentViewController(dataPickerVC, animated: true, completion: nil)
         
     }
     
@@ -117,7 +123,7 @@ class TodoListTableViewController: UITableViewController {
         
         if(todoListHelper.currentTodo.finishTime != "")
         {
-             cell.detailTextLabel?.text = "预计完成时间:" + todoListHelper.currentTodo.finishTime
+            cell.detailTextLabel?.text = "预计完成时间:" + todoListHelper.currentTodo.finishTime
         }
         //        let check = SingletonClass.sharedInstance.todoList[indexPath.row] as TodoList
         let check = todoListHelper.lists[indexPath.row] as TodoList
@@ -218,6 +224,6 @@ class TodoListTableViewController: UITableViewController {
     //        //        datePicker.delegate=self
     //        //        channelC.channelData=self.channelData
     //    }
-    //    
+    //
     
 }

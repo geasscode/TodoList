@@ -5,7 +5,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Todo List Table View Controller-->
+        <!--TodoList-->
         <scene sceneID="YQZ-qB-JtM">
             <objects>
                 <tableViewController id="J5k-YP-lwK" customClass="TodoListTableViewController" customModule="ToDoListApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -26,7 +26,7 @@
                             <outlet property="delegate" destination="J5k-YP-lwK" id="OEP-FX-8jD"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="k2x-yw-YCH"/>
+                    <navigationItem key="navigationItem" title="TodoList" id="k2x-yw-YCH"/>
                     <connections>
                         <outlet property="todoTableView" destination="gLE-EL-h3Y" id="TNn-QT-RrN"/>
                     </connections>
@@ -47,11 +47,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="标题" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gYG-sp-45N">
-                                <rect key="frame" x="41" y="117" width="489" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aIm-ZX-kae">
                                 <rect key="frame" x="41" y="173" width="489" height="128"/>
                                 <color key="backgroundColor" red="0.3541818289" green="1" blue="0.26431352209999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -77,6 +72,11 @@
                                     <action selector="finishTimeAction:" destination="lw9-uK-7LB" eventType="touchUpInside" id="Cjm-zN-ucj"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="标题" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gYG-sp-45N">
+                                <rect key="frame" x="41" y="117" width="489" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>

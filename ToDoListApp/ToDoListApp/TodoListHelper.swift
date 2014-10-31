@@ -24,7 +24,10 @@ class TodoList {
     var name = ""
     var desc = ""
     var hascomplete = false
+    var startTime = ""
     var finishTime = ""
+    var remarks = ""
+    var navigationTitle = ""
     
     init()
     {

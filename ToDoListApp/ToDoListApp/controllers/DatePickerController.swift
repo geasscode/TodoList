@@ -8,12 +8,16 @@
 
 import UIKit
 
+@objc protocol FromViewControllerDelegate {
+     func showDate(data: AnyObject)
+}
 class DatePickerController: UIViewController {
     
     
     var modifyDetail = ""
-    var navigationTitle = ""
-    
+    var time = ""
+    weak var delegate: FromViewControllerDelegate?
+
     
     @IBOutlet weak var datePickers: UIDatePicker!
     @IBOutlet weak var dateLabel: UILabel!
@@ -39,6 +43,8 @@ class DatePickerController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let title = todoListHelper.currentTodo
+        navigationItem.title = todoListHelper.currentTodo.navigationTitle
         configureDatePicker()
     }
     
@@ -81,15 +87,15 @@ class DatePickerController: UIViewController {
     func updateDatePickerLabel() {
         
         //如果属性定制不多的话可以用
-       //dateLabel.text = NSDateFormatter.localizedStringFromDate(NSDate(), dateStyle: .MediumStyle, timeStyle: .ShortStyle)
+        //dateLabel.text = NSDateFormatter.localizedStringFromDate(NSDate(), dateStyle: .MediumStyle, timeStyle: .ShortStyle)
         
         dateLabel.text = dateFormatter.stringFromDate(datePickers.date)
         
         let currentTodoList  =  todoListHelper.currentTodo
-      
-
-        let time = dateFormatter.stringFromDate(datePickers.date)
-        todoListHelper.currentTodo.finishTime = time
+        
+        
+        time = dateFormatter.stringFromDate(datePickers.date)
+        //        todoListHelper.currentTodo.finishTime = time
         println("currentTime is \(time)")
         
         //        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
@@ -101,21 +107,65 @@ class DatePickerController: UIViewController {
     @IBAction func finishAction(sender: UIButton) {
         
         finish()
+        //用segue方式传值：如果是tableView 还可以传indexpath 过去。
+       // self.performSegueWithIdentifier("mydateTable", sender: sender)
+        
     }
     
     func finish()
     {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        
+        if(todoListHelper.currentTodo.navigationTitle == "开始时间")
+        {
+            todoListHelper.currentTodo.startTime = time
+            //            dateTable.currentTodo.startTime = time
+            
+        }
+        else
+        {
+            todoListHelper.currentTodo.finishTime = time
+            
+            //            dateTable.currentTodo.finishTime = time
+            
+        }
+        
+
+        //        self.dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.popViewControllerAnimated(true)
+//        delegate?.showDate(time)
+        
+        
+      
         
     }
-    /*
+    
+    @IBAction func cancel(sender: UIBarButtonItem) {
+        
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    
+    
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        
+        
+        var dateTable :TodoListDateTableViewController = segue.destinationViewController as TodoListDateTableViewController
+        if(todoListHelper.currentTodo.navigationTitle == "开始时间")
+        {
+            dateTable.currentTodo.startTime = time
+            
+        }
+        else
+        {
+            dateTable.currentTodo.finishTime = time
+            
+        }
     }
-    */
+    
     
 }
