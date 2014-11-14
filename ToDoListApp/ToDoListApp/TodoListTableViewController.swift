@@ -11,6 +11,7 @@ import UIKit
 class TodoListTableViewController: UITableViewController {
     
     var myTodoList = todoListHelper.lists
+    var headerVC  = HeaderVC(nibName: "HeaderVC", bundle: NSBundle.mainBundle())
     
     @IBOutlet weak var todoTableView: UITableView!
     override func viewDidLoad() {
@@ -22,10 +23,14 @@ class TodoListTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addItem")
+
+        
+        
         var nib = UINib(nibName:"TodoItemCell", bundle: nil)
         self.tableView.registerNib(nib, forCellReuseIdentifier: "todoItem")
         
-        var headerVC:HeaderVC = HeaderVC(nibName: "HeaderVC", bundle: NSBundle.mainBundle())
+//       headerVC = HeaderVC(nibName: "HeaderVC", bundle: NSBundle.mainBundle())
 //        headerVC.newTask.text = "hello,world"
         
         self.tableView.tableHeaderView = headerVC.view
@@ -52,7 +57,23 @@ class TodoListTableViewController: UITableViewController {
     //        // Return the number of sections.
     //        return 0
     //    }
-    
+    func addItem()
+    {
+        println("hello,world")
+        
+        todoListHelper.addTask("hello", desc: "world",complete:false)
+        //        SingletonClass.sharedInstance.todoList = todoListHelper.lists
+       
+        todoTableView.reloadData()
+
+        
+        //todoListHelper.addTask(toDoListTitle.text, desc: desc.text)
+       // self.view.endEditing(true)
+//        toDoListTitle.text = ""
+//        desc.text = ""
+
+    }
+
     
     func myheaderView() -> UIView
     {
