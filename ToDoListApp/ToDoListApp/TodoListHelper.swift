@@ -28,6 +28,7 @@ class TodoList {
     var finishTime = ""
     var remarks = ""
     var navigationTitle = ""
+    var taskfinish = false
     
     init()
     {

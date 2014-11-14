@@ -21,6 +21,14 @@ class TodoListTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        var nib = UINib(nibName:"TodoItemCell", bundle: nil)
+        self.tableView.registerNib(nib, forCellReuseIdentifier: "todoItem")
+        
+        var headerVC:HeaderVC = HeaderVC(nibName: "HeaderVC", bundle: NSBundle.mainBundle())
+//        headerVC.newTask.text = "hello,world"
+        
+        self.tableView.tableHeaderView = headerVC.view
     }
     
     
@@ -36,6 +44,7 @@ class TodoListTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
+ 
     // MARK: - Table view data source
     
     //    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -44,6 +53,28 @@ class TodoListTableViewController: UITableViewController {
     //        return 0
     //    }
     
+    
+    func myheaderView() -> UIView
+    {
+        
+        
+        let headerView = UIView(frame: CGRectMake( 0, 0, self.view.bounds.width, 100))
+        
+        var label:UILabel! = UILabel(frame: CGRectMake(15, 10, 80, 80))
+        label.text = "头像"
+        label.textAlignment = NSTextAlignment.Left
+        
+        
+        headerView.backgroundColor = UIColor.clearColor()
+        
+    
+        
+        var seperatorView  = UIView(frame: CGRectMake(15, headerView.frame.size.height-1, headerView.frame.width, 1))
+        seperatorView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.5)
+        headerView.addSubview(label)
+        headerView.addSubview(seperatorView)
+        return headerView;
+    }
     
     func finishTime() {
         
@@ -71,6 +102,10 @@ class TodoListTableViewController: UITableViewController {
 //        self.presentViewController(dataPickerVC, animated: true, completion: nil)
         
     }
+    
+    
+   
+
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
@@ -110,6 +145,14 @@ class TodoListTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         
+        let itemCell = tableView.dequeueReusableCellWithIdentifier("todoItem", forIndexPath: indexPath) as TodoItemTableViewCell
+        todoListHelper.currentTodo = todoListHelper.lists[indexPath.row]
+
+        itemCell.finishTime.text =  todoListHelper.lists[indexPath.row].name
+        itemCell.taskName.text =  todoListHelper.lists[indexPath.row].desc
+        itemCell.checkbox.hidden = false
+        
+        /*
         // Configure the cell...
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "todolist")
         
@@ -117,13 +160,23 @@ class TodoListTableViewController: UITableViewController {
         //cell.textLabel.text = SingletonClass.sharedInstance.todoList[indexPath.row].name
         cell.textLabel.text =  todoListHelper.lists[indexPath.row].name
         
+         cell.imageView.image = UIImage(named: "icon-calendar.png")
+         //cell.imageView.image = UIImage(named: "uncheck.png")
+        
         // cell.detailTextLabel?.text = SingletonClass.sharedInstance.todoList[indexPath.row].desc
         cell.detailTextLabel?.text = todoListHelper.lists[indexPath.row].desc
         cell.accessoryType =  .DisclosureIndicator
+        */
+        let taskcheck = todoListHelper.currentTodo.taskfinish
+        if(taskcheck)
+        {
+          itemCell.checkbox.selected = taskcheck
+        }
         
         if(todoListHelper.currentTodo.finishTime != "")
         {
-            cell.detailTextLabel?.text = "预计完成时间:" + todoListHelper.currentTodo.finishTime
+             itemCell.finishTime.text = "预计完成时间:" + todoListHelper.currentTodo.finishTime
+//            cell.detailTextLabel?.text = "预计完成时间:" + todoListHelper.currentTodo.finishTime
         }
         //        let check = SingletonClass.sharedInstance.todoList[indexPath.row] as TodoList
         let check = todoListHelper.lists[indexPath.row] as TodoList
@@ -138,7 +191,8 @@ class TodoListTableViewController: UITableViewController {
         //
         //        }
         //
-        return cell
+//        return cell
+        return itemCell
     }
     
     
