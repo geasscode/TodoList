@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		D083E9011A15F11200ADA68E /* IOS8Text@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D083E9001A15F11200ADA68E /* IOS8Text@2x.png */; };
+		D094D5CB1A19C43700BFEB53 /* TodoListTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D094D5C91A19C43700BFEB53 /* TodoListTabBar.swift */; };
+		D094D5CC1A19C43700BFEB53 /* TodoListTabBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = D094D5CA1A19C43700BFEB53 /* TodoListTabBar.xib */; };
+		D094D5CE1A19C97000BFEB53 /* emergencyTask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D094D5CD1A19C97000BFEB53 /* emergencyTask@2x.png */; };
 		D0C299411A13638C006F8786 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C299401A13638C006F8786 /* CheckBox.swift */; };
 		D0CC8BCC1A1448810001A82A /* TodoItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0CC8BCB1A1448810001A82A /* TodoItemCell.xib */; };
 		D0CC8BD31A144F550001A82A /* icon_checkbox_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0CC8BD11A144F550001A82A /* icon_checkbox_default@2x.png */; };
@@ -16,6 +19,11 @@
 		D0CC8BDD1A14865E0001A82A /* TodoItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CC8BDC1A14865E0001A82A /* TodoItemTableViewCell.swift */; };
 		D0CC8BE41A14A8460001A82A /* HeaderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CC8BE21A14A8460001A82A /* HeaderVC.swift */; };
 		D0CC8BE51A14A8460001A82A /* HeaderVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0CC8BE31A14A8460001A82A /* HeaderVC.xib */; };
+		D0DE7C3D1A1B1CB100C206F5 /* icon-afternoon_tea@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0DE7C3A1A1B1CB100C206F5 /* icon-afternoon_tea@2x.png */; };
+		D0DE7C3E1A1B1CB100C206F5 /* icon-contacts@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0DE7C3B1A1B1CB100C206F5 /* icon-contacts@2x.png */; };
+		D0DE7C3F1A1B1CB100C206F5 /* icon-more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0DE7C3C1A1B1CB100C206F5 /* icon-more@2x.png */; };
+		D0DE7C411A1B4BC800C206F5 /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DE7C401A1B4BC800C206F5 /* NewTaskViewController.swift */; };
+		D0DE7C431A1B50AF00C206F5 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DE7C421A1B50AF00C206F5 /* TableViewController.swift */; };
 		F743606E1A01E3FC00B58E66 /* TodoListDateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F743606D1A01E3FC00B58E66 /* TodoListDateTableViewController.swift */; };
 		F74360711A02101300B58E66 /* icon-calendar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F74360701A02101300B58E66 /* icon-calendar@2x.png */; };
 		F74A338F19FFA04F00F5BA5A /* TodoListBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74A338E19FFA04F00F5BA5A /* TodoListBaseCell.swift */; };
@@ -50,6 +58,9 @@
 
 /* Begin PBXFileReference section */
 		D083E9001A15F11200ADA68E /* IOS8Text@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IOS8Text@2x.png"; sourceTree = "<group>"; };
+		D094D5C91A19C43700BFEB53 /* TodoListTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListTabBar.swift; sourceTree = "<group>"; };
+		D094D5CA1A19C43700BFEB53 /* TodoListTabBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TodoListTabBar.xib; sourceTree = "<group>"; };
+		D094D5CD1A19C97000BFEB53 /* emergencyTask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emergencyTask@2x.png"; sourceTree = "<group>"; };
 		D0C299401A13638C006F8786 /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		D0CC8BCB1A1448810001A82A /* TodoItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TodoItemCell.xib; sourceTree = "<group>"; };
 		D0CC8BD11A144F550001A82A /* icon_checkbox_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_checkbox_default@2x.png"; sourceTree = "<group>"; };
@@ -58,6 +69,11 @@
 		D0CC8BDC1A14865E0001A82A /* TodoItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoItemTableViewCell.swift; sourceTree = "<group>"; };
 		D0CC8BE21A14A8460001A82A /* HeaderVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderVC.swift; sourceTree = "<group>"; };
 		D0CC8BE31A14A8460001A82A /* HeaderVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderVC.xib; sourceTree = "<group>"; };
+		D0DE7C3A1A1B1CB100C206F5 /* icon-afternoon_tea@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-afternoon_tea@2x.png"; sourceTree = "<group>"; };
+		D0DE7C3B1A1B1CB100C206F5 /* icon-contacts@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-contacts@2x.png"; sourceTree = "<group>"; };
+		D0DE7C3C1A1B1CB100C206F5 /* icon-more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-more@2x.png"; sourceTree = "<group>"; };
+		D0DE7C401A1B4BC800C206F5 /* NewTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
+		D0DE7C421A1B50AF00C206F5 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		F743606D1A01E3FC00B58E66 /* TodoListDateTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListDateTableViewController.swift; sourceTree = "<group>"; };
 		F74360701A02101300B58E66 /* icon-calendar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-calendar@2x.png"; sourceTree = "<group>"; };
 		F74A338E19FFA04F00F5BA5A /* TodoListBaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListBaseCell.swift; sourceTree = "<group>"; };
@@ -117,6 +133,8 @@
 				D0CC8BDC1A14865E0001A82A /* TodoItemTableViewCell.swift */,
 				D0CC8BE21A14A8460001A82A /* HeaderVC.swift */,
 				D0CC8BE31A14A8460001A82A /* HeaderVC.xib */,
+				D094D5C91A19C43700BFEB53 /* TodoListTabBar.swift */,
+				D094D5CA1A19C43700BFEB53 /* TodoListTabBar.xib */,
 			);
 			path = xib;
 			sourceTree = "<group>";
@@ -124,6 +142,10 @@
 		F743606F1A020F4600B58E66 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				D0DE7C3A1A1B1CB100C206F5 /* icon-afternoon_tea@2x.png */,
+				D0DE7C3B1A1B1CB100C206F5 /* icon-contacts@2x.png */,
+				D0DE7C3C1A1B1CB100C206F5 /* icon-more@2x.png */,
+				D094D5CD1A19C97000BFEB53 /* emergencyTask@2x.png */,
 				D083E9001A15F11200ADA68E /* IOS8Text@2x.png */,
 				D0CC8BD51A14500E0001A82A /* iii@2x.png */,
 				D0CC8BD11A144F550001A82A /* icon_checkbox_default@2x.png */,
@@ -151,6 +173,8 @@
 				F79610EB19FF74C800F7EC51 /* UserAddVC.swift */,
 				F7F7D84F1A00855F00D3B7B9 /* DatePickerController.swift */,
 				F743606D1A01E3FC00B58E66 /* TodoListDateTableViewController.swift */,
+				D0DE7C401A1B4BC800C206F5 /* NewTaskViewController.swift */,
+				D0DE7C421A1B50AF00C206F5 /* TableViewController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -318,11 +342,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				D083E9011A15F11200ADA68E /* IOS8Text@2x.png in Resources */,
+				D094D5CE1A19C97000BFEB53 /* emergencyTask@2x.png in Resources */,
 				D0CC8BD41A144F550001A82A /* icon_checkbox_selected@2x.png in Resources */,
 				F79610CF19FF737600F7EC51 /* Main.storyboard in Resources */,
 				F7F7D84E1A0082D800D3B7B9 /* TodoListDate.storyboard in Resources */,
+				D0DE7C3D1A1B1CB100C206F5 /* icon-afternoon_tea@2x.png in Resources */,
+				D0DE7C3F1A1B1CB100C206F5 /* icon-more@2x.png in Resources */,
 				D0CC8BE51A14A8460001A82A /* HeaderVC.xib in Resources */,
+				D094D5CC1A19C43700BFEB53 /* TodoListTabBar.xib in Resources */,
 				F79610D419FF737600F7EC51 /* LaunchScreen.xib in Resources */,
+				D0DE7C3E1A1B1CB100C206F5 /* icon-contacts@2x.png in Resources */,
 				F74360711A02101300B58E66 /* icon-calendar@2x.png in Resources */,
 				D0CC8BD31A144F550001A82A /* icon_checkbox_default@2x.png in Resources */,
 				D0CC8BD61A14500E0001A82A /* iii@2x.png in Resources */,
@@ -345,13 +374,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0DE7C411A1B4BC800C206F5 /* NewTaskViewController.swift in Sources */,
 				D0CC8BE41A14A8460001A82A /* HeaderVC.swift in Sources */,
 				F74A339919FFA38000F5BA5A /* TodoListSectionDescriptor.swift in Sources */,
+				D0DE7C431A1B50AF00C206F5 /* TableViewController.swift in Sources */,
 				F79610CC19FF737600F7EC51 /* ViewController.swift in Sources */,
 				F79610EE19FF74C800F7EC51 /* UserAddVC.swift in Sources */,
 				F74A339B19FFA8F300F5BA5A /* TodoListPickerCell.swift in Sources */,
 				F79610EC19FF74C800F7EC51 /* TodoListHelper.swift in Sources */,
 				F74A339D19FFA92600F5BA5A /* TodoListDateCell.swift in Sources */,
+				D094D5CB1A19C43700BFEB53 /* TodoListTabBar.swift in Sources */,
 				F74A339219FFA1D300F5BA5A /* TodoListCheckCell.swift in Sources */,
 				F74A339519FFA34800F5BA5A /* TodoListDescriptor.swift in Sources */,
 				F79610CA19FF737600F7EC51 /* AppDelegate.swift in Sources */,
