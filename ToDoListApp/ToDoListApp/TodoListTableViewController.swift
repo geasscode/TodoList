@@ -8,10 +8,25 @@
 
 import UIKit
 
-class TodoListTableViewController: UITableViewController {
+class TodoListTableViewController: UITableViewController,UIGestureRecognizerDelegate {
     
     var myTodoList = todoListHelper.lists
     var headerVC  = HeaderVC(nibName: "HeaderVC", bundle: NSBundle.mainBundle())
+    
+    
+    var actionMap: [[(selectedIndexPath: NSIndexPath) -> Void]] {
+        return [
+            // Alert style alerts.
+            [
+                self.alert
+            ],
+            // Action sheet style alerts.
+            [
+                self.actionSheet
+            ]
+        ]
+    }
+    
     
     var tabBarView = TodoListTabBar(nibName: "TodoListTabBar", bundle: NSBundle.mainBundle())
     
@@ -19,6 +34,10 @@ class TodoListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        var recognizer = UIPanGestureRecognizer(target: self, action: "gestureRecognizerAction:")
+        recognizer.delegate = self
+        self.view.addGestureRecognizer(recognizer)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -35,13 +54,13 @@ class TodoListTableViewController: UITableViewController {
         //       headerVC = HeaderVC(nibName: "HeaderVC", bundle: NSBundle.mainBundle())
         //        headerVC.newTask.text = "hello,world"
         self.tableView.tableHeaderView = headerVC.view
-//        self.tableView.tableFooterView = tabBarView.view
+        //        self.tableView.tableFooterView = tabBarView.view
         
-//        
-//       tabBarView.view.frame.origin.y = 430
-// 
-//        self.view.addSubview(tabBarView.view)
-//        
+        //
+        //       tabBarView.view.frame.origin.y = 430
+        //
+        //        self.view.addSubview(tabBarView.view)
+        //
         
     }
     
@@ -70,8 +89,8 @@ class TodoListTableViewController: UITableViewController {
     
     func loadTabBar() -> UIView
     {
-//        var array = NSBundle.mainBundle().loadNibNamed("TodoListTabBar", owner: self, options: nil)
-//        tabBarView = array[0] as TodoListTabBar
+        //        var array = NSBundle.mainBundle().loadNibNamed("TodoListTabBar", owner: self, options: nil)
+        //        tabBarView = array[0] as TodoListTabBar
         tabBarView.view = UIView(frame: CGRectMake( 0, 33, self.view.bounds.width, 65))
         
         let tableFooterView = tabBarView.view
@@ -84,23 +103,27 @@ class TodoListTableViewController: UITableViewController {
     
     func addItem()
     {
-//        println("hello,world")
-//        
+        //        println("hello,world")
+        //
 //        todoListHelper.addTask("hello", desc: "world",complete:false)
 //        //        SingletonClass.sharedInstance.todoList = todoListHelper.lists
 //        
 //        todoTableView.reloadData()
+        
+        
+        
+        
         //如果是xib的方式就用。
-//        var headerVC  = NewTaskViewController(nibName: "newTaskVC", bundle: NSBundle.mainBundle())
-
+        //        var headerVC  = NewTaskViewController(nibName: "newTaskVC", bundle: NSBundle.mainBundle())
+        
         
         //不要用这种初始化方式，绑定不了视图的。
         //let newtask = NewTaskViewController()
         
-    let newTask  =  UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("newTask") as UIViewController
+                let newTask  =  UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("newTask") as UIViewController
         
-        self.navigationController?.pushViewController(newTask, animated: true)
-
+                self.navigationController?.pushViewController(newTask, animated: true)
+        
         //todoListHelper.addTask(toDoListTitle.text, desc: desc.text)
         // self.view.endEditing(true)
         //        toDoListTitle.text = ""
@@ -129,6 +152,53 @@ class TodoListTableViewController: UITableViewController {
         headerView.addSubview(label)
         headerView.addSubview(seperatorView)
         return headerView;
+    }
+    
+    
+    func strikeThrough() -> NSAttributedString
+    {
+        let buttonTitle = NSLocalizedString("Button", comment: "")
+        
+        // Set the button's title for normal state.
+        let normalTitleAttributes = [
+            NSForegroundColorAttributeName: UIColor.grayColor(),
+            NSStrikethroughStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue
+        ]
+        
+        
+        let normalAttributedTitle = NSAttributedString(string: "helloworld", attributes: normalTitleAttributes)
+        
+        return normalAttributedTitle
+        // Do any additional setup after loading the view.
+        
+    }
+    
+    func alert(_: NSIndexPath)
+    {
+        
+    }
+    
+    func actionSheet(_: NSIndexPath)
+    {
+        
+    }
+    
+    
+    func GestureRecognizerAction()
+    {
+        
+    }
+    
+    
+    func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if let panGestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
+            let translation = panGestureRecognizer.translationInView(self.view.superview!)
+            if fabs(translation.x) > fabs(translation.y) {
+                return true
+            }
+            return false
+        }
+        return false
     }
     
     func finishTime() {
@@ -226,6 +296,7 @@ class TodoListTableViewController: UITableViewController {
         if(taskcheck)
         {
             itemCell.checkbox.selected = taskcheck
+            itemCell.taskName.attributedText = strikeThrough()
         }
         
         if(todoListHelper.currentTodo.finishTime != "")

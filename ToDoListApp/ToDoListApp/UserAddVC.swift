@@ -78,6 +78,10 @@ class UserAddVC:UIViewController, UITextFieldDelegate {
         return true
     }
     
-    
-    
-}
+
+    @IBAction func dismissVC(sender: UIButton) {
+        dismissViewControllerAnimated(true, completion: nil)
+
+    }
+
+ }

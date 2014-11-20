@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="mFa-W7-Jj5">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--排序-->
+        <scene sceneID="zQQ-Pf-OiQ">
+            <objects>
+                <viewController id="mFa-W7-Jj5" customClass="TestViewController" customModule="ToDoListApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eiK-hB-iOn"/>
+                        <viewControllerLayoutGuide type="bottom" id="YNg-bK-ZbH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="l4N-RI-xYD">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u0v-xo-kWv">
+                                <rect key="frame" x="437" y="20" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YO7-Bn-jqf">
+                                <rect key="frame" x="204" y="562" width="192" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.89338827844263069" blue="0.13574051749173532" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="a very long long long button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uCb-UA-ZAc">
+                                <rect key="frame" x="135" y="562" width="46" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.89338827840000001" blue="0.13574051749999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZhE-3p-mnm">
+                                <rect key="frame" x="204" y="497" width="46" height="30"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T46-D6-jYk">
+                                <rect key="frame" x="208" y="232" width="173" height="21"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="YO7-Bn-jqf" firstAttribute="leading" secondItem="ZhE-3p-mnm" secondAttribute="leading" id="4sb-jV-9mm"/>
+                            <constraint firstAttribute="centerY" secondItem="YO7-Bn-jqf" secondAttribute="centerY" constant="-277" id="Iy9-hH-OQb"/>
+                            <constraint firstItem="YO7-Bn-jqf" firstAttribute="top" secondItem="ZhE-3p-mnm" secondAttribute="bottom" constant="35" id="JWg-Yl-zE9"/>
+                            <constraint firstItem="u0v-xo-kWv" firstAttribute="top" secondItem="eiK-hB-iOn" secondAttribute="bottom" id="KPB-7v-JCW"/>
+                            <constraint firstAttribute="centerX" secondItem="YO7-Bn-jqf" secondAttribute="centerX" id="QzW-3n-2Wa"/>
+                            <constraint firstItem="YO7-Bn-jqf" firstAttribute="height" secondItem="uCb-UA-ZAc" secondAttribute="height" id="Uns-4Z-sJx"/>
+                            <constraint firstItem="YO7-Bn-jqf" firstAttribute="leading" secondItem="uCb-UA-ZAc" secondAttribute="trailing" constant="23" id="hym-G2-oJw"/>
+                            <constraint firstItem="u0v-xo-kWv" firstAttribute="trailing" secondItem="l4N-RI-xYD" secondAttribute="trailingMargin" constant="-101" id="p5x-cF-gIp"/>
+                            <constraint firstItem="YNg-bK-ZbH" firstAttribute="top" secondItem="uCb-UA-ZAc" secondAttribute="bottom" constant="8" id="wjs-Rb-hik"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="排序" id="KkI-2v-TDf"/>
+                    <connections>
+                        <outlet property="testDelete" destination="T46-D6-jYk" id="tUa-M5-0lT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WqQ-7u-gpZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4724" y="1360"/>
+        </scene>
+    </scenes>
+</document>

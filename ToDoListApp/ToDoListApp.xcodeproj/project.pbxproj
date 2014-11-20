@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D056686A1A1C6F5E002FEC80 /* TestAutoLayoutStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D05668691A1C6F5E002FEC80 /* TestAutoLayoutStoryboard.storyboard */; };
+		D056686C1A1DC4CC002FEC80 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D056686B1A1DC4CC002FEC80 /* TestViewController.swift */; };
+		D08241B31A1DF897009FC2A5 /* CustomerTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08241B21A1DF897009FC2A5 /* CustomerTabBarViewController.swift */; };
 		D083E9011A15F11200ADA68E /* IOS8Text@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D083E9001A15F11200ADA68E /* IOS8Text@2x.png */; };
 		D094D5CB1A19C43700BFEB53 /* TodoListTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D094D5C91A19C43700BFEB53 /* TodoListTabBar.swift */; };
 		D094D5CC1A19C43700BFEB53 /* TodoListTabBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = D094D5CA1A19C43700BFEB53 /* TodoListTabBar.xib */; };
@@ -57,6 +60,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D05668691A1C6F5E002FEC80 /* TestAutoLayoutStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TestAutoLayoutStoryboard.storyboard; sourceTree = "<group>"; };
+		D056686B1A1DC4CC002FEC80 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		D08241B21A1DF897009FC2A5 /* CustomerTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerTabBarViewController.swift; sourceTree = "<group>"; };
 		D083E9001A15F11200ADA68E /* IOS8Text@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IOS8Text@2x.png"; sourceTree = "<group>"; };
 		D094D5C91A19C43700BFEB53 /* TodoListTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListTabBar.swift; sourceTree = "<group>"; };
 		D094D5CA1A19C43700BFEB53 /* TodoListTabBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TodoListTabBar.xib; sourceTree = "<group>"; };
@@ -175,6 +181,7 @@
 				F743606D1A01E3FC00B58E66 /* TodoListDateTableViewController.swift */,
 				D0DE7C401A1B4BC800C206F5 /* NewTaskViewController.swift */,
 				D0DE7C421A1B50AF00C206F5 /* TableViewController.swift */,
+				D08241B21A1DF897009FC2A5 /* CustomerTabBarViewController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -223,6 +230,8 @@
 				F79610D019FF737600F7EC51 /* Images.xcassets */,
 				F79610D219FF737600F7EC51 /* LaunchScreen.xib */,
 				F79610C719FF737600F7EC51 /* Supporting Files */,
+				D05668691A1C6F5E002FEC80 /* TestAutoLayoutStoryboard.storyboard */,
+				D056686B1A1DC4CC002FEC80 /* TestViewController.swift */,
 			);
 			path = ToDoListApp;
 			sourceTree = "<group>";
@@ -349,6 +358,7 @@
 				D0DE7C3D1A1B1CB100C206F5 /* icon-afternoon_tea@2x.png in Resources */,
 				D0DE7C3F1A1B1CB100C206F5 /* icon-more@2x.png in Resources */,
 				D0CC8BE51A14A8460001A82A /* HeaderVC.xib in Resources */,
+				D056686A1A1C6F5E002FEC80 /* TestAutoLayoutStoryboard.storyboard in Resources */,
 				D094D5CC1A19C43700BFEB53 /* TodoListTabBar.xib in Resources */,
 				F79610D419FF737600F7EC51 /* LaunchScreen.xib in Resources */,
 				D0DE7C3E1A1B1CB100C206F5 /* icon-contacts@2x.png in Resources */,
@@ -381,6 +391,7 @@
 				F79610CC19FF737600F7EC51 /* ViewController.swift in Sources */,
 				F79610EE19FF74C800F7EC51 /* UserAddVC.swift in Sources */,
 				F74A339B19FFA8F300F5BA5A /* TodoListPickerCell.swift in Sources */,
+				D056686C1A1DC4CC002FEC80 /* TestViewController.swift in Sources */,
 				F79610EC19FF74C800F7EC51 /* TodoListHelper.swift in Sources */,
 				F74A339D19FFA92600F5BA5A /* TodoListDateCell.swift in Sources */,
 				D094D5CB1A19C43700BFEB53 /* TodoListTabBar.swift in Sources */,
@@ -393,6 +404,7 @@
 				F7F7D8501A00855F00D3B7B9 /* DatePickerController.swift in Sources */,
 				F79610ED19FF74C800F7EC51 /* TodoListTableViewController.swift in Sources */,
 				D0CC8BDD1A14865E0001A82A /* TodoItemTableViewCell.swift in Sources */,
+				D08241B31A1DF897009FC2A5 /* CustomerTabBarViewController.swift in Sources */,
 				D0C299411A13638C006F8786 /* CheckBox.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
