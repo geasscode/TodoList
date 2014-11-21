@@ -31,7 +31,7 @@ class UserAddVC:UIViewController, UITextFieldDelegate {
     
     @IBAction func addText(sender: AnyObject) {
         
-        todoListHelper.addTask(toDoListTitle.text, desc: desc.text,complete:false)
+        todoListHelper.addTask(toDoListTitle.text, dateline: desc.text,complete:false)
 //        SingletonClass.sharedInstance.todoList = todoListHelper.lists
         let list = todoListHelper.lists
 

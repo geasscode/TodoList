@@ -8,11 +8,12 @@
 
 import UIKit
 
-class CustomerTabBarViewController: UITabBarController,UITabBarControllerDelegate {
+class CustomerTabBarViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.selectedIndex = 1
+
         
         
         // Do any additional setup after loading the view.
@@ -38,13 +39,13 @@ class CustomerTabBarViewController: UITabBarController,UITabBarControllerDelegat
         let  currentTag = item.tag
         
         if item.tag == 3{
+            
             popupActionSheet()
-            // we are in new view controller
-            //            info.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
-            //            self.presentViewController(info, animated: true, completion: nil)
+            
         }
     }
     
+    /*
     func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool
     {
         let selectVC = tabBarController.viewControllers?[tabBarController.selectedIndex] as UIViewController
@@ -58,27 +59,33 @@ class CustomerTabBarViewController: UITabBarController,UITabBarControllerDelegat
         }
         
     }
+    */
     
     func popupActionSheet()
     {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         
         // Create the actions.
-        let destructiveAction = UIAlertAction(title: "高", style: .Destructive) { action in
+        let letterSort = UIAlertAction(title: "按字母排序排序", style: .Destructive) { action in
             NSLog("The \"Other\" alert action sheet's destructive action occured.")
         }
         
-        let cancelAction = UIAlertAction(title: "中", style: .Cancel) { action in
+        let datelineSort = UIAlertAction(title: "按到期日排序", style: .Cancel) { action in
             NSLog("The \"Other\" alert action sheet's other action occured.")
         }
         
-        let defaultAction = UIAlertAction(title: "低", style: .Default) { action in
+        let createDateSort = UIAlertAction(title: "按创建日期排序", style: .Default) { action in
+            NSLog("The \"Other\" alert action sheet's other action occured.")
+        }
+        
+        let prioritSort = UIAlertAction(title: "按优先级排序", style: .Default) { action in
             NSLog("The \"Other\" alert action sheet's other action occured.")
         }
         // Add the actions.
-        alertController.addAction(destructiveAction)
-        alertController.addAction(cancelAction)
-        alertController.addAction(defaultAction)
+        alertController.addAction(letterSort)
+        alertController.addAction(datelineSort)
+        alertController.addAction(createDateSort)
+        alertController.addAction(prioritSort)
         
         presentViewController(alertController, animated: true, completion: nil)
         

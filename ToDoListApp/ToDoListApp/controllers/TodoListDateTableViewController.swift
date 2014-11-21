@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class TodoListDateTableViewController: UITableViewController,FromViewControllerDelegate,UITabBarControllerDelegate {
+class TodoListDateTableViewController: UITableViewController,FromViewControllerDelegate {
     
     @IBOutlet weak var startTime: UILabel!
     
@@ -41,20 +41,7 @@ class TodoListDateTableViewController: UITableViewController,FromViewControllerD
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
-    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool
-    {
-        let selectVC = tabBarController.viewControllers?[tabBarController.selectedIndex] as UIViewController
-        if(selectVC == viewController)
-        {
-            return false
-        }
-        else
-        {
-            return true;
-        }
-        
-    }
-
+   
     
     override func viewWillAppear(animated: Bool) // Called when the view is about to made visible. Default does nothing
         

@@ -12,7 +12,7 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     
     var myTodoList = todoListHelper.lists
     var headerVC  = HeaderVC(nibName: "HeaderVC", bundle: NSBundle.mainBundle())
-    
+//    var todo = TodoList()
     
     var actionMap: [[(selectedIndexPath: NSIndexPath) -> Void]] {
         return [
@@ -69,6 +69,21 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     override func viewWillAppear(animated: Bool) // Called when the view is about to made visible. Default does nothing
         
     {
+         let todo = todoListHelper.currentTodo
+        //        let lists = todoListHelper.lists
+        todoListHelper.tempTodo = todo
+        let startTimeValue   = todoListHelper.currentTodo.startTime
+        
+        if(todoListHelper.currentTodo.startTime != "" || todoListHelper.currentTodo.finishTime != "")
+        {
+
+                    todoListHelper.addTask(todo.remarks, dateline: todo.finishTime,complete:false)
+
+        }
+        
+        //        finishTime.text =  todoListHelper.currentTodo.finishTime
+//        detailInfo.text = todoListHelper.currentTodo.remarks
+
         todoTableView.reloadData()
     }
     
@@ -206,8 +221,8 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
         var todoList: UIStoryboard!
         todoList = UIStoryboard(name: "TodoListDate", bundle: nil)
         
+       let newTaskVC = self.storyboard?.instantiateViewControllerWithIdentifier("newTask") as UIViewController
         
-        let dataPickerVC  = todoList.instantiateViewControllerWithIdentifier("todoListTime") as UIViewController
         
         //        let dataPickerVC  = todoList.instantiateViewControllerWithIdentifier("dataPicker") as UIViewController
         //
@@ -223,7 +238,7 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
         //只适合同一个storyboard的不同ViewController在带有箭头的成为segue那里设置identifier。
         // self.performSegueWithIdentifier("dataPicker", sender: self)
         //使用self.presentViewController意味着导航条会失效，弄了很长时间才发现。
-        self.navigationController?.pushViewController(dataPickerVC, animated: true)
+        self.navigationController?.pushViewController(newTaskVC, animated: true)
         //        self.presentViewController(dataPickerVC, animated: true, completion: nil)
         
     }
@@ -273,8 +288,30 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
         let itemCell = tableView.dequeueReusableCellWithIdentifier("todoItem", forIndexPath: indexPath) as TodoItemTableViewCell
         todoListHelper.currentTodo = todoListHelper.lists[indexPath.row]
         
-        itemCell.finishTime.text =  todoListHelper.lists[indexPath.row].name
-        itemCell.taskName.text =  todoListHelper.lists[indexPath.row].desc
+        itemCell.finishTime.text =  todoListHelper.lists[indexPath.row].finishTime
+        itemCell.taskName.text =  todoListHelper.lists[indexPath.row].remarks
+        
+       
+        let todo =  todoListHelper.tempTodo
+        
+        if(todo.currentPriority == "高")
+        {
+            itemCell.priority.text = "!!!"
+
+        }
+        
+        else if(todo.currentPriority == "中")
+        {
+            itemCell.priority.text = "!!"
+
+        }
+        
+        else if(todo.currentPriority == "低")
+        {
+            itemCell.priority.text = "!"
+            
+        }
+        
         itemCell.checkbox.hidden = false
         
         /*

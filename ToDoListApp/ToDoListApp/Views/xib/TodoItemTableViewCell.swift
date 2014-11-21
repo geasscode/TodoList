@@ -14,6 +14,7 @@ class TodoItemTableViewCell: UITableViewCell {
     @IBOutlet weak var taskName: UILabel!
     @IBOutlet weak var checkbox: UIButton!
 
+    @IBOutlet weak var priority: UILabel!
     @IBOutlet weak var taskProgress: UIProgressView!
     @IBOutlet weak var finishTime: UILabel!
     @IBOutlet weak var emergencyStatus: UIImageView!
@@ -22,7 +23,6 @@ class TodoItemTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         checkbox.setImage(UIImage(named: "icon_checkbox_default.png"), forState: UIControlState.Normal)
-
         checkbox.setImage(UIImage(named: "icon_checkbox_selected.png"), forState: UIControlState.Selected)
 
         // Initialization code

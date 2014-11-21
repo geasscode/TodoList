@@ -21,7 +21,8 @@ class SingletonClass {
 var todoListHelper : TodoHelper = TodoHelper ()
 
 class TodoList {
-    var name = ""
+    
+    var taskName = ""
     var desc = ""
     var hascomplete = false
     var startTime = ""
@@ -29,16 +30,20 @@ class TodoList {
     var remarks = ""
     var navigationTitle = ""
     var taskfinish = false
+    var currentPriority = ""
+    var currentProgress = ""
+    var reminderTime = ""
     
     init()
     {
         
     }
-    init(name:String,desc:String,hascomplete:Bool)
+    
+    init(taskName:String,finishTime:String,hascomplete:Bool)
         
     {
-        self.name = name
-        self.desc = desc
+        self.taskName = taskName
+        self.finishTime  = finishTime
         self.hascomplete = hascomplete
     }
 }
@@ -49,12 +54,15 @@ class TodoHelper: NSObject {
     
     //    var hascomplete = false
     var currentTodo = TodoList()
+    var tempTodo = TodoList()
 
     var lists = [TodoList]()
     
-    func addTask(name: String, desc: String,complete:Bool) {
+    func addTask(taskName: String, dateline: String,complete:Bool) {
+        lists.append(TodoList(taskName: taskName, finishTime: dateline,hascomplete:complete))
+
         
-        lists.append(TodoList(name: name, desc: desc,hascomplete:complete))
+        //lists.append(TodoList(name: name, desc: desc,hascomplete:complete))
     }
     
     
