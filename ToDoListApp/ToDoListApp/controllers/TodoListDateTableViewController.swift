@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class TodoListDateTableViewController: UITableViewController,FromViewControllerDelegate {
+class TodoListDateTableViewController: UITableViewController,FromViewControllerDelegate,UITabBarControllerDelegate {
     
     @IBOutlet weak var startTime: UILabel!
     
@@ -32,6 +32,8 @@ class TodoListDateTableViewController: UITableViewController,FromViewControllerD
         let current = currentTodo
         detailInfo.text = todoListHelper.currentTodo.remarks
         
+        
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -39,6 +41,20 @@ class TodoListDateTableViewController: UITableViewController,FromViewControllerD
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
+    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool
+    {
+        let selectVC = tabBarController.viewControllers?[tabBarController.selectedIndex] as UIViewController
+        if(selectVC == viewController)
+        {
+            return false
+        }
+        else
+        {
+            return true;
+        }
+        
+    }
+
     
     override func viewWillAppear(animated: Bool) // Called when the view is about to made visible. Default does nothing
         
