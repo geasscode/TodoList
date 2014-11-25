@@ -34,10 +34,10 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        var recognizer = UIPanGestureRecognizer(target: self, action: "gestureRecognizerAction:")
-        recognizer.delegate = self
-        self.view.addGestureRecognizer(recognizer)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleTextFieldTextDidChangeNotification:", name: "taskName", object: nil)
+//        var recognizer = UIPanGestureRecognizer(target: self, action: "gestureRecognizerAction")
+//        recognizer.delegate = self
+//        self.view.addGestureRecognizer(recognizer)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -87,6 +87,13 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
         todoTableView.reloadData()
     }
     
+    
+    override func viewDidDisappear(animated: Bool) {
+        
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.removeObserver(self, name: "taskName", object: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -100,7 +107,11 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     //        // Return the number of sections.
     //        return 0
     //    }
-    
+    func handleTextFieldTextDidChangeNotification(notification: NSNotification) {
+        let textField = notification.object as UITextField
+        todoListHelper.addTask(textField.text, dateline:"",complete:false)
+        todoTableView.reloadData()
+    }
     
     func loadTabBar() -> UIView
     {
@@ -205,16 +216,16 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     }
     
     
-    func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
-        if let panGestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
-            let translation = panGestureRecognizer.translationInView(self.view.superview!)
-            if fabs(translation.x) > fabs(translation.y) {
-                return true
-            }
-            return false
-        }
-        return false
-    }
+//    func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+//        if let panGestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
+//            let translation = panGestureRecognizer.translationInView(self.view.superview!)
+//            if fabs(translation.x) > fabs(translation.y) {
+//                return true
+//            }
+//            return false
+//        }
+//        return false
+//    }
     
     func finishTime() {
         
@@ -289,7 +300,7 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
         todoListHelper.currentTodo = todoListHelper.lists[indexPath.row]
         
         itemCell.finishTime.text =  todoListHelper.lists[indexPath.row].finishTime
-        itemCell.taskName.text =  todoListHelper.lists[indexPath.row].remarks
+        itemCell.taskName.text =  todoListHelper.lists[indexPath.row].taskName
         
        
         let todo =  todoListHelper.tempTodo
@@ -340,6 +351,12 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
         {
             itemCell.finishTime.text = "预计完成时间:" + todoListHelper.currentTodo.finishTime
             //            cell.detailTextLabel?.text = "预计完成时间:" + todoListHelper.currentTodo.finishTime
+        }
+        
+        else
+        {
+            itemCell.finishTime.text = "预计完成时间:" + "明天"
+
         }
         //        let check = SingletonClass.sharedInstance.todoList[indexPath.row] as TodoList
         let check = todoListHelper.lists[indexPath.row] as TodoList

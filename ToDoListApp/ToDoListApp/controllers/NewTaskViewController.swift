@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewTaskViewController: UITableViewController {
+class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFieldDelegate {
     
     @IBOutlet weak var taskName: UITextField!
     
@@ -22,8 +22,11 @@ class NewTaskViewController: UITableViewController {
     
     @IBOutlet weak var priority: UILabel!
     
+    @IBOutlet weak var cellheight: UITableViewCell!
     var datePicker = DatePickerController()
     
+    @IBOutlet weak var textViewBottomLayoutGuideConstraint: NSLayoutConstraint!
+    var needMovetextview = false
     
     
     override func viewDidLoad() {
@@ -50,7 +53,86 @@ class NewTaskViewController: UITableViewController {
         //        finishTime.text =  todoListHelper.currentTodo.finishTime
         taskName.text = todoListHelper.currentTodo.remarks
         
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.addObserver(self, selector: "handleKeyboardWillShowNotification:", name: UIKeyboardWillShowNotification, object: nil)
+        notificationCenter.addObserver(self, selector: "handleKeyboardWillHideNotification:", name: UIKeyboardWillHideNotification, object: nil)
     }
+    
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        notificationCenter.removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    
+    func handleKeyboardWillShowNotification(notification: NSNotification) {
+        
+        keyboardWillChangeFrameWithNotification(notification, showsKeyboard: true,needMovetextview:self.needMovetextview)
+    }
+    
+    func handleKeyboardWillHideNotification(notification: NSNotification) {
+        keyboardWillChangeFrameWithNotification(notification, showsKeyboard: false,needMovetextview:self.needMovetextview)
+    }
+    
+    // MARK: Convenience
+    //黑科技。
+    func keyboardWillChangeFrameWithNotification(notification: NSNotification, showsKeyboard: Bool,needMovetextview:Bool) {
+        println("keyboard event")
+        
+        if(needMovetextview == false)
+        {
+            return
+        }
+        
+        if(showsKeyboard)
+        {
+            UIView.beginAnimations("slide", context: nil)
+            UIView.setAnimationDuration(0.3)
+            self.view.transform = CGAffineTransformMakeTranslation(0, -250);
+            UIView.commitAnimations()
+        }
+        else
+        {
+            UIView.beginAnimations("slide", context: nil)
+            UIView.setAnimationDuration(0.1)
+            self.view.transform = CGAffineTransformMakeTranslation(0, 0);
+            UIView.commitAnimations()
+        }
+        
+        
+        
+        /*
+        let userInfo = notification.userInfo!
+        
+        let animationDuration: NSTimeInterval = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as NSNumber).doubleValue
+        
+        // Convert the keyboard frame from screen to view coordinates.
+        let keyboardScreenBeginFrame = (userInfo[UIKeyboardFrameBeginUserInfoKey] as NSValue).CGRectValue()
+        let keyboardScreenEndFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
+        
+        let keyboardViewBeginFrame = view.convertRect(keyboardScreenBeginFrame, fromView: view.window)
+        let keyboardViewEndFrame = view.convertRect(keyboardScreenEndFrame, fromView: view.window)
+        let originDelta = keyboardViewEndFrame.origin.y - keyboardViewBeginFrame.origin.y
+        
+        // The text view should be adjusted, update the constant for this constraint.
+        textViewBottomLayoutGuideConstraint.constant -= originDelta
+        
+        view.setNeedsUpdateConstraints()
+        
+        UIView.animateWithDuration(animationDuration, delay: 0, options: .BeginFromCurrentState, animations: {
+        self.view.layoutIfNeeded()
+        }, completion: nil)
+        
+        // Scroll to the selected text once the keyboard frame changes.
+        let selectedRange = remark.selectedRange
+        
+        remark.scrollRangeToVisible(selectedRange)
+        */
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -94,19 +176,19 @@ class NewTaskViewController: UITableViewController {
         let hight = UIAlertAction(title: "高", style: .Destructive) { action in
             self.currentPriority.text = "高"
             todoListHelper.currentTodo.currentPriority = "高"
-
+            
         }
         
         let mid = UIAlertAction(title: "中", style: .Cancel) { action in
             self.currentPriority.text = "中"
             todoListHelper.currentTodo.currentPriority = "中"
-
+            
         }
         
         let low = UIAlertAction(title: "低", style: .Default) { action in
             self.currentPriority.text = "低"
             todoListHelper.currentTodo.currentPriority = "低"
-
+            
         }
         
         //        alertCotroller.addTextFieldWithConfigurationHandler { textField in
@@ -137,31 +219,31 @@ class NewTaskViewController: UITableViewController {
         let percent25 = UIAlertAction(title: "25%", style: .Default) { action in
             self.currentProgress.text = "25%"
             todoListHelper.currentTodo.currentProgress = "25%"
-
+            
         }
         
         let percent50 = UIAlertAction(title: "50%", style: .Default) { action in
             self.currentProgress.text = "50%"
             todoListHelper.currentTodo.currentProgress = "50%"
-
+            
         }
         
         let percent75 = UIAlertAction(title: "75%", style: .Default) { action in
             self.currentProgress.text = "75%"
             todoListHelper.currentTodo.currentProgress = "75%"
-
+            
         }
         
         let percent90 = UIAlertAction(title: "90%", style: .Default) { action in
             self.currentProgress.text = "90%"
             todoListHelper.currentTodo.currentProgress = "90%"
-
+            
         }
         
         let percent100 = UIAlertAction(title: "100%", style: .Default) { action in
             self.currentProgress.text = "100%"
             todoListHelper.currentTodo.currentProgress = "100%"
-
+            
         }
         
         //        alertCotroller.addTextFieldWithConfigurationHandler { textField in
@@ -198,7 +280,7 @@ class NewTaskViewController: UITableViewController {
     @IBAction func doneTask(sender: AnyObject) {
         
         self.navigationController?.popViewControllerAnimated(true)
-
+        
     }
     
     func poptoDateVC()
@@ -231,13 +313,13 @@ class NewTaskViewController: UITableViewController {
             {
                 todoListHelper.currentTodo.navigationTitle = "结束时间"
                 poptoDateVC()
-
+                
             }
             else if(row == 3)
             {
                 todoListHelper.currentTodo.navigationTitle = "提醒我"
                 poptoDateVC()
-
+                
             }
             
             if(row == 4)
@@ -270,7 +352,174 @@ class NewTaskViewController: UITableViewController {
         
         
     }
+    /*   delegate  执行顺序 bool为true的情况下。
+    textFieldShouldBeginEditing
+    textFieldDidBeginEditing
+    textFieldShouldReturn
+    textFieldShouldEndEditing
+    textFieldDidEndEditing
+    
+    optional func textFieldShouldBeginEditing(textField: UITextField) -> Bool // return NO to disallow editing.
+    optional func textFieldDidBeginEditing(textField: UITextField) // became first responder
+    optional func textFieldShouldEndEditing(textField: UITextField) -> Bool // return YES to allow editing to stop and to resign first responder status. NO to disallow the editing session to end
+    optional func textFieldDidEndEditing(textField: UITextField) // may be called if forced even if shouldEndEditing returns NO (e.g. view removed from window) or endEditing:YES called
+    
+    optional func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool // return NO to not change text
+    
+    optional func textFieldShouldClear(textField: UITextField) -> Bool // called when clear button pressed. return NO to ignore (no notifications)
+    optional func textFieldShouldReturn(textField: UITextField) -> Bool // called when 'return' key pressed. return NO to ignore.
+    */
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool // return NO to disallow editing.
+    {
+        needMovetextview = false
+        println("textFieldShouldBeginEditing")
+        
+        return true
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) // return NO to disallow editing.
+    {
+        println("textFieldDidBeginEditing")
+    }
+    
+    func textFieldShouldEndEditing(textField: UITextField) -> Bool
+    {
+        println("textFieldShouldEndEditing")
+        
+        return true
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField)
+    {
+        println("textFieldDidEndEditing")
+        
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool
+    {
+        println("textFieldShouldReturn")
+        
+        return taskName.resignFirstResponder()
+    }
     
     
+    func textFieldShouldClear(textField: UITextField) -> Bool
+    {
+        println("textFieldShouldClear")
+        
+        return true
+    }
+    
+    //    func textViewDidBeginEditing(textView: UITextView) {
+    //        // Provide a "Done" button for the user to select to signify completion with writing text in the text view.
+    //        let doneBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "doneBarButtonItemClicked")
+    //
+    //        navigationItem.setRightBarButtonItem(doneBarButtonItem, animated: true)
+    //    }
+    //
+    //
+    //    func textViewShouldEndEditing(textView: UITextView) -> Bool
+    //    {
+    //        return remark.resignFirstResponder()
+    //
+    //    }
+    
+    func doneBarButtonItemClicked() {
+        // Dismiss the keyboard by removing it as the first responder.
+        remark.resignFirstResponder()
+        
+        navigationItem.setRightBarButtonItem(nil, animated: true)
+        
+        self.navigationController?.popViewControllerAnimated(true)
+        
+    }
+    
+    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+        
+        needMovetextview = true
+        return needMovetextview
+    }
+    
+   
+    
+    
+    /*
+    
+    func textViewDidBeginEditing(textView: UITextView)
+    {
+    
+    let cellh = cellheight.frame
+    let frame = self.tableView.frame
+    
+    //        self.tableView.scrollRectToVisible(CGRectMake(0, 520, 320, 568), animated: true)
+    //                UIView.animateWithDuration(0.25, animations: {
+    //                    self.tableView.frame = CGRectMake(0.0, 15, self.tableView.frame.size.width, self.tableView.frame.size.height)
+    //                })
+    //
+    UIView.animateWithDuration(0.25, animations: {
+    self.tableView.frame = CGRectMake(0.0, 535, self.tableView.frame.size.width, self.tableView.frame.size.height)
+    })
+    
+    
+    }
+    
+    func textViewDidEndEditing(textView: UITextView)
+    {
+    //        remark.frame = CGRectMake(0, 0, remark.frame.size.width,108)
+    //
+    //        let frame = remark.frame
+    //
+    //        remark.setContentOffset(CGPointMake(0, 0), animated: true)
+    //        cellheight.frame = CGRectMake(0, 461, cellheight.frame.width, cellheight.frame.height)
+    //        self.tableView.scrollRectToVisible(CGRectMake(0, 0, 320, 568), animated: true)
+    
+    UIView.animateWithDuration(0.25, animations:
+    {
+    self.cellheight.frame = CGRectMake(0.0, 397, self.cellheight.frame.size.width, self.cellheight.frame.size.height)
+    
+    }, completion: nil)
+    
+    }
+    
+    //    func textViewDidChange(textView: UITextView) {
+    //        remark.frame = CGRectMake(0, 0, remark.frame.size.width, 70)
+    //        let frame = remark.frame
+    //
+    //    }
+    */
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool
+    {
+        if text == "\n" {
+            textView.resignFirstResponder()
+        }
+        
+        return true
+        
+        //
+        //        if let resultRange = text.rangeOfCharacterFromSet(NSCharacterSet.newlineCharacterSet()) {
+        //
+        //            let count = countElements(text)
+        //
+        //            if(countElements(text)==1)
+        //            {
+        //                textView.resignFirstResponder()
+        //                return false
+        //            }
+        //
+        //        }
+        //
+        //
+        //        return true
+    }
+    //    - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    //    NSRange resultRange = [text rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet] options:NSBackwardsSearch];
+    //    if ([text length] == 1 && resultRange.location != NSNotFound) {
+    //    [textView resignFirstResponder];
+    //    return NO;
+    //    }
+    //
+    //    return YES;
+    //    }
     
 }

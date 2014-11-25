@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HeaderVC: UIViewController {
+class HeaderVC: UIViewController,UITextFieldDelegate {
     
     
     @IBOutlet weak var newTask: UITextField!
@@ -35,8 +35,21 @@ class HeaderVC: UIViewController {
     //        fatalError("init(coder:) has not been implemented")
     //    }
     //
+    /*
+    optional func textFieldShouldBeginEditing(textField: UITextField) -> Bool // return NO to disallow editing.
+    optional func textFieldDidBeginEditing(textField: UITextField) // became first responder
+    optional func textFieldShouldEndEditing(textField: UITextField) -> Bool // return YES to allow editing to stop and to resign first responder status. NO to disallow the editing session to end
+    optional func textFieldDidEndEditing(textField: UITextField) // may be called if forced even if shouldEndEditing returns NO (e.g. view removed from window) or endEditing:YES called
+    
+    optional func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool // return NO to not change text
+    
+    optional func textFieldShouldClear(textField: UITextField) -> Bool // called when clear button pressed. return NO to ignore (no notifications)
+    optional func textFieldShouldReturn(textField: UITextField) -> Bool // called when 'return' key pressed. return NO to ignore.
+    */
+    
     func textFieldShouldReturn(textField: UITextField!) -> Bool {
         textField.resignFirstResponder()
+        NSNotificationCenter.defaultCenter().postNotificationName("taskName", object: textField)
         return true
     }
     
@@ -45,9 +58,21 @@ class HeaderVC: UIViewController {
     }
     
     
-    func textViewShouldBeginEditing(textField: UITextField!) -> Bool {
+     func textFieldShouldBeginEditing(textField: UITextField) -> Bool  {
         println("textViewShouldBeginEditing")
         return true
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField)
+    {
+        println("textFieldDidBeginEditing")
+
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField)
+    {
+        println("textFieldDidEndEditing")
+
     }
     /*
     // MARK: - Navigation

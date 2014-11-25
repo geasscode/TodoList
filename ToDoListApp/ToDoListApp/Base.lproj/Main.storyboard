@@ -298,7 +298,10 @@
                                                     <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="zNB-LO-NrJ" id="bgl-Tr-vlN"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -511,6 +514,9 @@
                                                     <color key="backgroundColor" red="0.8872899514" green="1" blue="0.24370267309999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="alert" returnKeyType="done"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="zNB-LO-NrJ" id="hCW-Fd-YTT"/>
+                                                    </connections>
                                                 </textView>
                                             </subviews>
                                             <constraints>
@@ -551,14 +557,9 @@
                             <outlet property="delegate" destination="zNB-LO-NrJ" id="khS-1M-IPI"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="nTh-8I-03c">
-                        <barButtonItem key="rightBarButtonItem" title="完成" style="done" id="Yz0-xk-bHO">
-                            <connections>
-                                <action selector="doneTask:" destination="zNB-LO-NrJ" id="EIe-iD-Ehu"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="nTh-8I-03c"/>
                     <connections>
+                        <outlet property="cellheight" destination="jtO-xu-pN0" id="P5W-Dy-6mQ"/>
                         <outlet property="currentPriority" destination="EAh-Tj-P6F" id="bDH-CY-jVy"/>
                         <outlet property="currentProgress" destination="btJ-ZP-6TL" id="vpZ-Wf-iRr"/>
                         <outlet property="finishTime" destination="Mb9-Q9-gUE" id="g4u-Mj-vJ9"/>
@@ -567,6 +568,7 @@
                         <outlet property="reminderMe" destination="6h4-Oe-kEK" id="or2-lI-rag"/>
                         <outlet property="startTime" destination="LQd-nU-udG" id="myE-CC-C1x"/>
                         <outlet property="taskName" destination="O40-zS-I9Z" id="5gE-gi-5el"/>
+                        <outlet property="textViewBottomLayoutGuideConstraint" destination="3sS-hD-L6s" id="m36-h0-tOQ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nlf-yl-BxP" userLabel="First Responder" sceneMemberID="firstResponder"/>
