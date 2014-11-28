@@ -59,20 +59,33 @@ class SqliteHelper: NSObject  {
     {
         let item = item
         //        let todolistItem = item as TodoList
+        let startTime:String = todolistItem.startTime
         let taskID: String = todolistItem.taskID
         let taskName: String = todolistItem.taskName
         let emergency: String = todolistItem.currentPriority
         let isChecked: Bool = todolistItem.hascomplete
         let finishTime: String =  todolistItem.finishTime
+        let progress :String = todolistItem.currentProgress
+        let taskDescription:String = todolistItem.remarks
         
         if let err = SD.executeChange("INSERT INTO TodoList (TaskID,TaskName, Emergency, IsChecked, FinishTime) VALUES (?, ?, ?, ?, ?)", withArgs: [taskID,taskName, emergency, isChecked, finishTime]) {
             //there was an error during the insert, handle it here
             println( "error is \(err)")
             
         } else {
-            println( "err")
+            println( "insert success")
             
         }
+        
+   
+//        if let err = SD.executeChange("INSERT INTO TodoListItem (TaskID,TaskName, Emergency, StartTime, FinishTime,Priority,Progress,TaskDescription) VALUES (?, ?, ?, ?, ?,?,?,?)", withArgs: [taskID,taskName, emergency, startTime , finishTime,emergency,progress,taskDescription]) {
+//            //there was an error during the insert, handle it here
+//            println( "error is \(err)")
+//            
+//        } else {
+//            println( "insert success")
+//            
+//        }
     }
     
 
@@ -148,6 +161,66 @@ class SqliteHelper: NSObject  {
 //            }
 //        }
         
+    }
+    
+    
+    func queryDatas(queryDataWithKey:String) -> [TodoList]
+    {
+        
+        let (resultSet, err2) = SD.executeQuery("SELECT * FROM TodoListItem")
+        
+        if err2 != nil {
+            println("The error is \(err2)")
+            
+        } else {
+            for row in resultSet {
+                
+               // INSERT INTO TodoListItem (TaskID,TaskName, Emergency, StartTime, FinishTime,Priority,Progress,TaskDescription)
+                //位置放错，导致生成的是同一个。
+                var item = TodoList()
+                
+                if let taskId = row["TaskID"]?.asString() {
+                    println("The taskid  is: \(taskId)")
+                    item.taskID = taskId
+                    
+                }
+                
+                if let taskname = row["TaskName"]?.asString() {
+                    println("The taskname name is: \(taskname)")
+                    item.taskName = taskname
+                    
+                }
+                if let emergency = row["Emergency"]?.asString() {
+                    item.currentPriority = emergency
+                    println("The emergency is: \(emergency)")
+                }
+                
+                if let finishTime = row["FinishTime"]?.asString() {
+                    item.finishTime = finishTime
+                    println("The task  was finish  at: \(finishTime)")
+                }
+                
+                if let priority = row["Priority"]?.asString() {
+                    item.currentPriority = priority
+                    println("The task  was currentPriority  at: \(priority)")
+                }
+                
+                if let progress = row["Progress"]?.asString() {
+                    item.currentProgress = progress
+                    println("The task  was Progress  at: \(progress)")
+                }
+                
+                if let taskDescription = row["TaskDescription"]?.asString() {
+                    item.remarks = taskDescription
+                    println("The task  was Progress  at: \(taskDescription)")
+                }
+
+                
+                todoListArray.append(item)
+                
+            }
+        }
+        return (todoListArray)
     }
     
    internal class func deleteData(deleteByKey:String)
