@@ -10,9 +10,11 @@ import UIKit
 
 class TodoListTableViewController: UITableViewController,UIGestureRecognizerDelegate {
     
-    var myTodoList = todoListHelper.lists
+    var myTodoList:[TodoList] = []
+    var todoItem = TodoList()
+    var sqliteHelper = SqliteHelper()
     var headerVC  = HeaderVC(nibName: "HeaderVC", bundle: NSBundle.mainBundle())
-//    var todo = TodoList()
+    //    var todo = TodoList()
     
     var actionMap: [[(selectedIndexPath: NSIndexPath) -> Void]] {
         return [
@@ -34,10 +36,19 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleTextFieldTextDidChangeNotification:", name: "taskName", object: nil)
-//        var recognizer = UIPanGestureRecognizer(target: self, action: "gestureRecognizerAction")
-//        recognizer.delegate = self
-//        self.view.addGestureRecognizer(recognizer)
+        //        let cc = GenID("TASK")
+        //        let aa = "string"
+        //
+        //        let bb = (aa as NSString).md5()
+        
+        
+        //        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask, true)[0] as String
+        loadMySqlite()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleTextFieldTextDidChangeNotification:", name: "taskName", object: nil)
+        //        var recognizer = UIPanGestureRecognizer(target: self, action: "gestureRecognizerAction")
+        //        recognizer.delegate = self
+        //        self.view.addGestureRecognizer(recognizer)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -45,6 +56,7 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
         self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addItem")
+        // let leftBarButton:UIBarButtonItem = UIBarButtonItem(title: "返回", style: UIBarButtonItemStyle.Plain, target: self, action:"returnTodoList")
         
         
         
@@ -69,21 +81,38 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     override func viewWillAppear(animated: Bool) // Called when the view is about to made visible. Default does nothing
         
     {
-         let todo = todoListHelper.currentTodo
-        //        let lists = todoListHelper.lists
-        todoListHelper.tempTodo = todo
-        let startTimeValue   = todoListHelper.currentTodo.startTime
+        let item = todoListHelper.currentTodo
         
-        if(todoListHelper.currentTodo.startTime != "" || todoListHelper.currentTodo.finishTime != "")
+        
+        
+        if(item.startTime == "")
         {
+            let docsPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
+            // let array = sqliteHelper.queryData()(queryDataWithKey: "rt")
+            let array = sqliteHelper.queryData("rt")
+            
+            myTodoList = array
+            
+        }
+        else
+        {
+            if(item.isNewTask)
+            {
+                myTodoList.append(item)
+                item.isNewTask = false
+            }
+            
+            else
+            {
+                println("currentTodoIndex is \(item.currentRow)")
 
-                    todoListHelper.addTask(todo.remarks, dateline: todo.finishTime,complete:false)
-
+                myTodoList[item.currentRow] = item
+                
+            }
         }
         
-        //        finishTime.text =  todoListHelper.currentTodo.finishTime
-//        detailInfo.text = todoListHelper.currentTodo.remarks
-
+        
+        
         todoTableView.reloadData()
     }
     
@@ -107,9 +136,25 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     //        // Return the number of sections.
     //        return 0
     //    }
+    
+    
+    func loadMySqlite()
+    {
+        SqliteHelper.createTable()
+    }
+    
+    
+    
     func handleTextFieldTextDidChangeNotification(notification: NSNotification) {
         let textField = notification.object as UITextField
-        todoListHelper.addTask(textField.text, dateline:"",complete:false)
+        let todo = TodoList()
+        todo.finishTime = "2014-12-23"
+        todo.currentPriority = "!"
+        todo.taskName = textField.text
+        todo.taskID = GenID("Task")
+        
+        SqliteHelper.insertData("hello")(todolistItem: todo)
+        myTodoList.append(todo)
         todoTableView.reloadData()
     }
     
@@ -129,16 +174,7 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     
     func addItem()
     {
-        //        println("hello,world")
-        //
-//        todoListHelper.addTask("hello", desc: "world",complete:false)
-//        //        SingletonClass.sharedInstance.todoList = todoListHelper.lists
-//        
-//        todoTableView.reloadData()
-        
-        
-        
-        
+
         //如果是xib的方式就用。
         //        var headerVC  = NewTaskViewController(nibName: "newTaskVC", bundle: NSBundle.mainBundle())
         
@@ -146,14 +182,11 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
         //不要用这种初始化方式，绑定不了视图的。
         //let newtask = NewTaskViewController()
         
-                let newTask  =  UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("newTask") as UIViewController
-        
-                self.navigationController?.pushViewController(newTask, animated: true)
-        
-        //todoListHelper.addTask(toDoListTitle.text, desc: desc.text)
-        // self.view.endEditing(true)
-        //        toDoListTitle.text = ""
-        //        desc.text = ""
+        let newTask  =  UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("newTask") as NewTaskViewController
+        var item = TodoList()
+        item.isNewTask = true
+        newTask.todoItem = item
+        self.navigationController?.pushViewController(newTask, animated: true)
         
     }
     
@@ -216,23 +249,25 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     }
     
     
-//    func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
-//        if let panGestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
-//            let translation = panGestureRecognizer.translationInView(self.view.superview!)
-//            if fabs(translation.x) > fabs(translation.y) {
-//                return true
-//            }
-//            return false
-//        }
-//        return false
-//    }
+    //    func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+    //        if let panGestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
+    //            let translation = panGestureRecognizer.translationInView(self.view.superview!)
+    //            if fabs(translation.x) > fabs(translation.y) {
+    //                return true
+    //            }
+    //            return false
+    //        }
+    //        return false
+    //    }
     
-    func finishTime() {
+    func taskInfo() {
         
         var todoList: UIStoryboard!
         todoList = UIStoryboard(name: "TodoListDate", bundle: nil)
         
-       let newTaskVC = self.storyboard?.instantiateViewControllerWithIdentifier("newTask") as UIViewController
+        let newTaskVC = self.storyboard?.instantiateViewControllerWithIdentifier("newTask") as NewTaskViewController
+        
+        
         
         
         //        let dataPickerVC  = todoList.instantiateViewControllerWithIdentifier("dataPicker") as UIViewController
@@ -261,7 +296,11 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return todoListHelper.lists.count;
+        //        return todoListHelper.lists.count;
+        println("tableView count is \(myTodoList.count)")
+
+        return myTodoList.count;
+        
     }
     
     
@@ -270,16 +309,29 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
         
         todoTableView.deselectRowAtIndexPath(indexPath, animated: false)
         //var tappedItem = SingletonClass.sharedInstance.todoList[indexPath.row] as TodoList
-        var tappedItem = todoListHelper.lists[indexPath.row] as TodoList
+        //        var tappedItem = todoListHelper.lists[indexPath.row] as TodoList
+        
+        var todoItem = myTodoList[indexPath.row] as TodoList
         
         
-        tappedItem.hascomplete = !tappedItem.hascomplete
+        
+        todoItem.hascomplete = !todoItem.hascomplete
         //SingletonClass.sharedInstance.todoList[indexPath.row].hascomplete = tappedItem.hascomplete
-        todoListHelper.lists[indexPath.row].hascomplete = tappedItem.hascomplete
+        //        todoListHelper.lists[indexPath.row].hascomplete = tappedItem.hascomplete
+        myTodoList[indexPath.row].hascomplete = todoItem.hascomplete
         
-        tableView.moveRowAtIndexPath(indexPath, toIndexPath: NSIndexPath(forRow: todoListHelper.lists.count - 1, inSection: 0))
         
-        finishTime()
+        tableView.moveRowAtIndexPath(indexPath, toIndexPath: NSIndexPath(forRow: myTodoList.count - 1, inSection: 0))
+        
+        let newTaskVC = self.storyboard?.instantiateViewControllerWithIdentifier("newTask") as NewTaskViewController
+        
+        todoItem.currentRow = indexPath.row
+        newTaskVC.todoItem = todoItem
+        
+        
+        self.navigationController?.pushViewController(newTaskVC, animated: true)
+        
+        // taskInfo()
         
         //todoListHelper.lists = SingletonClass.sharedInstance.todoList
         //        println("diselect result is\(tappedItem.hascomplete)")
@@ -297,27 +349,25 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
         
         
         let itemCell = tableView.dequeueReusableCellWithIdentifier("todoItem", forIndexPath: indexPath) as TodoItemTableViewCell
-        todoListHelper.currentTodo = todoListHelper.lists[indexPath.row]
+        let currentTodoItem = myTodoList[indexPath.row]
+        itemCell.finishTime.text =  myTodoList[indexPath.row].finishTime
+        itemCell.taskName.text =  myTodoList[indexPath.row].taskName
         
-        itemCell.finishTime.text =  todoListHelper.lists[indexPath.row].finishTime
-        itemCell.taskName.text =  todoListHelper.lists[indexPath.row].taskName
         
-       
-        let todo =  todoListHelper.tempTodo
         
-        if(todo.currentPriority == "高")
+        if(currentTodoItem.currentPriority == "高")
         {
             itemCell.priority.text = "!!!"
-
+            
         }
-        
-        else if(todo.currentPriority == "中")
+            
+        else if(currentTodoItem.currentPriority == "中")
         {
             itemCell.priority.text = "!!"
-
+            
         }
-        
-        else if(todo.currentPriority == "低")
+            
+        else if(currentTodoItem.currentPriority == "低")
         {
             itemCell.priority.text = "!"
             
@@ -340,26 +390,26 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
         cell.detailTextLabel?.text = todoListHelper.lists[indexPath.row].desc
         cell.accessoryType =  .DisclosureIndicator
         */
-        let taskcheck = todoListHelper.currentTodo.taskfinish
-        if(taskcheck)
-        {
-            itemCell.checkbox.selected = taskcheck
-            itemCell.taskName.attributedText = strikeThrough()
-        }
+        //        let taskcheck = todoListHelper.currentTodo.taskfinish
+        //        if(taskcheck)
+        //        {
+        //            itemCell.checkbox.selected = taskcheck
+        //            itemCell.taskName.attributedText = strikeThrough()
+        //        }
         
-        if(todoListHelper.currentTodo.finishTime != "")
+        if(currentTodoItem.finishTime != "")
         {
-            itemCell.finishTime.text = "预计完成时间:" + todoListHelper.currentTodo.finishTime
+            itemCell.finishTime.text = "预计完成时间:" + currentTodoItem.finishTime
             //            cell.detailTextLabel?.text = "预计完成时间:" + todoListHelper.currentTodo.finishTime
         }
-        
+            
         else
         {
             itemCell.finishTime.text = "预计完成时间:" + "明天"
-
+            
         }
         //        let check = SingletonClass.sharedInstance.todoList[indexPath.row] as TodoList
-        let check = todoListHelper.lists[indexPath.row] as TodoList
+        //        let check = todoListHelper.lists[indexPath.row] as TodoList
         
         
         //        if check.hascomplete{
@@ -395,10 +445,13 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
+            let currentItem = myTodoList[indexPath.row] as TodoList
             
-            todoListHelper.lists.removeAtIndex(indexPath.row)
+            myTodoList.removeAtIndex(indexPath.row)
             
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            
+            SqliteHelper.deleteData(currentItem.taskID)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
@@ -416,9 +469,9 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
         
         
-        let item = todoListHelper.lists[fromIndexPath.row]
-        todoListHelper.lists.removeAtIndex(fromIndexPath.row)
-        todoListHelper.lists.insert(item, atIndex: toIndexPath.row)
+        let item = myTodoList[fromIndexPath.row]
+        myTodoList.removeAtIndex(fromIndexPath.row)
+        myTodoList.insert(item, atIndex: toIndexPath.row)
         
         //        let item = todoListHelper.lists[fromIndexPath.row - 1]
         

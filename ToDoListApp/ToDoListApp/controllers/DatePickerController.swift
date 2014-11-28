@@ -13,7 +13,9 @@ import UIKit
 }
 class DatePickerController: UIViewController {
     
-    
+    var todoItem = TodoList()
+    var taskInfoList = NewTaskViewController()
+
     var modifyDetail = ""
     var time = ""
     weak var delegate: FromViewControllerDelegate?
@@ -43,8 +45,10 @@ class DatePickerController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let title = todoListHelper.currentTodo
-        navigationItem.title = todoListHelper.currentTodo.navigationTitle
+//        let title = todoListHelper.currentTodo
+//        navigationItem.title = todoListHelper.currentTodo.navigationTitle
+        
+        navigationItem.title = todoItem.navigationTitle
         configureDatePicker()
     }
     
@@ -91,8 +95,6 @@ class DatePickerController: UIViewController {
         
         dateLabel.text = dateFormatter.stringFromDate(datePickers.date)
         
-        let currentTodoList  =  todoListHelper.currentTodo
-        
         
         time = dateFormatter.stringFromDate(datePickers.date)
         //        todoListHelper.currentTodo.finishTime = time
@@ -115,23 +117,28 @@ class DatePickerController: UIViewController {
     func finish()
     {
         
-        if(todoListHelper.currentTodo.navigationTitle == "开始时间")
+        if(todoItem.navigationTitle == "开始时间")
         {
-            todoListHelper.currentTodo.startTime = time
+           todoItem.startTime = time
             //            dateTable.currentTodo.startTime = time
             
         }
-        else
+        else if(todoItem.navigationTitle == "结束时间")
         {
-            todoListHelper.currentTodo.finishTime = time
-            
-            //            dateTable.currentTodo.finishTime = time
+            todoItem.finishTime = time
             
         }
         
+        else
+        {
+            todoItem.reminderTime = time
+        }
 
         //        self.dismissViewControllerAnimated(true, completion: nil)
-        self.navigationController?.popViewControllerAnimated(true)
+        self.taskInfoList.todoItem = todoItem
+        self.navigationController?.popToViewController(self.taskInfoList, animated: true)
+        
+//        self.navigationController?.popViewControllerAnimated(true)
 //        delegate?.showDate(time)
         
         
@@ -149,23 +156,23 @@ class DatePickerController: UIViewController {
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        
-        
-        var dateTable :TodoListDateTableViewController = segue.destinationViewController as TodoListDateTableViewController
-        if(todoListHelper.currentTodo.navigationTitle == "开始时间")
-        {
-            dateTable.currentTodo.startTime = time
-            
-        }
-        else
-        {
-            dateTable.currentTodo.finishTime = time
-            
-        }
-    }
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        // Get the new view controller using segue.destinationViewController.
+//        // Pass the selected object to the new view controller.
+//        
+//        
+//        var dateTable :TodoListDateTableViewController = segue.destinationViewController as TodoListDateTableViewController
+//        if(todoItem.navigationTitle == "开始时间")
+//        {
+//            dateTable.currentTodo.startTime = time
+//            
+//        }
+//        else
+//        {
+//            dateTable.currentTodo.finishTime = time
+//            
+//        }
+//    }
     
     
 }

@@ -45,6 +45,13 @@
 		F79610EC19FF74C800F7EC51 /* TodoListHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79610E919FF74C800F7EC51 /* TodoListHelper.swift */; };
 		F79610ED19FF74C800F7EC51 /* TodoListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79610EA19FF74C800F7EC51 /* TodoListTableViewController.swift */; };
 		F79610EE19FF74C800F7EC51 /* UserAddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79610EB19FF74C800F7EC51 /* UserAddVC.swift */; };
+		F7BFCC9A1A25C4B700596828 /* SwiftData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BFCC991A25C4B700596828 /* SwiftData.swift */; };
+		F7BFCC9C1A25C57200596828 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F7BFCC9B1A25C57200596828 /* libsqlite3.dylib */; };
+		F7BFCCA01A25C67800596828 /* bridging.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BFCC9F1A25C67800596828 /* bridging.m */; };
+		F7BFCCA21A25D89A00596828 /* SqliteHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BFCCA11A25D89A00596828 /* SqliteHelper.swift */; };
+		F7BFCCA51A26FE5500596828 /* GenerateString.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BFCCA41A26FE5500596828 /* GenerateString.swift */; };
+		F7BFCCA81A2704C200596828 /* ExtensionString.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BFCCA71A2704C200596828 /* ExtensionString.swift */; };
+		F7BFCCAB1A27085B00596828 /* NSString+MessageDigest.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BFCCAA1A27085B00596828 /* NSString+MessageDigest.m */; };
 		F7F7D84E1A0082D800D3B7B9 /* TodoListDate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7F7D84D1A0082D800D3B7B9 /* TodoListDate.storyboard */; };
 		F7F7D8501A00855F00D3B7B9 /* DatePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F7D84F1A00855F00D3B7B9 /* DatePickerController.swift */; };
 /* End PBXBuildFile section */
@@ -102,6 +109,16 @@
 		F79610E919FF74C800F7EC51 /* TodoListHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListHelper.swift; sourceTree = "<group>"; };
 		F79610EA19FF74C800F7EC51 /* TodoListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = TodoListTableViewController.swift; path = ../TodoListTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F79610EB19FF74C800F7EC51 /* UserAddVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserAddVC.swift; path = ../UserAddVC.swift; sourceTree = "<group>"; };
+		F7BFCC991A25C4B700596828 /* SwiftData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftData.swift; sourceTree = "<group>"; };
+		F7BFCC9B1A25C57200596828 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		F7BFCC9D1A25C67800596828 /* ToDoListApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ToDoListApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		F7BFCC9E1A25C67800596828 /* bridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bridging.h; sourceTree = "<group>"; };
+		F7BFCC9F1A25C67800596828 /* bridging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = bridging.m; sourceTree = "<group>"; };
+		F7BFCCA11A25D89A00596828 /* SqliteHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SqliteHelper.swift; sourceTree = "<group>"; };
+		F7BFCCA41A26FE5500596828 /* GenerateString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenerateString.swift; sourceTree = "<group>"; };
+		F7BFCCA71A2704C200596828 /* ExtensionString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionString.swift; sourceTree = "<group>"; };
+		F7BFCCA91A27085B00596828 /* NSString+MessageDigest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MessageDigest.h"; sourceTree = "<group>"; };
+		F7BFCCAA1A27085B00596828 /* NSString+MessageDigest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MessageDigest.m"; sourceTree = "<group>"; };
 		F7F7D84D1A0082D800D3B7B9 /* TodoListDate.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TodoListDate.storyboard; sourceTree = "<group>"; };
 		F7F7D84F1A00855F00D3B7B9 /* DatePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -111,6 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7BFCC9C1A25C57200596828 /* libsqlite3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,6 +217,7 @@
 		F79610BB19FF737600F7EC51 = {
 			isa = PBXGroup;
 			children = (
+				F7BFCC9B1A25C57200596828 /* libsqlite3.dylib */,
 				F79610C619FF737600F7EC51 /* ToDoListApp */,
 				F79610DC19FF737600F7EC51 /* ToDoListAppTests */,
 				F79610C519FF737600F7EC51 /* Products */,
@@ -217,6 +236,8 @@
 		F79610C619FF737600F7EC51 /* ToDoListApp */ = {
 			isa = PBXGroup;
 			children = (
+				F7BFCCA61A27047A00596828 /* ExtensionClasses */,
+				F7BFCC981A25C4B700596828 /* thirdpart */,
 				D0C2993F1A136318006F8786 /* control */,
 				F743606F1A020F4600B58E66 /* image */,
 				F7F7D84C1A0082CB00D3B7B9 /* Views */,
@@ -232,6 +253,13 @@
 				F79610C719FF737600F7EC51 /* Supporting Files */,
 				D05668691A1C6F5E002FEC80 /* TestAutoLayoutStoryboard.storyboard */,
 				D056686B1A1DC4CC002FEC80 /* TestViewController.swift */,
+				F7BFCC9E1A25C67800596828 /* bridging.h */,
+				F7BFCC9F1A25C67800596828 /* bridging.m */,
+				F7BFCC9D1A25C67800596828 /* ToDoListApp-Bridging-Header.h */,
+				F7BFCCA11A25D89A00596828 /* SqliteHelper.swift */,
+				F7BFCCA41A26FE5500596828 /* GenerateString.swift */,
+				F7BFCCA91A27085B00596828 /* NSString+MessageDigest.h */,
+				F7BFCCAA1A27085B00596828 /* NSString+MessageDigest.m */,
 			);
 			path = ToDoListApp;
 			sourceTree = "<group>";
@@ -259,6 +287,22 @@
 				F79610DE19FF737600F7EC51 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F7BFCC981A25C4B700596828 /* thirdpart */ = {
+			isa = PBXGroup;
+			children = (
+				F7BFCC991A25C4B700596828 /* SwiftData.swift */,
+			);
+			path = thirdpart;
+			sourceTree = "<group>";
+		};
+		F7BFCCA61A27047A00596828 /* ExtensionClasses */ = {
+			isa = PBXGroup;
+			children = (
+				F7BFCCA71A2704C200596828 /* ExtensionString.swift */,
+			);
+			path = ExtensionClasses;
 			sourceTree = "<group>";
 		};
 		F7F7D84C1A0082CB00D3B7B9 /* Views */ = {
@@ -386,9 +430,12 @@
 			files = (
 				D0DE7C411A1B4BC800C206F5 /* NewTaskViewController.swift in Sources */,
 				D0CC8BE41A14A8460001A82A /* HeaderVC.swift in Sources */,
+				F7BFCCA21A25D89A00596828 /* SqliteHelper.swift in Sources */,
 				F74A339919FFA38000F5BA5A /* TodoListSectionDescriptor.swift in Sources */,
+				F7BFCCA01A25C67800596828 /* bridging.m in Sources */,
 				D0DE7C431A1B50AF00C206F5 /* TableViewController.swift in Sources */,
 				F79610CC19FF737600F7EC51 /* ViewController.swift in Sources */,
+				F7BFCCAB1A27085B00596828 /* NSString+MessageDigest.m in Sources */,
 				F79610EE19FF74C800F7EC51 /* UserAddVC.swift in Sources */,
 				F74A339B19FFA8F300F5BA5A /* TodoListPickerCell.swift in Sources */,
 				D056686C1A1DC4CC002FEC80 /* TestViewController.swift in Sources */,
@@ -397,6 +444,7 @@
 				D094D5CB1A19C43700BFEB53 /* TodoListTabBar.swift in Sources */,
 				F74A339219FFA1D300F5BA5A /* TodoListCheckCell.swift in Sources */,
 				F74A339519FFA34800F5BA5A /* TodoListDescriptor.swift in Sources */,
+				F7BFCC9A1A25C4B700596828 /* SwiftData.swift in Sources */,
 				F79610CA19FF737600F7EC51 /* AppDelegate.swift in Sources */,
 				F743606E1A01E3FC00B58E66 /* TodoListDateTableViewController.swift in Sources */,
 				F74A338F19FFA04F00F5BA5A /* TodoListBaseCell.swift in Sources */,
@@ -404,8 +452,10 @@
 				F7F7D8501A00855F00D3B7B9 /* DatePickerController.swift in Sources */,
 				F79610ED19FF74C800F7EC51 /* TodoListTableViewController.swift in Sources */,
 				D0CC8BDD1A14865E0001A82A /* TodoItemTableViewCell.swift in Sources */,
+				F7BFCCA81A2704C200596828 /* ExtensionString.swift in Sources */,
 				D08241B31A1DF897009FC2A5 /* CustomerTabBarViewController.swift in Sources */,
 				D0C299411A13638C006F8786 /* CheckBox.swift in Sources */,
+				F7BFCCA51A26FE5500596828 /* GenerateString.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,9 +578,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = ToDoListApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ToDoListApp/ToDoListApp-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -538,9 +591,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = ToDoListApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ToDoListApp/ToDoListApp-Bridging-Header.h";
 			};
 			name = Release;
 		};

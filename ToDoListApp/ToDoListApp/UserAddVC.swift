@@ -31,15 +31,15 @@ class UserAddVC:UIViewController, UITextFieldDelegate {
     
     @IBAction func addText(sender: AnyObject) {
         
-        todoListHelper.addTask(toDoListTitle.text, dateline: desc.text,complete:false)
-//        SingletonClass.sharedInstance.todoList = todoListHelper.lists
-        let list = todoListHelper.lists
-
-
-        //todoListHelper.addTask(toDoListTitle.text, desc: desc.text)
-        self.view.endEditing(true)
-        toDoListTitle.text = ""
-        desc.text = ""
+//        todoListHelper.addTask(toDoListTitle.text, dateline: desc.text,complete:false)
+////        SingletonClass.sharedInstance.todoList = todoListHelper.lists
+//        let list = todoListHelper.lists
+//
+//
+//        //todoListHelper.addTask(toDoListTitle.text, desc: desc.text)
+//        self.view.endEditing(true)
+//        toDoListTitle.text = ""
+//        desc.text = ""
         
     }
     

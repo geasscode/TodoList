@@ -23,35 +23,34 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
     @IBOutlet weak var priority: UILabel!
     
     @IBOutlet weak var cellheight: UITableViewCell!
-    var datePicker = DatePickerController()
+//    var datePicker = DatePickerController()
     
     @IBOutlet weak var textViewBottomLayoutGuideConstraint: NSLayoutConstraint!
     var needMovetextview = false
+    
+    var todoItem = TodoList()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "< 返回", style: UIBarButtonItemStyle.Plain, target: self, action:"returnTodoListVC")
+//        navigationItem.backBarButtonItem = navigationItem.leftBarButtonItem
+
         // Do any additional setup after loading the view.
     }
     
     
     override func viewWillAppear(animated: Bool) {
-        let todo = todoListHelper.currentTodo
-        //        let lists = todoListHelper.lists
-        let startTimeValue   = todoListHelper.currentTodo.startTime
+        startTime.text = todoItem.startTime
+        finishTime.text = todoItem.finishTime
+        currentPriority.text =  todoItem.currentPriority
+        currentProgress.text = todoItem.currentProgress
+        reminderMe.text = todoItem.reminderTime
+        remark.text = todoItem.remarks
+        taskName.text = todoItem.taskName
         
-        if(todoListHelper.currentTodo.startTime != "" || todoListHelper.currentTodo.finishTime != "")
-        {
-            startTime.text = startTimeValue
-            finishTime.text = todo.finishTime
-            currentPriority.text =  todo.currentPriority
-            currentProgress.text = todo.currentProgress
-            remark.text = todo.remarks
-        }
-        
-        //        finishTime.text =  todoListHelper.currentTodo.finishTime
-        taskName.text = todoListHelper.currentTodo.remarks
+        println("NewTaskViewVC-startTime:\(todoItem.startTime),finishTime:\(todoItem.finishTime),reminderMe:\(todoItem.reminderTime)")
         
         let notificationCenter = NSNotificationCenter.defaultCenter()
         notificationCenter.addObserver(self, selector: "handleKeyboardWillShowNotification:", name: UIKeyboardWillShowNotification, object: nil)
@@ -139,6 +138,16 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
         // Dispose of any resources that can be recreated.
     }
     
+    func returnTodoListVC()
+    {
+        
+        todoListHelper.currentTodo = todoItem
+        self.navigationController?.popViewControllerAnimated(true)
+
+//        self.taskInfoList.todoItem = todoItem
+//        self.navigationController?.popToViewController(self.taskInfoList, animated: true)
+//        self.navigationController?.popToViewController(<#viewController: UIViewController#>, animated: true)
+    }
     
     func popupActionSheet()
     {
@@ -165,7 +174,6 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
         
     }
     
-    //alert 需要重构，失忆想不起代码来了。
     
     
     func popupAlertView()
@@ -175,19 +183,19 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
         // Create the actions.
         let hight = UIAlertAction(title: "高", style: .Destructive) { action in
             self.currentPriority.text = "高"
-            todoListHelper.currentTodo.currentPriority = "高"
+            self.todoItem.currentPriority = "高"
             
         }
         
         let mid = UIAlertAction(title: "中", style: .Cancel) { action in
             self.currentPriority.text = "中"
-            todoListHelper.currentTodo.currentPriority = "中"
+            self.todoItem.currentPriority = "中"
             
         }
         
         let low = UIAlertAction(title: "低", style: .Default) { action in
             self.currentPriority.text = "低"
-            todoListHelper.currentTodo.currentPriority = "低"
+            self.todoItem.currentPriority = "低"
             
         }
         
@@ -211,9 +219,9 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
         let alertCotroller = UIAlertController(title: "当前进度为", message: nil, preferredStyle: .Alert)
         
         // Create the actions.
-        let percent10 = UIAlertAction(title: "10%", style: .Default) { action in
-            self.currentProgress.text = "10%"
-            todoListHelper.currentTodo.currentProgress = "10%"
+        let percent10 = UIAlertAction(title: "0%", style: .Default) { action in
+            self.currentProgress.text = "0%"
+            self.todoItem.currentProgress = "0%"
         }
         
         let percent25 = UIAlertAction(title: "25%", style: .Default) { action in
@@ -224,25 +232,25 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
         
         let percent50 = UIAlertAction(title: "50%", style: .Default) { action in
             self.currentProgress.text = "50%"
-            todoListHelper.currentTodo.currentProgress = "50%"
+            self.todoItem.currentProgress = "50%"
             
         }
         
         let percent75 = UIAlertAction(title: "75%", style: .Default) { action in
             self.currentProgress.text = "75%"
-            todoListHelper.currentTodo.currentProgress = "75%"
+            self.todoItem.currentProgress = "75%"
             
         }
         
         let percent90 = UIAlertAction(title: "90%", style: .Default) { action in
             self.currentProgress.text = "90%"
-            todoListHelper.currentTodo.currentProgress = "90%"
+            self.todoItem.currentProgress = "90%"
             
         }
         
         let percent100 = UIAlertAction(title: "100%", style: .Default) { action in
             self.currentProgress.text = "100%"
-            todoListHelper.currentTodo.currentProgress = "100%"
+            self.todoItem.currentProgress = "100%"
             
         }
         
@@ -286,7 +294,9 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
     func poptoDateVC()
     {
         let todoList = UIStoryboard(name: "TodoListDate", bundle: nil)
-        let dataPickerVC  = todoList.instantiateViewControllerWithIdentifier("dataPicker") as UIViewController
+        let dataPickerVC  = todoList.instantiateViewControllerWithIdentifier("dataPicker") as DatePickerController
+        dataPickerVC.todoItem = self.todoItem
+        dataPickerVC.taskInfoList = self
         self.navigationController?.pushViewController(dataPickerVC, animated: true)
     }
     
@@ -295,10 +305,7 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
         
         let section = indexPath.section
         let row = indexPath.row
-        
-        
-        
-        
+
         switch (section)
         {
             
@@ -306,18 +313,18 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
             
             if(row == 1)
             {
-                todoListHelper.currentTodo.navigationTitle = "开始时间"
+                self.todoItem.navigationTitle = "开始时间"
                 poptoDateVC()
             }
             else if(row == 2)
             {
-                todoListHelper.currentTodo.navigationTitle = "结束时间"
+                self.todoItem.navigationTitle = "结束时间"
                 poptoDateVC()
                 
             }
             else if(row == 3)
             {
-                todoListHelper.currentTodo.navigationTitle = "提醒我"
+                self.todoItem.navigationTitle = "提醒我"
                 poptoDateVC()
                 
             }
@@ -344,7 +351,7 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
             
         case 2:
             
-            todoListHelper.currentTodo.remarks = remark.text
+            self.todoItem.remarks = remark.text
             
         default:
             return
@@ -441,7 +448,7 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
         return needMovetextview
     }
     
-   
+    
     
     
     /*
