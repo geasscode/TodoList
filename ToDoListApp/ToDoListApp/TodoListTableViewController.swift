@@ -171,7 +171,8 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
         todo.taskName = textField.text
         todo.taskID = GenID("Task")
         todo.finishTime = "明天"
-        todo.isNewTask = false
+        todo.isShortcut = true
+//        todo.isNewTask = false
         myTodoList.append(todo)
 
         SqliteHelper.insertData(.InsertAllFromTodoList,model: todo)

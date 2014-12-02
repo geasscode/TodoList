@@ -56,21 +56,9 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
         
         //按快键方式创建和直接按+的情况为newTask
         
-       
-        if(todoItem.isNewTask || todoItem.remarks == "任务描述")
-        {
-            startTime.text = todoItem.startTime
-            finishTime.text = todoItem.finishTime
-            reminderMe.text = todoItem.reminderTime
-            currentPriority.text =  todoItem.currentPriority
-            currentProgress.text = todoItem.currentProgress
-            taskName.text = todoItem.taskName
-            //            remark.text = todoItem.remarks
-            println("NewTaskViewVC-finishTime:\(todoItem.finishTime),currentPriority:\(todoItem.currentPriority),taskName:\(todoItem.taskName)")
-            
-        }
-            
-        else
+        
+        
+        if(!todo.isNewTask)
         {
             
             let todolist = SqliteHelper.queryData(.QueryWithKeyFromTodoListItem)
@@ -86,6 +74,16 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
         }
         
         
+        
+        
+        startTime.text = todoItem.startTime
+        finishTime.text = todoItem.finishTime
+        reminderMe.text = todoItem.reminderTime
+        currentPriority.text =  todoItem.currentPriority
+        currentProgress.text = todoItem.currentProgress
+        taskName.text = todoItem.taskName
+        //            remark.text = todoItem.remarks
+        println("NewTaskViewVC-finishTime:\(todoItem.finishTime),currentPriority:\(todoItem.currentPriority),taskName:\(todoItem.taskName)")
         
         //        println("NewTaskViewVC-startTime:\(todoItem.startTime),finishTime:\(todoItem.finishTime),reminderMe:\(todoItem.reminderTime)")
         
@@ -480,30 +478,24 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
         //两种方式进入newTask，第一，直接按+进入，此时isNewTask肯定为true，
         //第二，按快键方式进入，此时remark肯定为空
         
-        if(todoItem.isNewTask)
+   
+            
+       if(todoItem.isShortcut || !todoItem.isNewTask)
         {
+            SqliteHelper.updateData(.UpdateTodoList,model:todoItem)
+            SqliteHelper.updateData(.UpdateTodoListItem,model:todoItem)
+        }
+            
+        else
+        {
+            
             todoItem.taskID = GenID("Task")
             todoItem.isNewTask = false
             todoItem.remarks = remark.text
             //按加号添加的方式插入到todolist 表
             SqliteHelper.insertData(.InsertAllFromTodoListItem, model: todoItem)
             SqliteHelper.insertData(.InsertAllFromTodoList, model: todoItem)
-            
-        }
-//            
-//        else if(todoItem.finishTime == "明天")
-//        {
-//            todoItem.finishTime = finishTime.text!
-//            SqliteHelper.updateData(.UpdateTodoListItem,model:todoItem)
-//
-//        }
-            
-            //update todoListTable and tolistItem table.
-        else
-        {
-            SqliteHelper.updateData(.UpdateTodoList,model:todoItem)
-            SqliteHelper.updateData(.UpdateTodoListItem,model:todoItem)
-            
+
         }
         
         

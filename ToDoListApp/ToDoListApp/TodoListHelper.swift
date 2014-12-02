@@ -36,6 +36,7 @@ class TodoList {
     var reminderTime = ""
     var isNewTask = true
     var currentRow  = 0
+    var isShortcut = false
 
 }
 
