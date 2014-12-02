@@ -12,7 +12,6 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     
     var myTodoList:[TodoList] = []
     var todoItem = TodoList()
-    var sqliteHelper = SqliteHelper()
     var headerVC  = HeaderVC(nibName: "HeaderVC", bundle: NSBundle.mainBundle())
     //    var todo = TodoList()
     
@@ -81,35 +80,55 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     override func viewWillAppear(animated: Bool) // Called when the view is about to made visible. Default does nothing
         
     {
-        let item = todoListHelper.currentTodo
         
         
+                    let docsPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
         
-        if(item.startTime == "")
-        {
-            let docsPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
-            // let array = sqliteHelper.queryData()(queryDataWithKey: "rt")
-            let array = sqliteHelper.queryData("rt")
-            
-            myTodoList = array
-            
-        }
-        else
-        {
-            if(item.isNewTask)
-            {
-                myTodoList.append(item)
-                item.isNewTask = false
-            }
-            
-            else
-            {
-                println("currentTodoIndex is \(item.currentRow)")
+                    println("sqlite path is \(docsPath)")
+        
+                    let array = SqliteHelper.queryData(.QueryAllFromTodoList)
+                    myTodoList = array
 
-                myTodoList[item.currentRow] = item
-                
-            }
-        }
+        let item = todoListHelper.currentTodo
+//        
+//        if(!item.isNewTask)
+//        {
+//            let docsPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
+//            
+//            println("sqlite path is \(docsPath)")
+//            
+//            let array = SqliteHelper.queryData(.QueryAllFromTodoList)
+//            myTodoList = array
+//            
+//        }
+        
+        
+//        if(item.startTime == "")
+//        {
+//            let docsPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
+//            
+//            println("sqlite path is \(docsPath)")
+//            
+//            let array = SqliteHelper.queryData(.QueryAllFromTodoList)
+//            myTodoList = array
+//            
+//        }
+//        else
+//        {
+//            if(item.isNewTask)
+//            {
+//                myTodoList.append(item)
+//                item.isNewTask = false
+//            }
+//            
+//            else
+//            {
+////                println("currentTodoIndex is \(item.currentRow)")
+////
+////                myTodoList[item.currentRow] = item
+//                
+//            }
+//        }
         
         
         
@@ -148,13 +167,16 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     func handleTextFieldTextDidChangeNotification(notification: NSNotification) {
         let textField = notification.object as UITextField
         let todo = TodoList()
-        todo.finishTime = "2014-12-23"
-        todo.currentPriority = "!"
+//        todo.currentPriority = "!"
         todo.taskName = textField.text
         todo.taskID = GenID("Task")
-        
-        SqliteHelper.insertData("hello")(todolistItem: todo)
+        todo.finishTime = "明天"
+        todo.isNewTask = false
         myTodoList.append(todo)
+
+        SqliteHelper.insertData(.InsertAllFromTodoList,model: todo)
+        SqliteHelper.insertData(.InsertAllFromTodoListItem, model: todo)
+
         todoTableView.reloadData()
     }
     
@@ -184,7 +206,6 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
         
         let newTask  =  UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("newTask") as NewTaskViewController
         var item = TodoList()
-        item.isNewTask = true
         newTask.todoItem = item
         self.navigationController?.pushViewController(newTask, animated: true)
         
@@ -354,7 +375,7 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
         itemCell.taskName.text =  myTodoList[indexPath.row].taskName
         
         
-        
+
         if(currentTodoItem.currentPriority == "高")
         {
             itemCell.priority.text = "!!!"
@@ -375,6 +396,9 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
         
         itemCell.checkbox.hidden = false
         
+        
+        itemCell.finishTime.text = "预计完成时间:" + currentTodoItem.finishTime
+
         /*
         // Configure the cell...
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "todolist")
@@ -396,7 +420,7 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
         //            itemCell.checkbox.selected = taskcheck
         //            itemCell.taskName.attributedText = strikeThrough()
         //        }
-        
+        /*
         if(currentTodoItem.finishTime != "")
         {
             itemCell.finishTime.text = "预计完成时间:" + currentTodoItem.finishTime
@@ -407,7 +431,7 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
         {
             itemCell.finishTime.text = "预计完成时间:" + "明天"
             
-        }
+        }*/
         //        let check = SingletonClass.sharedInstance.todoList[indexPath.row] as TodoList
         //        let check = todoListHelper.lists[indexPath.row] as TodoList
         

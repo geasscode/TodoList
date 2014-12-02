@@ -23,7 +23,7 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
     @IBOutlet weak var priority: UILabel!
     
     @IBOutlet weak var cellheight: UITableViewCell!
-//    var datePicker = DatePickerController()
+    //    var datePicker = DatePickerController()
     
     @IBOutlet weak var textViewBottomLayoutGuideConstraint: NSLayoutConstraint!
     var needMovetextview = false
@@ -33,24 +33,61 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "< 返回", style: UIBarButtonItemStyle.Plain, target: self, action:"returnTodoListVC")
-//        navigationItem.backBarButtonItem = navigationItem.leftBarButtonItem
-
+        //        navigationItem.backBarButtonItem = navigationItem.leftBarButtonItem
+        
         // Do any additional setup after loading the view.
     }
     
     
     override func viewWillAppear(animated: Bool) {
-        startTime.text = todoItem.startTime
-        finishTime.text = todoItem.finishTime
-        currentPriority.text =  todoItem.currentPriority
-        currentProgress.text = todoItem.currentProgress
-        reminderMe.text = todoItem.reminderTime
-        remark.text = todoItem.remarks
-        taskName.text = todoItem.taskName
         
-        println("NewTaskViewVC-startTime:\(todoItem.startTime),finishTime:\(todoItem.finishTime),reminderMe:\(todoItem.reminderTime)")
+        //不知道为毛按两次才显示文本。
+        //        startTime.text = todoItem.startTime
+        //        finishTime.text = todoItem.finishTime
+        //        currentPriority.text =  todoItem.currentPriority
+        //        currentProgress.text = todoItem.currentProgress
+        //        reminderMe.text = todoItem.reminderTime
+        //        remark.text = todoItem.remarks
+        //        taskName.text = todoItem.taskName
+        let todo = todoItem
+        
+        
+        
+        //按快键方式创建和直接按+的情况为newTask
+        
+       
+        if(todoItem.isNewTask || todoItem.remarks == "任务描述")
+        {
+            startTime.text = todoItem.startTime
+            finishTime.text = todoItem.finishTime
+            reminderMe.text = todoItem.reminderTime
+            currentPriority.text =  todoItem.currentPriority
+            currentProgress.text = todoItem.currentProgress
+            taskName.text = todoItem.taskName
+            //            remark.text = todoItem.remarks
+            println("NewTaskViewVC-finishTime:\(todoItem.finishTime),currentPriority:\(todoItem.currentPriority),taskName:\(todoItem.taskName)")
+            
+        }
+            
+        else
+        {
+            
+            let todolist = SqliteHelper.queryData(.QueryWithKeyFromTodoListItem)
+            
+            startTime.text = todolist[0].startTime
+            finishTime.text = todolist[0].finishTime
+            currentPriority.text =  todolist[0].currentPriority
+            currentProgress.text = todolist[0].currentProgress
+            reminderMe.text = todolist[0].reminderTime
+            remark.text = todolist[0].remarks
+            taskName.text = todolist[0].taskName
+            println("NewTaskViewVC-startTime:\(todolist[0].startTime),finishTime:\(todolist[0].finishTime),reminderMe:\(todolist[0].reminderTime)")
+        }
+        
+        
+        
+        //        println("NewTaskViewVC-startTime:\(todoItem.startTime),finishTime:\(todoItem.finishTime),reminderMe:\(todoItem.reminderTime)")
         
         let notificationCenter = NSNotificationCenter.defaultCenter()
         notificationCenter.addObserver(self, selector: "handleKeyboardWillShowNotification:", name: UIKeyboardWillShowNotification, object: nil)
@@ -141,12 +178,13 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
     func returnTodoListVC()
     {
         
-        todoListHelper.currentTodo = todoItem
+        //        todoListHelper.currentTodo = todoItem
+        //        SqliteHelper.insertData(.InsertAllFromTodoListItem, model: todoItem)
+        
         self.navigationController?.popViewControllerAnimated(true)
-
-//        self.taskInfoList.todoItem = todoItem
-//        self.navigationController?.popToViewController(self.taskInfoList, animated: true)
-//        self.navigationController?.popToViewController(<#viewController: UIViewController#>, animated: true)
+        //        self.taskInfoList.todoItem = todoItem
+        //        self.navigationController?.popToViewController(self.taskInfoList, animated: true)
+        //        self.navigationController?.popToViewController(<#viewController: UIViewController#>, animated: true)
     }
     
     func popupActionSheet()
@@ -305,7 +343,7 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
         
         let section = indexPath.section
         let row = indexPath.row
-
+        
         switch (section)
         {
             
@@ -406,6 +444,8 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
     func textFieldShouldReturn(textField: UITextField) -> Bool
     {
         println("textFieldShouldReturn")
+        todoItem.taskName = taskName.text
+        todoItem.remarks = remark.text
         
         return taskName.resignFirstResponder()
     }
@@ -434,7 +474,38 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
     
     func doneBarButtonItemClicked() {
         // Dismiss the keyboard by removing it as the first responder.
-        remark.resignFirstResponder()
+        
+        todoListHelper.currentTodo = todoItem
+        
+        //两种方式进入newTask，第一，直接按+进入，此时isNewTask肯定为true，
+        //第二，按快键方式进入，此时remark肯定为空
+        
+        if(todoItem.isNewTask)
+        {
+            todoItem.taskID = GenID("Task")
+            todoItem.isNewTask = false
+            todoItem.remarks = remark.text
+            //按加号添加的方式插入到todolist 表
+            SqliteHelper.insertData(.InsertAllFromTodoListItem, model: todoItem)
+            SqliteHelper.insertData(.InsertAllFromTodoList, model: todoItem)
+            
+        }
+//            
+//        else if(todoItem.finishTime == "明天")
+//        {
+//            todoItem.finishTime = finishTime.text!
+//            SqliteHelper.updateData(.UpdateTodoListItem,model:todoItem)
+//
+//        }
+            
+            //update todoListTable and tolistItem table.
+        else
+        {
+            SqliteHelper.updateData(.UpdateTodoList,model:todoItem)
+            SqliteHelper.updateData(.UpdateTodoListItem,model:todoItem)
+            
+        }
+        
         
         navigationItem.setRightBarButtonItem(nil, animated: true)
         
@@ -499,6 +570,11 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
     {
         if text == "\n" {
             textView.resignFirstResponder()
+            
+            let doneBarButtonItem = UIBarButtonItem(title: "完成", style: UIBarButtonItemStyle.Plain, target: self, action:"doneBarButtonItemClicked")
+            navigationItem.setRightBarButtonItem(doneBarButtonItem, animated: true)
+            
+            
         }
         
         return true
