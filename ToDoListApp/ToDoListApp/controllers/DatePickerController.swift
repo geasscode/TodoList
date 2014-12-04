@@ -135,6 +135,8 @@ class DatePickerController: UIViewController {
         }
 
         //        self.dismissViewControllerAnimated(true, completion: nil)
+        SqliteHelper.updateData(.UpdateTodoList,model:todoItem)
+        SqliteHelper.updateData(.UpdateTodoListItem,model:todoItem)
         self.taskInfoList.todoItem = todoItem
         self.navigationController?.popToViewController(self.taskInfoList, animated: true)
         
@@ -152,27 +154,6 @@ class DatePickerController: UIViewController {
     }
     
     
-    
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        // Get the new view controller using segue.destinationViewController.
-//        // Pass the selected object to the new view controller.
-//        
-//        
-//        var dateTable :TodoListDateTableViewController = segue.destinationViewController as TodoListDateTableViewController
-//        if(todoItem.navigationTitle == "开始时间")
-//        {
-//            dateTable.currentTodo.startTime = time
-//            
-//        }
-//        else
-//        {
-//            dateTable.currentTodo.finishTime = time
-//            
-//        }
-//    }
     
     
 }

@@ -12,15 +12,6 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WRf-4R-SqV" id="hMt-1f-Tx0">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZB2-MN-cKl">
-                        <rect key="frame" x="8" y="21" width="44" height="44"/>
-                        <state key="normal" image="icon_checkbox_default.png">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <connections>
-                            <action selector="checkboxStatus:" destination="WRf-4R-SqV" eventType="touchUpInside" id="K6k-jG-nE6"/>
-                        </connections>
-                    </button>
                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Xfa-h6-nQg">
                         <rect key="frame" x="21" y="78" width="324" height="2"/>
                     </progressView>
@@ -42,6 +33,15 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZB2-MN-cKl">
+                        <rect key="frame" x="8" y="21" width="44" height="44"/>
+                        <state key="normal" image="icon_checkbox_default.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="checkboxStatus:" destination="WRf-4R-SqV" eventType="touchUpInside" id="K6k-jG-nE6"/>
+                        </connections>
+                    </button>
                 </subviews>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.36937855139999998" green="0.61017219389999999" blue="0.30171939549999999" alpha="1" colorSpace="calibratedRGB"/>

@@ -30,7 +30,7 @@ class TodoList {
     var finishTime = ""
     var remarks = "任务描述"
     var navigationTitle = ""
-    var taskfinish = false
+    var hasTaskfinish = false
     var currentPriority = "!"
     var currentProgress = "0%"
     var reminderTime = ""

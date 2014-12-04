@@ -42,50 +42,29 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
     
     override func viewWillAppear(animated: Bool) {
         
-        //不知道为毛按两次才显示文本。
-        //        startTime.text = todoItem.startTime
-        //        finishTime.text = todoItem.finishTime
-        //        currentPriority.text =  todoItem.currentPriority
-        //        currentProgress.text = todoItem.currentProgress
-        //        reminderMe.text = todoItem.reminderTime
-        //        remark.text = todoItem.remarks
-        //        taskName.text = todoItem.taskName
+        
         let todo = todoItem
-        
-        
-        
-        //按快键方式创建和直接按+的情况为newTask
-        
-        
-        
-        if(!todo.isNewTask)
-        {
-            
-            let todolist = SqliteHelper.queryData(.QueryWithKeyFromTodoListItem)
-            
-            startTime.text = todolist[0].startTime
-            finishTime.text = todolist[0].finishTime
-            currentPriority.text =  todolist[0].currentPriority
-            currentProgress.text = todolist[0].currentProgress
-            reminderMe.text = todolist[0].reminderTime
-            remark.text = todolist[0].remarks
-            taskName.text = todolist[0].taskName
-            println("NewTaskViewVC-startTime:\(todolist[0].startTime),finishTime:\(todolist[0].finishTime),reminderMe:\(todolist[0].reminderTime)")
-        }
-        
-        
-        
-        
         startTime.text = todoItem.startTime
         finishTime.text = todoItem.finishTime
         reminderMe.text = todoItem.reminderTime
         currentPriority.text =  todoItem.currentPriority
         currentProgress.text = todoItem.currentProgress
         taskName.text = todoItem.taskName
-        //            remark.text = todoItem.remarks
-        println("NewTaskViewVC-finishTime:\(todoItem.finishTime),currentPriority:\(todoItem.currentPriority),taskName:\(todoItem.taskName)")
         
-        //        println("NewTaskViewVC-startTime:\(todoItem.startTime),finishTime:\(todoItem.finishTime),reminderMe:\(todoItem.reminderTime)")
+        if(!todo.isNewTask)
+        {
+            let todolist = SqliteHelper.queryDataWithField(todoItem)
+            
+            startTime.text = todolist.startTime
+            finishTime.text = todolist.finishTime
+            currentPriority.text =  todolist.currentPriority
+            currentProgress.text = todolist.currentProgress
+            reminderMe.text = todolist.reminderTime
+            remark.text = todolist.remarks
+            taskName.text = todolist.taskName
+            println("NewTaskViewVC-QueryTodoListItemTable-startTime:\(todolist.startTime),finishTime:\(todolist.finishTime),reminderMe:\(todolist.reminderTime)")
+        }
+        
         
         let notificationCenter = NSNotificationCenter.defaultCenter()
         notificationCenter.addObserver(self, selector: "handleKeyboardWillShowNotification:", name: UIKeyboardWillShowNotification, object: nil)
@@ -262,7 +241,7 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
         
         let percent25 = UIAlertAction(title: "25%", style: .Default) { action in
             self.currentProgress.text = "25%"
-            todoListHelper.currentTodo.currentProgress = "25%"
+            self.todoItem.currentProgress = "25%"
             
         }
         
@@ -470,38 +449,80 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
     //
     //    }
     
+    
+    func showHudView (text:String)
+    {
+        HUDController.sharedController.contentView = HUDContentView.TextView(text: text)
+        HUDController.sharedController.show()
+        HUDController.sharedController.hide(afterDelay: 2.0)
+        
+    }
+    func newTaskValidate() -> Bool
+    {
+        if(startTime.text == "")
+        {
+            showHudView("骚年别急")
+            return false
+        }
+        
+        if(taskName.text == "")
+        {
+            showHudView("骚年别急，先输入任务名先。")
+            return false
+            
+        }
+        
+    
+        
+        if(finishTime.text == "")
+        {
+            showHudView("亲，完成时间很重要哦。")
+            //String(format: "%@ %@ Check your rear view mirror. Then depress gas pedal.", start(), changeGears("Reverse"))
+            return false
+        }
+        
+        
+   
+        
+        return true
+        
+    }
+    
     func doneBarButtonItemClicked() {
         // Dismiss the keyboard by removing it as the first responder.
         
-        todoListHelper.currentTodo = todoItem
+        //        todoListHelper.currentTodo = todoItem
         
         //两种方式进入newTask，第一，直接按+进入，此时isNewTask肯定为true，
         //第二，按快键方式进入，此时remark肯定为空
         
-   
-            
-       if(todoItem.isShortcut || !todoItem.isNewTask)
-        {
-            SqliteHelper.updateData(.UpdateTodoList,model:todoItem)
-            SqliteHelper.updateData(.UpdateTodoListItem,model:todoItem)
-        }
-            
-        else
+        if(newTaskValidate())
         {
             
-            todoItem.taskID = GenID("Task")
-            todoItem.isNewTask = false
-            todoItem.remarks = remark.text
-            //按加号添加的方式插入到todolist 表
-            SqliteHelper.insertData(.InsertAllFromTodoListItem, model: todoItem)
-            SqliteHelper.insertData(.InsertAllFromTodoList, model: todoItem)
-
+            if(todoItem.isShortcut || !todoItem.isNewTask)
+            {
+                SqliteHelper.updateData(.UpdateTodoList,model:todoItem)
+                SqliteHelper.updateData(.UpdateTodoListItem,model:todoItem)
+            }
+                
+            else
+            {
+                
+                todoItem.taskID = GenID("Task")
+                todoItem.isNewTask = false
+                todoItem.remarks = remark.text
+                //按加号添加的方式插入到todolist 表
+                SqliteHelper.insertData(.InsertAllFromTodoListItem, model: todoItem)
+                SqliteHelper.insertData(.InsertAllFromTodoList, model: todoItem)
+                
+            }
+            
+            
+            navigationItem.setRightBarButtonItem(nil, animated: true)
+            
+            self.navigationController?.popViewControllerAnimated(true)
         }
         
-        
-        navigationItem.setRightBarButtonItem(nil, animated: true)
-        
-        self.navigationController?.popViewControllerAnimated(true)
         
     }
     

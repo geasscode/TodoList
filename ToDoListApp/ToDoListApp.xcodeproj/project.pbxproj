@@ -45,6 +45,14 @@
 		F79610EC19FF74C800F7EC51 /* TodoListHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79610E919FF74C800F7EC51 /* TodoListHelper.swift */; };
 		F79610ED19FF74C800F7EC51 /* TodoListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79610EA19FF74C800F7EC51 /* TodoListTableViewController.swift */; };
 		F79610EE19FF74C800F7EC51 /* UserAddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79610EB19FF74C800F7EC51 /* UserAddVC.swift */; };
+		F79B6E861A2F20DB007880A7 /* FrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79B6E7D1A2F20DB007880A7 /* FrameView.swift */; };
+		F79B6E871A2F20DB007880A7 /* HUDAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79B6E7E1A2F20DB007880A7 /* HUDAssets.swift */; };
+		F79B6E881A2F20DB007880A7 /* HUDContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79B6E7F1A2F20DB007880A7 /* HUDContentView.swift */; };
+		F79B6E891A2F20DB007880A7 /* HUDController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79B6E801A2F20DB007880A7 /* HUDController.swift */; };
+		F79B6E8A1A2F20DB007880A7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F79B6E811A2F20DB007880A7 /* Images.xcassets */; };
+		F79B6E8B1A2F20DB007880A7 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F79B6E821A2F20DB007880A7 /* Info.plist */; };
+		F79B6E8C1A2F20DB007880A7 /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79B6E841A2F20DB007880A7 /* Window.swift */; };
+		F79B6E8D1A2F20DB007880A7 /* WindowRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79B6E851A2F20DB007880A7 /* WindowRootViewController.swift */; };
 		F7BFCC9A1A25C4B700596828 /* SwiftData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BFCC991A25C4B700596828 /* SwiftData.swift */; };
 		F7BFCC9C1A25C57200596828 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F7BFCC9B1A25C57200596828 /* libsqlite3.dylib */; };
 		F7BFCCA01A25C67800596828 /* bridging.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BFCC9F1A25C67800596828 /* bridging.m */; };
@@ -109,6 +117,15 @@
 		F79610E919FF74C800F7EC51 /* TodoListHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListHelper.swift; sourceTree = "<group>"; };
 		F79610EA19FF74C800F7EC51 /* TodoListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = TodoListTableViewController.swift; path = ../TodoListTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F79610EB19FF74C800F7EC51 /* UserAddVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserAddVC.swift; path = ../UserAddVC.swift; sourceTree = "<group>"; };
+		F79B6E7D1A2F20DB007880A7 /* FrameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameView.swift; sourceTree = "<group>"; };
+		F79B6E7E1A2F20DB007880A7 /* HUDAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUDAssets.swift; sourceTree = "<group>"; };
+		F79B6E7F1A2F20DB007880A7 /* HUDContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUDContentView.swift; sourceTree = "<group>"; };
+		F79B6E801A2F20DB007880A7 /* HUDController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUDController.swift; sourceTree = "<group>"; };
+		F79B6E811A2F20DB007880A7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F79B6E821A2F20DB007880A7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F79B6E831A2F20DB007880A7 /* PKHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKHUD.h; sourceTree = "<group>"; };
+		F79B6E841A2F20DB007880A7 /* Window.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
+		F79B6E851A2F20DB007880A7 /* WindowRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowRootViewController.swift; sourceTree = "<group>"; };
 		F7BFCC991A25C4B700596828 /* SwiftData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftData.swift; sourceTree = "<group>"; };
 		F7BFCC9B1A25C57200596828 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		F7BFCC9D1A25C67800596828 /* ToDoListApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ToDoListApp-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -289,9 +306,26 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F79B6E7C1A2F20DB007880A7 /* PKHUD */ = {
+			isa = PBXGroup;
+			children = (
+				F79B6E7D1A2F20DB007880A7 /* FrameView.swift */,
+				F79B6E7E1A2F20DB007880A7 /* HUDAssets.swift */,
+				F79B6E7F1A2F20DB007880A7 /* HUDContentView.swift */,
+				F79B6E801A2F20DB007880A7 /* HUDController.swift */,
+				F79B6E811A2F20DB007880A7 /* Images.xcassets */,
+				F79B6E821A2F20DB007880A7 /* Info.plist */,
+				F79B6E831A2F20DB007880A7 /* PKHUD.h */,
+				F79B6E841A2F20DB007880A7 /* Window.swift */,
+				F79B6E851A2F20DB007880A7 /* WindowRootViewController.swift */,
+			);
+			path = PKHUD;
+			sourceTree = "<group>";
+		};
 		F7BFCC981A25C4B700596828 /* thirdpart */ = {
 			isa = PBXGroup;
 			children = (
+				F79B6E7C1A2F20DB007880A7 /* PKHUD */,
 				F7BFCC991A25C4B700596828 /* SwiftData.swift */,
 			);
 			path = thirdpart;
@@ -403,6 +437,8 @@
 				D0DE7C3F1A1B1CB100C206F5 /* icon-more@2x.png in Resources */,
 				D0CC8BE51A14A8460001A82A /* HeaderVC.xib in Resources */,
 				D056686A1A1C6F5E002FEC80 /* TestAutoLayoutStoryboard.storyboard in Resources */,
+				F79B6E8B1A2F20DB007880A7 /* Info.plist in Resources */,
+				F79B6E8A1A2F20DB007880A7 /* Images.xcassets in Resources */,
 				D094D5CC1A19C43700BFEB53 /* TodoListTabBar.xib in Resources */,
 				F79610D419FF737600F7EC51 /* LaunchScreen.xib in Resources */,
 				D0DE7C3E1A1B1CB100C206F5 /* icon-contacts@2x.png in Resources */,
@@ -447,8 +483,12 @@
 				F7BFCC9A1A25C4B700596828 /* SwiftData.swift in Sources */,
 				F79610CA19FF737600F7EC51 /* AppDelegate.swift in Sources */,
 				F743606E1A01E3FC00B58E66 /* TodoListDateTableViewController.swift in Sources */,
+				F79B6E891A2F20DB007880A7 /* HUDController.swift in Sources */,
 				F74A338F19FFA04F00F5BA5A /* TodoListBaseCell.swift in Sources */,
+				F79B6E871A2F20DB007880A7 /* HUDAssets.swift in Sources */,
+				F79B6E8D1A2F20DB007880A7 /* WindowRootViewController.swift in Sources */,
 				F74A339719FFA35F00F5BA5A /* TodoListRowDescriptor.swift in Sources */,
+				F79B6E881A2F20DB007880A7 /* HUDContentView.swift in Sources */,
 				F7F7D8501A00855F00D3B7B9 /* DatePickerController.swift in Sources */,
 				F79610ED19FF74C800F7EC51 /* TodoListTableViewController.swift in Sources */,
 				D0CC8BDD1A14865E0001A82A /* TodoItemTableViewCell.swift in Sources */,
@@ -456,6 +496,8 @@
 				D08241B31A1DF897009FC2A5 /* CustomerTabBarViewController.swift in Sources */,
 				D0C299411A13638C006F8786 /* CheckBox.swift in Sources */,
 				F7BFCCA51A26FE5500596828 /* GenerateString.swift in Sources */,
+				F79B6E861A2F20DB007880A7 /* FrameView.swift in Sources */,
+				F79B6E8C1A2F20DB007880A7 /* Window.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
