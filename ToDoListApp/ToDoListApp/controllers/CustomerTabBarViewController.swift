@@ -10,18 +10,23 @@ import UIKit
 
 class CustomerTabBarViewController: UITabBarController {
     
+      var  currentTabBar = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         
-        
         // Do any additional setup after loading the view.
     }
     
+   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        self.selectedIndex = 3
+        
         // Dispose of any resources that can be recreated.
     }
+
     
     
     /*
@@ -33,12 +38,18 @@ class CustomerTabBarViewController: UITabBarController {
     // Pass the selected object to the new view controller.
     }
     */
+    
     override  func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem!)
     {
-        let  currentTag = item.tag
-        
+        //self.selectedIndex = 3
+        currentTabBar = item.tag
+        TodoHelper.TabBarIndex.currentIndex = item.tag
+//        let todoList  =  self.storyboard?.instantiateViewControllerWithIdentifier("TodoList") as TodoListTableViewController
+//         self.navigationController?.pushViewController(todoList, animated: true)
+
         if item.tag == 3{
-            
+
+
             popupActionSheet()
             
         }
@@ -64,24 +75,23 @@ class CustomerTabBarViewController: UITabBarController {
     {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         
-        // Create the actions.
-        let letterSort = UIAlertAction(title: "按字母排序排序", style: .Destructive) { action in
-            NSLog("The \"Other\" alert action sheet's destructive action occured.")
-        }
         
         let datelineSort = UIAlertAction(title: "按到期日排序", style: .Cancel) { action in
-            NSLog("The \"Other\" alert action sheet's other action occured.")
+            
+            NSNotificationCenter.defaultCenter().postNotificationName("sort", object: "按到期日排序")
+
         }
         
         let createDateSort = UIAlertAction(title: "按创建日期排序", style: .Default) { action in
+            NSNotificationCenter.defaultCenter().postNotificationName("sort", object: "按创建日期排序")
+        }
+        
+        let prioritSort = UIAlertAction(title: "按优先级排序", style: .Destructive) { action in
+            NSNotificationCenter.defaultCenter().postNotificationName("sort", object: "按优先级排序")
+
             NSLog("The \"Other\" alert action sheet's other action occured.")
         }
         
-        let prioritSort = UIAlertAction(title: "按优先级排序", style: .Default) { action in
-            NSLog("The \"Other\" alert action sheet's other action occured.")
-        }
-        // Add the actions.
-        alertController.addAction(letterSort)
         alertController.addAction(datelineSort)
         alertController.addAction(createDateSort)
         alertController.addAction(prioritSort)

@@ -13,10 +13,9 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     
     var myTodoList:[TodoList] = []
     var todoItem = TodoList()
+    var selectedIndex = 0;
     
     var headerVC  = HeaderVC(nibName: "HeaderVC", bundle: NSBundle.mainBundle())
-    //    var todo = TodoList()
-    
     var actionMap: [[(selectedIndexPath: NSIndexPath) -> Void]] {
         return [
             // Alert style alerts.
@@ -30,7 +29,13 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
         ]
     }
     
-    
+    struct TabBarIndex {
+        
+        private static let clickedHistoryTab = 0
+        private static let clickedFinishTab = 1
+        private static let clickedEmergencyTab = 2
+        private static let clickedSortTab = 3
+    }
     
     var tabBarView = TodoListTabBar(nibName: "TodoListTabBar", bundle: NSBundle.mainBundle())
     
@@ -39,34 +44,11 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
         super.viewDidLoad()
         
         
-        //        var games:[String]!
-        //        var selectedGame:String? = nil
-        //        var selectedGameIndex:Int? = nil
-        //
-        //
-        //                games = ["Angry Birds",
-        //                "Chess",
-        //                "Russian Roulette",
-        //                "Spin the Bottle",
-        //                "Texas Hold'em Poker",
-        //                "Tic-Tac-Toe"]
-        //
-        //            if let game = selectedGame {
-        //                selectedGameIndex = find(games, game)!
-        //            }
-        
-        
-        //        let cc = GenID("TASK")
-        //        let aa = "string"
-        //
-        //        let bb = (aa as NSString).md5()
-        
-        
-        //        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask, true)[0] as String
         loadMySqlite()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleTextFieldTextDidChangeNotification:", name: "taskName", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleCheckboxDidChangeNotification:", name: "hasFinish", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleSortDidChangeNotification:", name: "sort", object: nil)
         
         //        var recognizer = UIPanGestureRecognizer(target: self, action: "gestureRecognizerAction")
         //        recognizer.delegate = self
@@ -100,70 +82,92 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     
     
     
+    
     override func viewWillAppear(animated: Bool) // Called when the view is about to made visible. Default does nothing
         
     {
-        
-        
+        let selectedIndex = TodoHelper.TabBarIndex.currentIndex
+        println("currentTabBar is \(selectedIndex)")
         let docsPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
         
         println("sqlite path is \(docsPath)")
         
-        let array = SqliteHelper.queryData(.QueryAllFromTodoList)
-        myTodoList = array
+        //        let array = SqliteHelper.queryData(.QueryAllFromTodoList)
         
-        //        let item = todoListHelper.currentTodo
-        //
-        //        if(!item.isNewTask)
-        //        {
-        //            let docsPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
-        //
-        //            println("sqlite path is \(docsPath)")
-        //
-        //            let array = SqliteHelper.queryData(.QueryAllFromTodoList)
-        //            myTodoList = array
-        //
-        //        }
-        
-        
-        //        if(item.startTime == "")
-        //        {
-        //            let docsPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
-        //
-        //            println("sqlite path is \(docsPath)")
-        //
-        //            let array = SqliteHelper.queryData(.QueryAllFromTodoList)
-        //            myTodoList = array
-        //
-        //        }
-        //        else
-        //        {
-        //            if(item.isNewTask)
-        //            {
-        //                myTodoList.append(item)
-        //                item.isNewTask = false
-        //            }
-        //
-        //            else
-        //            {
-        ////                println("currentTodoIndex is \(item.currentRow)")
-        ////
-        ////                myTodoList[item.currentRow] = item
-        //
-        //            }
-        //        }
-        
+        if(selectedIndex == TabBarIndex.clickedHistoryTab )
+        {
+            //history
+            myTodoList = SqliteHelper.queryData(.QueryAllFromTodoList)
+        }
+            
+        else if (selectedIndex == TabBarIndex.clickedFinishTab)
+        {
+            //finish
+            myTodoList = SqliteHelper.queryType(.QueryFinishedTask)
+            
+        }
+            
+        else if (selectedIndex == TabBarIndex.clickedEmergencyTab)
+        {
+            //emergency
+            myTodoList = SqliteHelper.queryType(.QueryEmergencyTask)
+            
+        }
+            
+        else if (selectedIndex == TabBarIndex.clickedSortTab)
+        {
+            //sort
+            myTodoList = SqliteHelper.queryData(.QueryAllFromTodoList)
+           // popupActionSheet()
+            
+            
+        }
         
         
         todoTableView.reloadData()
     }
     
     
+    func popupActionSheet()
+    {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        
+        
+        let datelineSort = UIAlertAction(title: "按到期日排序", style: .Cancel) { action in
+            self.myTodoList = SqliteHelper.queryType(.QueryDeadLineTask)
+            self.todoTableView.reloadData()
+            NSLog("The \"QueryDeadLineTask\" alert action sheet's other action occured.")
+        }
+        
+        let createDateSort = UIAlertAction(title: "按创建日期排序", style: .Default) { action in
+            self.myTodoList = SqliteHelper.queryType(.QueryCreateDateTask)
+            self.todoTableView.reloadData()
+            
+            
+            NSLog("The \"QueryCreateDateTask\" alert action sheet's other action occured.")
+        }
+        
+        let prioritSort = UIAlertAction(title: "按优先级排序", style: .Destructive) { action in
+            self.myTodoList = SqliteHelper.queryType(.QueryPriority)
+            self.todoTableView.reloadData()
+            
+            
+            NSLog("The \"QueryPriority\" alert action sheet's other action occured.")
+        }
+        
+        alertController.addAction(datelineSort)
+        alertController.addAction(createDateSort)
+        alertController.addAction(prioritSort)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+        
+    }
+    
     override func viewDidDisappear(animated: Bool) {
         
-//        let notificationCenter = NSNotificationCenter.defaultCenter()
-//        notificationCenter.removeObserver(self, name: "taskName", object: nil)
-//        notificationCenter.removeObserver(self, name: "hasFinish", object: nil)
+        //        let notificationCenter = NSNotificationCenter.defaultCenter()
+        //        notificationCenter.removeObserver(self, name: "taskName", object: nil)
+        //        notificationCenter.removeObserver(self, name: "hasFinish", object: nil)
         
     }
     
@@ -172,6 +176,8 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
         let notificationCenter = NSNotificationCenter.defaultCenter()
         notificationCenter.removeObserver(self, name: "taskName", object: nil)
         notificationCenter.removeObserver(self, name: "hasFinish", object: nil)
+        notificationCenter.removeObserver(self, name: "sort", object: nil)
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -202,7 +208,13 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
         //        todo.currentPriority = "!"
         todo.taskName = textField.text
         todo.taskID = GenID("Task")
-        todo.finishTime = "明天"
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        //            formatter.dateFromString("yyyy-MM-dd")
+        let date = NSDate()
+        todo.finishTime = formatter.stringFromDate(date)
+        
+        //        todo.finishTime = "明天"
         todo.isShortcut = true
         //        todo.isNewTask = false
         myTodoList.append(todo)
@@ -215,37 +227,75 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     
     func handleCheckboxDidChangeNotification(notification: NSNotification) {
         
-//        let hasFinish = notification.object as Bool
+        //        let hasFinish = notification.object as Bool
         let btn = notification.object as UIButton
-        let clickedCell =  btn.superview?.superview as UITableViewCell
-        let indexPath = todoTableView.indexPathForCell(clickedCell)
-        let currentRow = indexPath?.row
-        let clickedItem = myTodoList[currentRow!] as TodoList
-        println("item taskName is \(clickedItem.taskName)")
+        //        let clickedCell =  btn.superview?.superview as UITableViewCell
+        //        let indexPath = todoTableView.indexPathForCell(clickedCell)!
+        //        let currentRow :Int = indexPath.row
         
-        let hasFinish = btn.selected
+        var clickedItem:TodoList
         
-        if(hasFinish)
+        let pointInTable: CGPoint = btn.convertPoint(btn.bounds.origin, toView: todoTableView)
+        
+        if let cellIndexPath = todoTableView.indexPathForRowAtPoint(pointInTable)
         {
-            clickedItem.hasTaskfinish = true
-            SqliteHelper.updateData(.UpdateTodoList, model: clickedItem)
+            let currentRow = cellIndexPath.row
+            let clickedItem = myTodoList[currentRow] as TodoList
+            println("item taskName is \(clickedItem.taskName)")
             
-            myTodoList.removeAtIndex(currentRow!)
-            todoTableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Right)
+            let hasFinish = btn.selected
+            
+            if(hasFinish)
+            {
+                clickedItem.hasTaskfinish = true
+                SqliteHelper.updateData(.UpdateTodoList, model: clickedItem)
+                
+                myTodoList.removeAtIndex(currentRow)
+                todoTableView.deleteRowsAtIndexPaths([cellIndexPath], withRowAnimation: .Right)
+                
+            }
+                
+            else
+            {
+                clickedItem.hasTaskfinish = false
+                SqliteHelper.updateData(.UpdateTodoList, model: clickedItem)
+            }
+            
+            
+        }
+        
+        
+        
+        
+        
+        //        todoTableView.reloadData()
+        
+    }
+    
+    func handleSortDidChangeNotification (notification: NSNotification)
+    {
+          let sortName = notification.object as String
+        
+        if(sortName == "按到期日排序")
+        {
+            self.myTodoList = SqliteHelper.queryType(.QueryDeadLineTask)
+        }
+        
+        else if (sortName == "按创建日期排序")
+        {
+            self.myTodoList = SqliteHelper.queryType(.QueryCreateDateTask)
 
         }
         
         else
         {
-            clickedItem.hasTaskfinish = false
-            SqliteHelper.updateData(.UpdateTodoList, model: clickedItem)
+            self.myTodoList = SqliteHelper.queryType(.QueryPriority)
+
         }
         
-
-//        todoTableView.reloadData()
+        self.todoTableView.reloadData()
 
     }
-    
     
     
     func loadTabBar() -> UIView
@@ -400,7 +450,6 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
         }
         
     }
-    
     
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

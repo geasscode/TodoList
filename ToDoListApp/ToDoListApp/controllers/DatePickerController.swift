@@ -45,9 +45,7 @@ class DatePickerController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let title = todoListHelper.currentTodo
-//        navigationItem.title = todoListHelper.currentTodo.navigationTitle
-        
+
         navigationItem.title = todoItem.navigationTitle
         configureDatePicker()
     }
@@ -92,17 +90,36 @@ class DatePickerController: UIViewController {
         
         //如果属性定制不多的话可以用
         //dateLabel.text = NSDateFormatter.localizedStringFromDate(NSDate(), dateStyle: .MediumStyle, timeStyle: .ShortStyle)
-        
+        datePickers.datePickerMode = .Date
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+
+        time = dateFormatter.stringFromDate(datePickers.date)
         dateLabel.text = dateFormatter.stringFromDate(datePickers.date)
         
-        
-        time = dateFormatter.stringFromDate(datePickers.date)
-        //        todoListHelper.currentTodo.finishTime = time
-        println("currentTime is \(time)")
-        
-        //        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-        //        let formatTime = dateFormatter.stringFromDate(datePickers.date)
-        //        println("currentFormatterTime is \(time)")
+        if(todoItem.navigationTitle == "开始时间")
+        {
+            
+            todoItem.startTime = time
+            
+        }
+            
+        else if(todoItem.navigationTitle == "结束时间")
+        {
+
+            todoItem.finishTime = time
+            
+        }
+
+        else if(todoItem.navigationTitle == "提醒我")
+        {
+            datePickers.datePickerMode = .DateAndTime
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+            time = dateFormatter.stringFromDate(datePickers.date)
+            todoItem.reminderTime = time
+            dateLabel.text = dateFormatter.stringFromDate(datePickers.date)
+
+        }
+
         
     }
     
@@ -116,36 +133,17 @@ class DatePickerController: UIViewController {
     
     func finish()
     {
-        
-        if(todoItem.navigationTitle == "开始时间")
-        {
-           todoItem.startTime = time
-            //            dateTable.currentTodo.startTime = time
-            
-        }
-        else if(todoItem.navigationTitle == "结束时间")
-        {
-            todoItem.finishTime = time
-            
-        }
-        
-        else
-        {
-            todoItem.reminderTime = time
-        }
 
         //        self.dismissViewControllerAnimated(true, completion: nil)
-        SqliteHelper.updateData(.UpdateTodoList,model:todoItem)
-        SqliteHelper.updateData(.UpdateTodoListItem,model:todoItem)
+//        SqliteHelper.updateData(.UpdateTodoList,model:todoItem)
+//        SqliteHelper.updateData(.UpdateTodoListItem,model:todoItem)
         self.taskInfoList.todoItem = todoItem
         self.navigationController?.popToViewController(self.taskInfoList, animated: true)
         
 //        self.navigationController?.popViewControllerAnimated(true)
 //        delegate?.showDate(time)
         
-        
-      
-        
+
     }
     
     @IBAction func cancel(sender: UIBarButtonItem) {

@@ -57,27 +57,15 @@ class TodoItemTableViewCell: UITableViewCell {
     @IBAction func checkboxStatus(sender: UIButton) {
         checkbox.selected = !sender.selected;
         
-        
-//        let cell = sender.superview?.superview as UITableViewCell
-    
-        //        checkbox.imageView?.image = UIImage(named: "icon_checkbox_selected.png")
-//        UITableViewCell * cell = (UITableViewCell *)[[sender superview] superview];
-//        NSIndexPath * path = [self.tableView indexPathForCell:cell];
-//        NSLog(@"index row%d", [path row]);
-        //NSLog(@"view:%@", [[[sender superview] superview] description]);
-        
-//           NSNotificationCenter.defaultCenter().postNotificationName("hasFinish", object: checkbox.selected)
         NSNotificationCenter.defaultCenter().postNotificationName("hasFinish", object: sender)
 
-        
-//        todoListHelper.currentTodo.isTaskfinish = true
     }
     
     
     func currentProgress(increase:Int) {
         
         operationQueue.addOperationWithBlock {
-            sleep(arc4random_uniform(10))
+           // sleep(arc4random_uniform(10))
             
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 self.completedProgress = increase

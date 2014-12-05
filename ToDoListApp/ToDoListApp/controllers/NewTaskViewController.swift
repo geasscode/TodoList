@@ -44,13 +44,16 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
         
         
         let todo = todoItem
+         println("NewTaskViewVC-QueryTodoListItemTable-startTime:\(todo.startTime),finishTime:\(todo.finishTime),reminderMe:\(todo.reminderTime),currentPriority:\(todo.currentPriority),currentProgress:\(todo.currentProgress),taskName:\(todo.taskName)")
+        
         startTime.text = todoItem.startTime
         finishTime.text = todoItem.finishTime
         reminderMe.text = todoItem.reminderTime
         currentPriority.text =  todoItem.currentPriority
         currentProgress.text = todoItem.currentProgress
         taskName.text = todoItem.taskName
-        
+       
+
         if(!todo.isNewTask)
         {
             let todolist = SqliteHelper.queryDataWithField(todoItem)
@@ -66,9 +69,12 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
         }
         
         
+        
         let notificationCenter = NSNotificationCenter.defaultCenter()
         notificationCenter.addObserver(self, selector: "handleKeyboardWillShowNotification:", name: UIKeyboardWillShowNotification, object: nil)
         notificationCenter.addObserver(self, selector: "handleKeyboardWillHideNotification:", name: UIKeyboardWillHideNotification, object: nil)
+        
+        self.tableView.reloadData()
     }
     
     
@@ -154,11 +160,17 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
     
     func returnTodoListVC()
     {
-        
+        if(newTaskValidate())
+        {
+            SqliteHelper.updateData(.UpdateTodoList,model:todoItem)
+            SqliteHelper.updateData(.UpdateTodoListItem,model:todoItem)
+            self.navigationController?.popViewControllerAnimated(true)
+          
+
+        }
         //        todoListHelper.currentTodo = todoItem
         //        SqliteHelper.insertData(.InsertAllFromTodoListItem, model: todoItem)
         
-        self.navigationController?.popViewControllerAnimated(true)
         //        self.taskInfoList.todoItem = todoItem
         //        self.navigationController?.popToViewController(self.taskInfoList, animated: true)
         //        self.navigationController?.popToViewController(<#viewController: UIViewController#>, animated: true)
@@ -315,6 +327,9 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
         self.navigationController?.pushViewController(dataPickerVC, animated: true)
     }
     
+
+    
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         
@@ -461,7 +476,7 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
     {
         if(startTime.text == "")
         {
-            showHudView("骚年别急")
+            showHudView("骚年别急,先输入开始时间先。")
             return false
         }
         
@@ -476,7 +491,7 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
         
         if(finishTime.text == "")
         {
-            showHudView("亲，完成时间很重要哦。")
+            showHudView("亲，设置完成时间很重要哦。")
             //String(format: "%@ %@ Check your rear view mirror. Then depress gas pedal.", start(), changeGears("Reverse"))
             return false
         }

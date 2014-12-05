@@ -31,7 +31,7 @@ class TodoList {
     var remarks = "任务描述"
     var navigationTitle = ""
     var hasTaskfinish = false
-    var currentPriority = "!"
+    var currentPriority = "低"
     var currentProgress = "0%"
     var reminderTime = ""
     var isNewTask = true
@@ -43,7 +43,10 @@ class TodoList {
 
 
   class TodoHelper: NSObject {
-
+    
+    struct TabBarIndex {
+        static var currentIndex = 0
+    }
     var currentTodo = TodoList()
 
 }
