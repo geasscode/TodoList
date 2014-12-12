@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class TodoListTableViewController: UITableViewController,UIGestureRecognizerDelegate {
     
     
@@ -154,12 +155,29 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath){
-        cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1)
-        UIView.animateWithDuration(0.3, animations: {
+
+
+       cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1)
+
+        UIView.animateWithDuration(0.25, animations: {
             cell.layer.transform=CATransform3DMakeScale(1, 1, 1)
-        })
+       })
+        
     }
-    
+
+    /*
+    func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        if (operation != .None) {
+            
+//            AMWaveViewController.animationControllerForOperation(operation)
+//           AMWaveViewController.
+        
+//            return [AMWaveTransition transitionWithOperation:operation andTransitionType:AMWaveTransitionTypeBounce];
+        }
+        return nil;
+    }
+    */
+
     override func tableView(tableView: UITableView, shouldShowMenuForRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }

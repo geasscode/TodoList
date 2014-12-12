@@ -16,6 +16,8 @@ class TodoItemTableViewCell: UITableViewCell {
     
     var hasFinish = false
     
+
+    
     @IBOutlet weak var taskName: UILabel!
     @IBOutlet weak var checkbox: UIButton!
     
@@ -61,6 +63,13 @@ class TodoItemTableViewCell: UITableViewCell {
 
     }
     
+    func startAnimationWithDelay (delayTime: NSTimeInterval)
+    {
+        
+
+    }
+    
+ 
     
     func currentProgress(increase:Int) {
         

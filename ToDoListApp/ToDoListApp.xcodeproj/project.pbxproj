@@ -60,6 +60,8 @@
 		F79B6E8D1A2F20DB007880A7 /* WindowRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79B6E851A2F20DB007880A7 /* WindowRootViewController.swift */; };
 		F79DE9251A37E544000DF3CE /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F79DE9241A37E544000DF3CE /* AudioToolbox.framework */; };
 		F79DE92D1A37F8C1000DF3CE /* Alarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F79DE92C1A37F8C1000DF3CE /* Alarm.mp3 */; };
+		F7A5F36D1A3AC85F00B69D84 /* AMWaveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = F7A5F36A1A3AC85F00B69D84 /* AMWaveTransition.m */; };
+		F7A5F36E1A3AC85F00B69D84 /* AMWaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7A5F36C1A3AC85F00B69D84 /* AMWaveViewController.m */; };
 		F7BFCC9A1A25C4B700596828 /* SwiftData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BFCC991A25C4B700596828 /* SwiftData.swift */; };
 		F7BFCC9C1A25C57200596828 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F7BFCC9B1A25C57200596828 /* libsqlite3.dylib */; };
 		F7BFCCA01A25C67800596828 /* bridging.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BFCC9F1A25C67800596828 /* bridging.m */; };
@@ -146,6 +148,10 @@
 		F79DE9241A37E544000DF3CE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		F79DE9261A37E544000DF3CE /* ToDoListApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ToDoListApp.entitlements; sourceTree = "<group>"; };
 		F79DE92C1A37F8C1000DF3CE /* Alarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Alarm.mp3; path = image/Alarm.mp3; sourceTree = "<group>"; };
+		F7A5F3691A3AC85F00B69D84 /* AMWaveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMWaveTransition.h; sourceTree = "<group>"; };
+		F7A5F36A1A3AC85F00B69D84 /* AMWaveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMWaveTransition.m; sourceTree = "<group>"; };
+		F7A5F36B1A3AC85F00B69D84 /* AMWaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMWaveViewController.h; sourceTree = "<group>"; };
+		F7A5F36C1A3AC85F00B69D84 /* AMWaveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMWaveViewController.m; sourceTree = "<group>"; };
 		F7BFCC991A25C4B700596828 /* SwiftData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftData.swift; sourceTree = "<group>"; };
 		F7BFCC9B1A25C57200596828 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		F7BFCC9D1A25C67800596828 /* ToDoListApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ToDoListApp-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -359,9 +365,21 @@
 			path = PKHUD;
 			sourceTree = "<group>";
 		};
+		F7A5F3681A3AC85F00B69D84 /* AMWaveTransition */ = {
+			isa = PBXGroup;
+			children = (
+				F7A5F3691A3AC85F00B69D84 /* AMWaveTransition.h */,
+				F7A5F36A1A3AC85F00B69D84 /* AMWaveTransition.m */,
+				F7A5F36B1A3AC85F00B69D84 /* AMWaveViewController.h */,
+				F7A5F36C1A3AC85F00B69D84 /* AMWaveViewController.m */,
+			);
+			path = AMWaveTransition;
+			sourceTree = "<group>";
+		};
 		F7BFCC981A25C4B700596828 /* thirdpart */ = {
 			isa = PBXGroup;
 			children = (
+				F7A5F3681A3AC85F00B69D84 /* AMWaveTransition */,
 				F78A8B391A35847800CBA32E /* ENSideMenu.swift */,
 				F78A8B3A1A35847800CBA32E /* ENSideMenuNavigationController.swift */,
 				F79B6E7C1A2F20DB007880A7 /* PKHUD */,
@@ -533,10 +551,12 @@
 				F74A339D19FFA92600F5BA5A /* TodoListDateCell.swift in Sources */,
 				D094D5CB1A19C43700BFEB53 /* TodoListTabBar.swift in Sources */,
 				F74A339219FFA1D300F5BA5A /* TodoListCheckCell.swift in Sources */,
+				F7A5F36E1A3AC85F00B69D84 /* AMWaveViewController.m in Sources */,
 				F74A339519FFA34800F5BA5A /* TodoListDescriptor.swift in Sources */,
 				F7BFCC9A1A25C4B700596828 /* SwiftData.swift in Sources */,
 				F79610CA19FF737600F7EC51 /* AppDelegate.swift in Sources */,
 				F743606E1A01E3FC00B58E66 /* TodoListDateTableViewController.swift in Sources */,
+				F7A5F36D1A3AC85F00B69D84 /* AMWaveTransition.m in Sources */,
 				F79B6E891A2F20DB007880A7 /* HUDController.swift in Sources */,
 				F74A338F19FFA04F00F5BA5A /* TodoListBaseCell.swift in Sources */,
 				F79B6E871A2F20DB007880A7 /* HUDAssets.swift in Sources */,
