@@ -36,6 +36,11 @@
 		F74A339919FFA38000F5BA5A /* TodoListSectionDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74A339819FFA38000F5BA5A /* TodoListSectionDescriptor.swift */; };
 		F74A339B19FFA8F300F5BA5A /* TodoListPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74A339A19FFA8F300F5BA5A /* TodoListPickerCell.swift */; };
 		F74A339D19FFA92600F5BA5A /* TodoListDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74A339C19FFA92600F5BA5A /* TodoListDateCell.swift */; };
+		F78A8B381A357E4B00CBA32E /* burger@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F78A8B371A357E4B00CBA32E /* burger@2x.png */; };
+		F78A8B3B1A35847800CBA32E /* ENSideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78A8B391A35847800CBA32E /* ENSideMenu.swift */; };
+		F78A8B3C1A35847800CBA32E /* ENSideMenuNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78A8B3A1A35847800CBA32E /* ENSideMenuNavigationController.swift */; };
+		F78A8B3E1A3584CA00CBA32E /* SideBarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78A8B3D1A3584CA00CBA32E /* SideBarTableViewController.swift */; };
+		F78A8B401A35894300CBA32E /* SideBarNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78A8B3F1A35894300CBA32E /* SideBarNavigation.swift */; };
 		F79610CA19FF737600F7EC51 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79610C919FF737600F7EC51 /* AppDelegate.swift */; };
 		F79610CC19FF737600F7EC51 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79610CB19FF737600F7EC51 /* ViewController.swift */; };
 		F79610CF19FF737600F7EC51 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F79610CD19FF737600F7EC51 /* Main.storyboard */; };
@@ -53,6 +58,8 @@
 		F79B6E8B1A2F20DB007880A7 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F79B6E821A2F20DB007880A7 /* Info.plist */; };
 		F79B6E8C1A2F20DB007880A7 /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79B6E841A2F20DB007880A7 /* Window.swift */; };
 		F79B6E8D1A2F20DB007880A7 /* WindowRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79B6E851A2F20DB007880A7 /* WindowRootViewController.swift */; };
+		F79DE9251A37E544000DF3CE /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F79DE9241A37E544000DF3CE /* AudioToolbox.framework */; };
+		F79DE92D1A37F8C1000DF3CE /* Alarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F79DE92C1A37F8C1000DF3CE /* Alarm.mp3 */; };
 		F7BFCC9A1A25C4B700596828 /* SwiftData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BFCC991A25C4B700596828 /* SwiftData.swift */; };
 		F7BFCC9C1A25C57200596828 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F7BFCC9B1A25C57200596828 /* libsqlite3.dylib */; };
 		F7BFCCA01A25C67800596828 /* bridging.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BFCC9F1A25C67800596828 /* bridging.m */; };
@@ -60,6 +67,11 @@
 		F7BFCCA51A26FE5500596828 /* GenerateString.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BFCCA41A26FE5500596828 /* GenerateString.swift */; };
 		F7BFCCA81A2704C200596828 /* ExtensionString.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BFCCA71A2704C200596828 /* ExtensionString.swift */; };
 		F7BFCCAB1A27085B00596828 /* NSString+MessageDigest.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BFCCAA1A27085B00596828 /* NSString+MessageDigest.m */; };
+		F7EAABE01A36DBC70054E6C3 /* icon_emergency@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7EAABDB1A36DBC70054E6C3 /* icon_emergency@2x.png */; };
+		F7EAABE11A36DBC70054E6C3 /* icon_finishTask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7EAABDC1A36DBC70054E6C3 /* icon_finishTask@2x.png */; };
+		F7EAABE21A36DBC70054E6C3 /* icon_hasFinishTask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7EAABDD1A36DBC70054E6C3 /* icon_hasFinishTask@2x.png */; };
+		F7EAABE31A36DBC70054E6C3 /* icon_sort@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7EAABDE1A36DBC70054E6C3 /* icon_sort@2x.png */; };
+		F7EAABE41A36DBC70054E6C3 /* icon_todoTask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7EAABDF1A36DBC70054E6C3 /* icon_todoTask@2x.png */; };
 		F7F7D84E1A0082D800D3B7B9 /* TodoListDate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7F7D84D1A0082D800D3B7B9 /* TodoListDate.storyboard */; };
 		F7F7D8501A00855F00D3B7B9 /* DatePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F7D84F1A00855F00D3B7B9 /* DatePickerController.swift */; };
 /* End PBXBuildFile section */
@@ -104,6 +116,11 @@
 		F74A339819FFA38000F5BA5A /* TodoListSectionDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TodoListSectionDescriptor.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F74A339A19FFA8F300F5BA5A /* TodoListPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListPickerCell.swift; sourceTree = "<group>"; };
 		F74A339C19FFA92600F5BA5A /* TodoListDateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListDateCell.swift; sourceTree = "<group>"; };
+		F78A8B371A357E4B00CBA32E /* burger@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "burger@2x.png"; sourceTree = "<group>"; };
+		F78A8B391A35847800CBA32E /* ENSideMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ENSideMenu.swift; sourceTree = "<group>"; };
+		F78A8B3A1A35847800CBA32E /* ENSideMenuNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ENSideMenuNavigationController.swift; sourceTree = "<group>"; };
+		F78A8B3D1A3584CA00CBA32E /* SideBarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBarTableViewController.swift; sourceTree = "<group>"; };
+		F78A8B3F1A35894300CBA32E /* SideBarNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBarNavigation.swift; sourceTree = "<group>"; };
 		F79610C419FF737600F7EC51 /* ToDoListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F79610C819FF737600F7EC51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F79610C919FF737600F7EC51 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -126,6 +143,9 @@
 		F79B6E831A2F20DB007880A7 /* PKHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKHUD.h; sourceTree = "<group>"; };
 		F79B6E841A2F20DB007880A7 /* Window.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
 		F79B6E851A2F20DB007880A7 /* WindowRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowRootViewController.swift; sourceTree = "<group>"; };
+		F79DE9241A37E544000DF3CE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		F79DE9261A37E544000DF3CE /* ToDoListApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ToDoListApp.entitlements; sourceTree = "<group>"; };
+		F79DE92C1A37F8C1000DF3CE /* Alarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Alarm.mp3; path = image/Alarm.mp3; sourceTree = "<group>"; };
 		F7BFCC991A25C4B700596828 /* SwiftData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftData.swift; sourceTree = "<group>"; };
 		F7BFCC9B1A25C57200596828 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		F7BFCC9D1A25C67800596828 /* ToDoListApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ToDoListApp-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -136,6 +156,11 @@
 		F7BFCCA71A2704C200596828 /* ExtensionString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionString.swift; sourceTree = "<group>"; };
 		F7BFCCA91A27085B00596828 /* NSString+MessageDigest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MessageDigest.h"; sourceTree = "<group>"; };
 		F7BFCCAA1A27085B00596828 /* NSString+MessageDigest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MessageDigest.m"; sourceTree = "<group>"; };
+		F7EAABDB1A36DBC70054E6C3 /* icon_emergency@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_emergency@2x.png"; sourceTree = "<group>"; };
+		F7EAABDC1A36DBC70054E6C3 /* icon_finishTask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_finishTask@2x.png"; sourceTree = "<group>"; };
+		F7EAABDD1A36DBC70054E6C3 /* icon_hasFinishTask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_hasFinishTask@2x.png"; sourceTree = "<group>"; };
+		F7EAABDE1A36DBC70054E6C3 /* icon_sort@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_sort@2x.png"; sourceTree = "<group>"; };
+		F7EAABDF1A36DBC70054E6C3 /* icon_todoTask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_todoTask@2x.png"; sourceTree = "<group>"; };
 		F7F7D84D1A0082D800D3B7B9 /* TodoListDate.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TodoListDate.storyboard; sourceTree = "<group>"; };
 		F7F7D84F1A00855F00D3B7B9 /* DatePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -146,6 +171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7BFCC9C1A25C57200596828 /* libsqlite3.dylib in Frameworks */,
+				F79DE9251A37E544000DF3CE /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,6 +209,12 @@
 		F743606F1A020F4600B58E66 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				F7EAABDB1A36DBC70054E6C3 /* icon_emergency@2x.png */,
+				F7EAABDC1A36DBC70054E6C3 /* icon_finishTask@2x.png */,
+				F7EAABDD1A36DBC70054E6C3 /* icon_hasFinishTask@2x.png */,
+				F7EAABDE1A36DBC70054E6C3 /* icon_sort@2x.png */,
+				F7EAABDF1A36DBC70054E6C3 /* icon_todoTask@2x.png */,
+				F78A8B371A357E4B00CBA32E /* burger@2x.png */,
 				D0DE7C3A1A1B1CB100C206F5 /* icon-afternoon_tea@2x.png */,
 				D0DE7C3B1A1B1CB100C206F5 /* icon-contacts@2x.png */,
 				D0DE7C3C1A1B1CB100C206F5 /* icon-more@2x.png */,
@@ -217,6 +249,8 @@
 				D0DE7C401A1B4BC800C206F5 /* NewTaskViewController.swift */,
 				D0DE7C421A1B50AF00C206F5 /* TableViewController.swift */,
 				D08241B21A1DF897009FC2A5 /* CustomerTabBarViewController.swift */,
+				F78A8B3D1A3584CA00CBA32E /* SideBarTableViewController.swift */,
+				F78A8B3F1A35894300CBA32E /* SideBarNavigation.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -234,6 +268,7 @@
 		F79610BB19FF737600F7EC51 = {
 			isa = PBXGroup;
 			children = (
+				F79DE9241A37E544000DF3CE /* AudioToolbox.framework */,
 				F7BFCC9B1A25C57200596828 /* libsqlite3.dylib */,
 				F79610C619FF737600F7EC51 /* ToDoListApp */,
 				F79610DC19FF737600F7EC51 /* ToDoListAppTests */,
@@ -253,6 +288,7 @@
 		F79610C619FF737600F7EC51 /* ToDoListApp */ = {
 			isa = PBXGroup;
 			children = (
+				F79DE9261A37E544000DF3CE /* ToDoListApp.entitlements */,
 				F7BFCCA61A27047A00596828 /* ExtensionClasses */,
 				F7BFCC981A25C4B700596828 /* thirdpart */,
 				D0C2993F1A136318006F8786 /* control */,
@@ -284,6 +320,7 @@
 		F79610C719FF737600F7EC51 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F79DE92C1A37F8C1000DF3CE /* Alarm.mp3 */,
 				F79610C819FF737600F7EC51 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -325,6 +362,8 @@
 		F7BFCC981A25C4B700596828 /* thirdpart */ = {
 			isa = PBXGroup;
 			children = (
+				F78A8B391A35847800CBA32E /* ENSideMenu.swift */,
+				F78A8B3A1A35847800CBA32E /* ENSideMenuNavigationController.swift */,
 				F79B6E7C1A2F20DB007880A7 /* PKHUD */,
 				F7BFCC991A25C4B700596828 /* SwiftData.swift */,
 			);
@@ -397,6 +436,12 @@
 				TargetAttributes = {
 					F79610C319FF737600F7EC51 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = HQCKDM42WD;
+						SystemCapabilities = {
+							com.apple.InterAppAudio = {
+								enabled = 1;
+							};
+						};
 					};
 					F79610D819FF737600F7EC51 = {
 						CreatedOnToolsVersion = 6.1;
@@ -429,8 +474,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D083E9011A15F11200ADA68E /* IOS8Text@2x.png in Resources */,
+				F7EAABE11A36DBC70054E6C3 /* icon_finishTask@2x.png in Resources */,
+				F78A8B381A357E4B00CBA32E /* burger@2x.png in Resources */,
 				D094D5CE1A19C97000BFEB53 /* emergencyTask@2x.png in Resources */,
 				D0CC8BD41A144F550001A82A /* icon_checkbox_selected@2x.png in Resources */,
+				F7EAABE41A36DBC70054E6C3 /* icon_todoTask@2x.png in Resources */,
 				F79610CF19FF737600F7EC51 /* Main.storyboard in Resources */,
 				F7F7D84E1A0082D800D3B7B9 /* TodoListDate.storyboard in Resources */,
 				D0DE7C3D1A1B1CB100C206F5 /* icon-afternoon_tea@2x.png in Resources */,
@@ -442,10 +490,14 @@
 				D094D5CC1A19C43700BFEB53 /* TodoListTabBar.xib in Resources */,
 				F79610D419FF737600F7EC51 /* LaunchScreen.xib in Resources */,
 				D0DE7C3E1A1B1CB100C206F5 /* icon-contacts@2x.png in Resources */,
+				F7EAABE01A36DBC70054E6C3 /* icon_emergency@2x.png in Resources */,
 				F74360711A02101300B58E66 /* icon-calendar@2x.png in Resources */,
+				F7EAABE21A36DBC70054E6C3 /* icon_hasFinishTask@2x.png in Resources */,
 				D0CC8BD31A144F550001A82A /* icon_checkbox_default@2x.png in Resources */,
 				D0CC8BD61A14500E0001A82A /* iii@2x.png in Resources */,
+				F7EAABE31A36DBC70054E6C3 /* icon_sort@2x.png in Resources */,
 				F79610D119FF737600F7EC51 /* Images.xcassets in Resources */,
+				F79DE92D1A37F8C1000DF3CE /* Alarm.mp3 in Resources */,
 				D0CC8BCC1A1448810001A82A /* TodoItemCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -466,9 +518,11 @@
 			files = (
 				D0DE7C411A1B4BC800C206F5 /* NewTaskViewController.swift in Sources */,
 				D0CC8BE41A14A8460001A82A /* HeaderVC.swift in Sources */,
+				F78A8B3B1A35847800CBA32E /* ENSideMenu.swift in Sources */,
 				F7BFCCA21A25D89A00596828 /* SqliteHelper.swift in Sources */,
 				F74A339919FFA38000F5BA5A /* TodoListSectionDescriptor.swift in Sources */,
 				F7BFCCA01A25C67800596828 /* bridging.m in Sources */,
+				F78A8B401A35894300CBA32E /* SideBarNavigation.swift in Sources */,
 				D0DE7C431A1B50AF00C206F5 /* TableViewController.swift in Sources */,
 				F79610CC19FF737600F7EC51 /* ViewController.swift in Sources */,
 				F7BFCCAB1A27085B00596828 /* NSString+MessageDigest.m in Sources */,
@@ -487,12 +541,14 @@
 				F74A338F19FFA04F00F5BA5A /* TodoListBaseCell.swift in Sources */,
 				F79B6E871A2F20DB007880A7 /* HUDAssets.swift in Sources */,
 				F79B6E8D1A2F20DB007880A7 /* WindowRootViewController.swift in Sources */,
+				F78A8B3C1A35847800CBA32E /* ENSideMenuNavigationController.swift in Sources */,
 				F74A339719FFA35F00F5BA5A /* TodoListRowDescriptor.swift in Sources */,
 				F79B6E881A2F20DB007880A7 /* HUDContentView.swift in Sources */,
 				F7F7D8501A00855F00D3B7B9 /* DatePickerController.swift in Sources */,
 				F79610ED19FF74C800F7EC51 /* TodoListTableViewController.swift in Sources */,
 				D0CC8BDD1A14865E0001A82A /* TodoItemTableViewCell.swift in Sources */,
 				F7BFCCA81A2704C200596828 /* ExtensionString.swift in Sources */,
+				F78A8B3E1A3584CA00CBA32E /* SideBarTableViewController.swift in Sources */,
 				D08241B31A1DF897009FC2A5 /* CustomerTabBarViewController.swift in Sources */,
 				D0C299411A13638C006F8786 /* CheckBox.swift in Sources */,
 				F7BFCCA51A26FE5500596828 /* GenerateString.swift in Sources */,
@@ -621,9 +677,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = ToDoListApp/ToDoListApp.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ToDoListApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ToDoListApp/ToDoListApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -634,9 +694,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = ToDoListApp/ToDoListApp.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ToDoListApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ToDoListApp/ToDoListApp-Bridging-Header.h";
 			};
 			name = Release;

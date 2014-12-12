@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -12,29 +13,26 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WRf-4R-SqV" id="hMt-1f-Tx0">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Xfa-h6-nQg">
-                        <rect key="frame" x="21" y="78" width="324" height="2"/>
+                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Xfa-h6-nQg">
+                        <rect key="frame" x="21" y="77" width="300" height="2"/>
                     </progressView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YQ4-jO-D4G">
-                        <rect key="frame" x="50" y="32" width="35" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YQ4-jO-D4G">
+                        <rect key="frame" x="62" y="31" width="18" height="22"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                         <color key="textColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="预计完成时间：明天" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZf-uU-bNQ">
-                        <rect key="frame" x="86" y="45" width="232" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="完成1000个任务达到1级战士" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FBl-dA-ody">
-                        <rect key="frame" x="86" y="14" width="218" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="完成1000个任务达到1级战士" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FBl-dA-ody">
+                        <rect key="frame" x="85" y="14" width="193" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Awn-ha-mFO"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZB2-MN-cKl">
-                        <rect key="frame" x="8" y="21" width="44" height="44"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZB2-MN-cKl">
+                        <rect key="frame" x="13" y="21" width="44" height="41"/>
                         <state key="normal" image="icon_checkbox_default.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -42,7 +40,37 @@
                             <action selector="checkboxStatus:" destination="WRf-4R-SqV" eventType="touchUpInside" id="K6k-jG-nE6"/>
                         </connections>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="预计完成时间：明天" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZf-uU-bNQ">
+                        <rect key="frame" x="85" y="45" width="232" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="qZf-uU-bNQ" firstAttribute="leading" secondItem="YQ4-jO-D4G" secondAttribute="trailing" constant="5" id="3uI-rS-ivf"/>
+                    <constraint firstItem="Xfa-h6-nQg" firstAttribute="top" secondItem="qZf-uU-bNQ" secondAttribute="bottom" constant="15" id="8S4-Ys-70j"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="FBl-dA-ody" secondAttribute="trailing" constant="54" id="9mY-qt-s9D"/>
+                    <constraint firstItem="FBl-dA-ody" firstAttribute="top" secondItem="hMt-1f-Tx0" secondAttribute="topMargin" constant="6" id="9xL-IK-d7W"/>
+                    <constraint firstItem="FBl-dA-ody" firstAttribute="leading" secondItem="qZf-uU-bNQ" secondAttribute="leading" id="BPJ-I3-dI6"/>
+                    <constraint firstItem="qZf-uU-bNQ" firstAttribute="top" secondItem="FBl-dA-ody" secondAttribute="bottom" constant="10" id="RLW-80-cSg"/>
+                    <constraint firstItem="YQ4-jO-D4G" firstAttribute="leading" secondItem="ZB2-MN-cKl" secondAttribute="trailing" constant="5" id="TkW-S0-8Ly"/>
+                    <constraint firstItem="ZB2-MN-cKl" firstAttribute="centerY" secondItem="YQ4-jO-D4G" secondAttribute="centerY" id="TrF-q1-pMT"/>
+                    <constraint firstItem="FBl-dA-ody" firstAttribute="leading" secondItem="ZB2-MN-cKl" secondAttribute="trailing" constant="28" id="UYm-6W-SS0"/>
+                    <constraint firstItem="ZB2-MN-cKl" firstAttribute="leading" secondItem="hMt-1f-Tx0" secondAttribute="leadingMargin" constant="5" id="W2t-0l-RyU"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Xfa-h6-nQg" secondAttribute="trailing" constant="11" id="ddb-Kz-U2e"/>
+                    <constraint firstItem="Xfa-h6-nQg" firstAttribute="top" secondItem="ZB2-MN-cKl" secondAttribute="bottom" constant="15" id="eIE-LY-Jsg"/>
+                    <constraint firstItem="Xfa-h6-nQg" firstAttribute="leading" secondItem="hMt-1f-Tx0" secondAttribute="leadingMargin" constant="13" id="gNU-au-562"/>
+                    <constraint firstItem="ZB2-MN-cKl" firstAttribute="top" secondItem="hMt-1f-Tx0" secondAttribute="topMargin" constant="13" id="nOD-7e-iNY"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="qZf-uU-bNQ" secondAttribute="trailing" constant="15" id="wJO-W2-iCv"/>
+                    <constraint firstItem="Xfa-h6-nQg" firstAttribute="top" secondItem="YQ4-jO-D4G" secondAttribute="bottom" constant="24" id="xgu-wR-ypS"/>
+                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="Xfa-h6-nQg" secondAttribute="bottom" constant="4" id="xj8-vr-LJz"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="xgu-wR-ypS"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.36937855139999998" green="0.61017219389999999" blue="0.30171939549999999" alpha="1" colorSpace="calibratedRGB"/>
             <connections>

@@ -20,7 +20,7 @@ import UIKit
 
 var todoListHelper  = TodoHelper ()
 
-class TodoList {
+class TodoList  {
     
     var taskID = ""
     var taskName = ""

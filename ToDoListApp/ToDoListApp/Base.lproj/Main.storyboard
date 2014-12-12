@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="aoF-sT-6EN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="aoF-sT-6EN">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -259,11 +259,11 @@
             </objects>
             <point key="canvasLocation" x="51" y="2214"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--待做任务-->
         <scene sceneID="UIt-5r-kRb">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eXm-ry-akc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="history" id="ZMc-I9-13F"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eXm-ry-akc" customClass="SideBarNavigation" customModule="ToDoListApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="待做任务" image="icon_todoTask.png" id="ZMc-I9-13F"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="sCg-GH-Cyb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -277,6 +277,86 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X27-eJ-c8c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3" y="1409"/>
+        </scene>
+        <!--Side Bar Table View Controller-->
+        <scene sceneID="fPC-ro-6L8">
+            <objects>
+                <tableViewController storyboardIdentifier="sideBarList" id="qSm-Ss-FX0" customClass="SideBarTableViewController" customModule="ToDoListApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="0WV-hH-abc">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <sections>
+                            <tableViewSection id="MxN-Yv-tPe">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="lwS-XZ-imX" imageView="B3u-5l-RCt" style="IBUITableViewCellStyleDefault" id="CXq-eR-s7P">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CXq-eR-s7P" id="vmB-Nz-sZT">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="今天" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lwS-XZ-imX">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="icon-calendar.png" id="B3u-5l-RCt">
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="Cyw-h2-CK3" imageView="tCC-s8-CZV" style="IBUITableViewCellStyleDefault" id="VKW-19-GsM">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VKW-19-GsM" id="LE0-zb-c24">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="明天" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Cyw-h2-CK3">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="icon-calendar.png" id="tCC-s8-CZV">
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="6dP-Qn-5q5" imageView="arJ-J1-VhP" style="IBUITableViewCellStyleDefault" id="2q9-PA-bp5">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2q9-PA-bp5" id="vzW-md-3BS">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="本周" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6dP-Qn-5q5">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="icon-afternoon_tea.png" id="arJ-J1-VhP">
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="qSm-Ss-FX0" id="e2j-j0-vSL"/>
+                            <outlet property="delegate" destination="qSm-Ss-FX0" id="JGk-MM-10a"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="N2s-jQ-Nc7"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aFk-9G-TFZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6220" y="-184"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="PIL-av-j3D">
@@ -295,7 +375,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c2Y-dF-XPw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4399.5" y="615"/>
+            <point key="canvasLocation" x="5211" y="615"/>
         </scene>
         <!--New Task View Controller-->
         <scene sceneID="l7w-dG-8J9">
@@ -361,7 +441,7 @@
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="开始时间" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zGO-Xt-Uoz">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="widthClass=compact">
@@ -647,7 +727,7 @@
         <scene sceneID="AXb-t6-ti0">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="t0J-Ot-Nxk" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="1" title="已完成的任务" id="sUz-ZA-pvs"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="已完成的任务" image="icon_hasFinishTask.png" id="sUz-ZA-pvs"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Nnr-EH-W0q">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -696,7 +776,7 @@
         <scene sceneID="qyL-Vn-yCo">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rBd-eR-vRD" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="2" title="紧急任务" id="yVf-M3-PSK"/>
+                    <tabBarItem key="tabBarItem" tag="2" title="紧急任务" image="icon_emergency.png" id="yVf-M3-PSK"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fdQ-UP-pLa">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -803,7 +883,9 @@
         <scene sceneID="fgC-HT-OaA">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eYq-ea-URy" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="3" title="排序" id="BuW-pI-pSx"/>
+                    <tabBarItem key="tabBarItem" tag="3" title="排序" image="icon_sort.png" id="BuW-pI-pSx">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-4"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vzg-8A-wLQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -836,9 +918,32 @@
             </objects>
             <point key="canvasLocation" x="3513" y="644"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="KYU-Ey-Mrv">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YFJ-NS-6gU" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="DYg-cB-kT8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="qSm-Ss-FX0" kind="relationship" relationship="rootViewController" id="K9p-bn-AMV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eYR-6c-CRu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5408" y="-184"/>
+        </scene>
     </scenes>
     <resources>
         <image name="IOS8Text.png" width="640" height="91"/>
+        <image name="icon-afternoon_tea.png" width="25" height="25"/>
         <image name="icon-calendar.png" width="22" height="22"/>
+        <image name="icon_emergency.png" width="24" height="24"/>
+        <image name="icon_hasFinishTask.png" width="32" height="32"/>
+        <image name="icon_sort.png" width="16" height="16"/>
+        <image name="icon_todoTask.png" width="24" height="24"/>
     </resources>
 </document>

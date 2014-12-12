@@ -9,16 +9,16 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate,UIAlertViewDelegate {
 
     var window: UIWindow?
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-
-        
-        // Override point for customization after application launch.
+        if(UIApplication.instancesRespondToSelector(Selector("registerUserNotificationSettings:"))) {
+            UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Alert | .Sound, categories: nil))
+        }        // Override point for customization after application launch.
         return true
     }
 
@@ -43,7 +43,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification)
+    {
+        
+        let deadlineTask = notification.userInfo as [String:String]?
+        
+        if let todo = deadlineTask
+        {
+            let currentTaskInfo = todo["timesup"]!
+            let message = String(format: "你的任务截止日期是 %@，目前进度是%@。",  currentTaskInfo,currentTaskInfo)
+            
+            let alert = UIAlertView(title: "Times UP", message: message, delegate: self, cancelButtonTitle: "Snooze", otherButtonTitles: "Cancel Alarm", "ss")
+//            alert.show()
 
+        }
+      
+        
+  
 
+    }
+
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        
+        //afconvert -f caff -d LEI16@44100 -c 1 yourfile.wav yourfile.caf
+        if(buttonIndex==0)
+        {
+            let date =  NSDate()
+            let snoozeTime = date.dateByAddingTimeInterval(5)
+            let notification =  UILocalNotification()
+            notification.fireDate = snoozeTime
+            notification.alertBody = "Time To Wake Up"
+            notification.soundName  = UILocalNotificationDefaultSoundName
+           // notification.soundName = "Alarm.mp3"
+            UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        }
+        else
+        {
+            UIApplication.sharedApplication().cancelAllLocalNotifications()
+            println("Cancel Alarm Button")
+ 
+        }
+
+    }
 }
 

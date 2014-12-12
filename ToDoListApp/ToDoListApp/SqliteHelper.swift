@@ -17,12 +17,17 @@ class SqliteHelper: NSObject  {
         case InsertAllFromTodoListItem = "InsertAllFromTodoListItem"
         case QueryAllFromTodoList = "QueryAllFromTodoList"
         case QueryAllFromTodoListItem = "QueryAllFromTodoListItem"
+        case QueryAllUndoTask = "QueryAllUndoTask"
         
         case QueryFinishedTask = "QueryFinishedTask"
         case QueryEmergencyTask = "QueryEmergencyTask"
         case QueryPriority = "QueryPriority"
         case QueryCreateDateTask = "QueryCreateDateTask"
         case QueryDeadLineTask = "QueryDeadLineTask"
+        case QueryTodayTask = "QueryTodayTask"
+        case QueryTomorrow = "QueryTomorrow"
+        case QueryOneWeek = "QueryOneWeek"
+        
         
         case UpdateTodoList = "UpdateTodoList"
         case UpdateTodoListItem = "UpdateTodoListItem"
@@ -32,17 +37,27 @@ class SqliteHelper: NSObject  {
     internal enum sqlStatement: String {
         
         case QueryAllFromTodoList = "select * from TodoList"
+        case QueryAllUndoTask = "select * from TodoList where HasTaskFinish = 0"
         case QueryDeadLineTask = "select * from TodoList ORDER BY  FinishTime DESC"
         case QueryCreateDateTask = "select * from TodoList ORDER BY  StartTime ASC"
         case QueryPriority = "select * from TodoList  ORDER BY(case  when Priority = '低' then 1 when Priority = '中' then 2 when Priority = '高' then 3 end) DESC"
         case QueryFinishedTask = "SELECT * FROM TodoList where HasTaskFinish = 1"
         case QueryEmergencyTask = "SELECT * FROM TodoList where Priority = '高'"
+        case QueryTodayTask = "SELECT *  from TodoList where  date('now') = FinishTime"
+        case QueryTomorrow = "SELECT * from TodoList where  date('now','+1 day') = FinishTime"
+        case QueryOneWeek = "SELECT  * from TodoList where FinishTime BETWEEN date('now') AND date('now','+7 day')"
+        
+        
         
     }
     
     internal class func queryType(sqlType:SqliteType) -> [TodoList]
     {
         switch sqlType {
+            
+        case .QueryAllUndoTask:
+            let (resultSet, err) = SD.executeQuery(sqlStatement.QueryAllUndoTask.rawValue)
+            return  generateTodoList(resultSet, error: err)
             
         case .QueryCreateDateTask:
             
@@ -68,6 +83,23 @@ class SqliteHelper: NSObject  {
             
             let (resultSet, err) = SD.executeQuery(sqlStatement.QueryFinishedTask.rawValue)
             return  generateTodoList(resultSet, error: err)
+            
+        case .QueryTodayTask:
+            
+            let (resultSet, err) = SD.executeQuery(sqlStatement.QueryTodayTask.rawValue)
+            return  generateTodoList(resultSet, error: err)
+            
+        case .QueryTomorrow:
+            
+            let (resultSet, err) = SD.executeQuery(sqlStatement.QueryTomorrow.rawValue)
+            return  generateTodoList(resultSet, error: err)
+            
+        case .QueryOneWeek:
+            
+            let (resultSet, err) = SD.executeQuery(sqlStatement.QueryOneWeek.rawValue)
+            return  generateTodoList(resultSet, error: err)
+            
+            
             
         default :
             return []
@@ -203,7 +235,7 @@ class SqliteHelper: NSObject  {
             
         case .UpdateTodoListItem:
             //?和argument应该是一一对应的。顺序不能乱。
-            let (resultSet2, err2) = SD.executeQuery("UPDATE TodoListItem set TaskName = ?,StartTime = ?, FinishTime = ?,Priority = ?, ReminderMe = ?,Progress = ? WHERE TaskID = ?", withArgs: [taskName,startTime,finishTime,priority,reminderMe,progress,taskID])
+            let (resultSet2, err2) = SD.executeQuery("UPDATE TodoListItem set TaskName = ?,StartTime = ?, FinishTime = ?,Priority = ?, ReminderMe = ?,Progress = ?, TaskDescription = ? WHERE TaskID = ?", withArgs: [taskName,startTime,finishTime,priority,reminderMe,progress,remark,taskID])
             
             println(" update TodoListItem table success")
             

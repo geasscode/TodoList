@@ -9,17 +9,17 @@
 import UIKit
 
 @objc protocol FromViewControllerDelegate {
-     func showDate(data: AnyObject)
+    func showDate(data: AnyObject)
 }
-class DatePickerController: UIViewController {
+class DatePickerController: UIViewController,UIAlertViewDelegate {
     
     var todoItem = TodoList()
     var taskInfoList = NewTaskViewController()
-
+    
     var modifyDetail = ""
     var time = ""
     weak var delegate: FromViewControllerDelegate?
-
+    
     
     @IBOutlet weak var datePickers: UIDatePicker!
     @IBOutlet weak var dateLabel: UILabel!
@@ -45,7 +45,7 @@ class DatePickerController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         navigationItem.title = todoItem.navigationTitle
         configureDatePicker()
     }
@@ -92,7 +92,7 @@ class DatePickerController: UIViewController {
         //dateLabel.text = NSDateFormatter.localizedStringFromDate(NSDate(), dateStyle: .MediumStyle, timeStyle: .ShortStyle)
         datePickers.datePickerMode = .Date
         dateFormatter.dateFormat = "yyyy-MM-dd"
-
+        
         time = dateFormatter.stringFromDate(datePickers.date)
         dateLabel.text = dateFormatter.stringFromDate(datePickers.date)
         
@@ -105,11 +105,11 @@ class DatePickerController: UIViewController {
             
         else if(todoItem.navigationTitle == "结束时间")
         {
-
+            
             todoItem.finishTime = time
             
         }
-
+            
         else if(todoItem.navigationTitle == "提醒我")
         {
             datePickers.datePickerMode = .DateAndTime
@@ -117,9 +117,11 @@ class DatePickerController: UIViewController {
             time = dateFormatter.stringFromDate(datePickers.date)
             todoItem.reminderTime = time
             dateLabel.text = dateFormatter.stringFromDate(datePickers.date)
-
+            
+            //            self.scheduleLocalNotificationWithDate(datePickers.date)
+            //            self.getAlertMessage("AlarmSet")
+            
         }
-
         
     }
     
@@ -127,23 +129,27 @@ class DatePickerController: UIViewController {
         
         finish()
         //用segue方式传值：如果是tableView 还可以传indexpath 过去。
-       // self.performSegueWithIdentifier("mydateTable", sender: sender)
+        // self.performSegueWithIdentifier("mydateTable", sender: sender)
         
     }
     
     func finish()
     {
-
-        //        self.dismissViewControllerAnimated(true, completion: nil)
-//        SqliteHelper.updateData(.UpdateTodoList,model:todoItem)
-//        SqliteHelper.updateData(.UpdateTodoListItem,model:todoItem)
+        if(todoItem.navigationTitle == "提醒我")
+        {
+            self.scheduleLocalNotificationWithDate(datePickers.date)
+        }
+        
+        //self.dismissViewControllerAnimated(true, completion: nil)
+        SqliteHelper.updateData(.UpdateTodoList,model:todoItem)
+        SqliteHelper.updateData(.UpdateTodoListItem,model:todoItem)
         self.taskInfoList.todoItem = todoItem
         self.navigationController?.popToViewController(self.taskInfoList, animated: true)
         
-//        self.navigationController?.popViewControllerAnimated(true)
-//        delegate?.showDate(time)
+        //        self.navigationController?.popViewControllerAnimated(true)
+        //        delegate?.showDate(time)
         
-
+        
     }
     
     @IBAction func cancel(sender: UIBarButtonItem) {
@@ -151,7 +157,66 @@ class DatePickerController: UIViewController {
         self.navigationController?.popViewControllerAnimated(true)
     }
     
+    func getAlertMessage(message:String)
+    {
+        let alertView = UIAlertView(title: "Alarm Clock", message: message, delegate: self, cancelButtonTitle: "OK", otherButtonTitles: "", "")
+        alertView.show()
+        
+    }
     
+    func scheduleLocalNotificationWithDate(date:NSDate)
+    {
+        let notification = UILocalNotification()
+        
+        //        let fivesecond = NSDate(timeIntervalSinceNow: 5)
+        //        notification.fireDate = fivesecond
+        
+        //        fivesecond.dateByAddingTimeInterval(4)
+        
+        //传类过去运行时会出错。 Property list invalid for format: 200 (property lists cannot contain objects of type 'CFType'
+        
+        var userDic  = ["timesup":"sai"]
+        //        var dd = ["timesup":todoItem]
+        
+        let  currentTime = dateFormatter.stringFromDate(date)
+        notification.fireDate = date
+        notification.alertBody = "兄弟，出来行，迟早要把任务做完的。"
+        notification.timeZone = NSTimeZone.defaultTimeZone()
+        notification.hasAction = true
+        notification.alertAction = "SNOOZE"
+        
+        notification.userInfo = userDic
+        notification.soundName = UILocalNotificationDefaultSoundName
+        
+        
+        //notification.soundName = "Alarm.mp3"
+        //        notification.alertAction = "Open"
+        
+        //        let state = UIApplication.sharedApplication().applicationState
+        //        if (state == .Background)
+        //        {
+        //
+        //            notification.applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber + 1
+        //        }
+        
+        
+        //        UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+    }
     
+    /*
+    func runTimer()
+    {
+    let timer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "showActivity", userInfo: nil, repeats: true)
     
+    }
+    
+    func showActivity()
+    {
+    let date = NSDate()
+    dateFormatter.timeStyle = .MediumStyle
+    dateLabel.text = dateFormatter.stringFromDate(date)
+    
+    }
+    */
 }

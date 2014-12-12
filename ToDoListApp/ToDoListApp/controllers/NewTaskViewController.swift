@@ -44,17 +44,18 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
         
         
         let todo = todoItem
-         println("NewTaskViewVC-QueryTodoListItemTable-startTime:\(todo.startTime),finishTime:\(todo.finishTime),reminderMe:\(todo.reminderTime),currentPriority:\(todo.currentPriority),currentProgress:\(todo.currentProgress),taskName:\(todo.taskName)")
+        println("NewTaskViewVC-QueryTodoListItemTable-startTime:\(todo.startTime),finishTime:\(todo.finishTime),reminderMe:\(todo.reminderTime),currentPriority:\(todo.currentPriority),currentProgress:\(todo.currentProgress),taskName:\(todo.taskName)")
         
-        startTime.text = todoItem.startTime
-        finishTime.text = todoItem.finishTime
-        reminderMe.text = todoItem.reminderTime
-        currentPriority.text =  todoItem.currentPriority
-        currentProgress.text = todoItem.currentProgress
-        taskName.text = todoItem.taskName
-       
-
-        if(!todo.isNewTask)
+        
+            startTime.text = todoItem.startTime
+            finishTime.text = todoItem.finishTime
+            reminderMe.text = todoItem.reminderTime
+            currentPriority.text =  todoItem.currentPriority
+            currentProgress.text = todoItem.currentProgress
+            taskName.text = todoItem.taskName
+        
+        
+        if(!todo.isNewTask && todo.startTime != "")
         {
             let todolist = SqliteHelper.queryDataWithField(todoItem)
             
@@ -110,7 +111,7 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
         {
             UIView.beginAnimations("slide", context: nil)
             UIView.setAnimationDuration(0.3)
-            self.view.transform = CGAffineTransformMakeTranslation(0, -250);
+            self.view.transform = CGAffineTransformMakeTranslation(0, -200);
             UIView.commitAnimations()
         }
         else
@@ -165,8 +166,8 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
             SqliteHelper.updateData(.UpdateTodoList,model:todoItem)
             SqliteHelper.updateData(.UpdateTodoListItem,model:todoItem)
             self.navigationController?.popViewControllerAnimated(true)
-          
-
+            
+            
         }
         //        todoListHelper.currentTodo = todoItem
         //        SqliteHelper.insertData(.InsertAllFromTodoListItem, model: todoItem)
@@ -327,7 +328,7 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
         self.navigationController?.pushViewController(dataPickerVC, animated: true)
     }
     
-
+    
     
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -487,7 +488,7 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
             
         }
         
-    
+        
         
         if(finishTime.text == "")
         {
@@ -497,7 +498,7 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
         }
         
         
-   
+        
         
         return true
         
@@ -514,8 +515,9 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
         if(newTaskValidate())
         {
             
-            if(todoItem.isShortcut || !todoItem.isNewTask)
+            if(todoItem.isShortcut || todoItem.isNewTask == false)
             {
+                todoItem.remarks = remark.text
                 SqliteHelper.updateData(.UpdateTodoList,model:todoItem)
                 SqliteHelper.updateData(.UpdateTodoListItem,model:todoItem)
             }
