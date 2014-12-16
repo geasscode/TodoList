@@ -29,6 +29,7 @@
 		D0DE7C431A1B50AF00C206F5 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DE7C421A1B50AF00C206F5 /* TableViewController.swift */; };
 		F743606E1A01E3FC00B58E66 /* TodoListDateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F743606D1A01E3FC00B58E66 /* TodoListDateTableViewController.swift */; };
 		F74360711A02101300B58E66 /* icon-calendar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F74360701A02101300B58E66 /* icon-calendar@2x.png */; };
+		F7466A251A403C9B0025D42C /* NSObject+Swift.m in Sources */ = {isa = PBXBuildFile; fileRef = F7466A241A403C9B0025D42C /* NSObject+Swift.m */; };
 		F74A338F19FFA04F00F5BA5A /* TodoListBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74A338E19FFA04F00F5BA5A /* TodoListBaseCell.swift */; };
 		F74A339219FFA1D300F5BA5A /* TodoListCheckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74A339119FFA1D300F5BA5A /* TodoListCheckCell.swift */; };
 		F74A339519FFA34800F5BA5A /* TodoListDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74A339419FFA34800F5BA5A /* TodoListDescriptor.swift */; };
@@ -62,6 +63,7 @@
 		F79DE92D1A37F8C1000DF3CE /* Alarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F79DE92C1A37F8C1000DF3CE /* Alarm.mp3 */; };
 		F7A5F36D1A3AC85F00B69D84 /* AMWaveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = F7A5F36A1A3AC85F00B69D84 /* AMWaveTransition.m */; };
 		F7A5F36E1A3AC85F00B69D84 /* AMWaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7A5F36C1A3AC85F00B69D84 /* AMWaveViewController.m */; };
+		F7A5F3741A3AFBA300B69D84 /* ExtensionTableViewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A5F3731A3AFBA300B69D84 /* ExtensionTableViewTableViewController.swift */; };
 		F7BFCC9A1A25C4B700596828 /* SwiftData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BFCC991A25C4B700596828 /* SwiftData.swift */; };
 		F7BFCC9C1A25C57200596828 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F7BFCC9B1A25C57200596828 /* libsqlite3.dylib */; };
 		F7BFCCA01A25C67800596828 /* bridging.m in Sources */ = {isa = PBXBuildFile; fileRef = F7BFCC9F1A25C67800596828 /* bridging.m */; };
@@ -111,6 +113,8 @@
 		D0DE7C421A1B50AF00C206F5 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		F743606D1A01E3FC00B58E66 /* TodoListDateTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListDateTableViewController.swift; sourceTree = "<group>"; };
 		F74360701A02101300B58E66 /* icon-calendar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-calendar@2x.png"; sourceTree = "<group>"; };
+		F7466A231A403C9B0025D42C /* NSObject+Swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Swift.h"; sourceTree = "<group>"; };
+		F7466A241A403C9B0025D42C /* NSObject+Swift.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Swift.m"; sourceTree = "<group>"; };
 		F74A338E19FFA04F00F5BA5A /* TodoListBaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListBaseCell.swift; sourceTree = "<group>"; };
 		F74A339119FFA1D300F5BA5A /* TodoListCheckCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListCheckCell.swift; sourceTree = "<group>"; };
 		F74A339419FFA34800F5BA5A /* TodoListDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListDescriptor.swift; sourceTree = "<group>"; };
@@ -152,6 +156,7 @@
 		F7A5F36A1A3AC85F00B69D84 /* AMWaveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMWaveTransition.m; sourceTree = "<group>"; };
 		F7A5F36B1A3AC85F00B69D84 /* AMWaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMWaveViewController.h; sourceTree = "<group>"; };
 		F7A5F36C1A3AC85F00B69D84 /* AMWaveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMWaveViewController.m; sourceTree = "<group>"; };
+		F7A5F3731A3AFBA300B69D84 /* ExtensionTableViewTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionTableViewTableViewController.swift; sourceTree = "<group>"; };
 		F7BFCC991A25C4B700596828 /* SwiftData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftData.swift; sourceTree = "<group>"; };
 		F7BFCC9B1A25C57200596828 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		F7BFCC9D1A25C67800596828 /* ToDoListApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ToDoListApp-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -234,6 +239,22 @@
 			path = image;
 			sourceTree = "<group>";
 		};
+		F7466A1E1A40369B0025D42C /* animation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = animation;
+			sourceTree = "<group>";
+		};
+		F7466A221A403C9B0025D42C /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				F7466A231A403C9B0025D42C /* NSObject+Swift.h */,
+				F7466A241A403C9B0025D42C /* NSObject+Swift.m */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		F74A338D19FFA03800F5BA5A /* cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -294,6 +315,7 @@
 		F79610C619FF737600F7EC51 /* ToDoListApp */ = {
 			isa = PBXGroup;
 			children = (
+				F7A5F3721A3AFADD00B69D84 /* animation */,
 				F79DE9261A37E544000DF3CE /* ToDoListApp.entitlements */,
 				F7BFCCA61A27047A00596828 /* ExtensionClasses */,
 				F7BFCC981A25C4B700596828 /* thirdpart */,
@@ -376,9 +398,19 @@
 			path = AMWaveTransition;
 			sourceTree = "<group>";
 		};
+		F7A5F3721A3AFADD00B69D84 /* animation */ = {
+			isa = PBXGroup;
+			children = (
+				F7A5F3731A3AFBA300B69D84 /* ExtensionTableViewTableViewController.swift */,
+			);
+			path = animation;
+			sourceTree = "<group>";
+		};
 		F7BFCC981A25C4B700596828 /* thirdpart */ = {
 			isa = PBXGroup;
 			children = (
+				F7466A221A403C9B0025D42C /* Extension */,
+				F7466A1E1A40369B0025D42C /* animation */,
 				F7A5F3681A3AC85F00B69D84 /* AMWaveTransition */,
 				F78A8B391A35847800CBA32E /* ENSideMenu.swift */,
 				F78A8B3A1A35847800CBA32E /* ENSideMenuNavigationController.swift */,
@@ -551,6 +583,7 @@
 				F74A339D19FFA92600F5BA5A /* TodoListDateCell.swift in Sources */,
 				D094D5CB1A19C43700BFEB53 /* TodoListTabBar.swift in Sources */,
 				F74A339219FFA1D300F5BA5A /* TodoListCheckCell.swift in Sources */,
+				F7466A251A403C9B0025D42C /* NSObject+Swift.m in Sources */,
 				F7A5F36E1A3AC85F00B69D84 /* AMWaveViewController.m in Sources */,
 				F74A339519FFA34800F5BA5A /* TodoListDescriptor.swift in Sources */,
 				F7BFCC9A1A25C4B700596828 /* SwiftData.swift in Sources */,
@@ -563,6 +596,7 @@
 				F79B6E8D1A2F20DB007880A7 /* WindowRootViewController.swift in Sources */,
 				F78A8B3C1A35847800CBA32E /* ENSideMenuNavigationController.swift in Sources */,
 				F74A339719FFA35F00F5BA5A /* TodoListRowDescriptor.swift in Sources */,
+				F7A5F3741A3AFBA300B69D84 /* ExtensionTableViewTableViewController.swift in Sources */,
 				F79B6E881A2F20DB007880A7 /* HUDContentView.swift in Sources */,
 				F7F7D8501A00855F00D3B7B9 /* DatePickerController.swift in Sources */,
 				F79610ED19FF74C800F7EC51 /* TodoListTableViewController.swift in Sources */,

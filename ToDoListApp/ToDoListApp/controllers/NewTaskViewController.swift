@@ -31,6 +31,7 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
     var todoItem = TodoList()
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "< 返回", style: UIBarButtonItemStyle.Plain, target: self, action:"returnTodoListVC")
@@ -44,15 +45,24 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
         
         
         let todo = todoItem
+        
+        let pointInTable: CGPoint = startTime.convertPoint(startTime.bounds.origin, toView: self.tableView)
+        
+        if let cellIndexPath = self.tableView.indexPathForRowAtPoint(pointInTable)
+        {
+            let currentRow = cellIndexPath.row
+            
+        }
+        
         println("NewTaskViewVC-QueryTodoListItemTable-startTime:\(todo.startTime),finishTime:\(todo.finishTime),reminderMe:\(todo.reminderTime),currentPriority:\(todo.currentPriority),currentProgress:\(todo.currentProgress),taskName:\(todo.taskName)")
         
         
-            startTime.text = todoItem.startTime
-            finishTime.text = todoItem.finishTime
-            reminderMe.text = todoItem.reminderTime
-            currentPriority.text =  todoItem.currentPriority
-            currentProgress.text = todoItem.currentProgress
-            taskName.text = todoItem.taskName
+        startTime.text = todoItem.startTime
+        finishTime.text = todoItem.finishTime
+        reminderMe.text = todoItem.reminderTime
+        currentPriority.text =  todoItem.currentPriority
+        currentProgress.text = todoItem.currentProgress
+        taskName.text = todoItem.taskName
         
         
         if(!todo.isNewTask && todo.startTime != "")
@@ -329,7 +339,19 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
     }
     
     
-    
+//    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+//        
+//        startTime.text = todoItem.startTime
+//        reminderMe.text = todoItem.reminderTime
+//        println("startTime is \(todoItem.startTime)，reminderTime is \(todoItem.reminderTime)")
+//        
+//    }
+    //
+    //    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    //
+    //
+    //
+    //    }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         

@@ -43,6 +43,8 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     @IBOutlet weak var todoTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
 //        self.tableView.separatorStyle = .None
         let longPressEvent = UILongPressGestureRecognizer(target: self, action: "longPressTodo:")
         //        longPressEvent.delegate = self
@@ -110,6 +112,9 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     override func viewWillAppear(animated: Bool) // Called when the view is about to made visible. Default does nothing
         
     {
+        
+        tableView.reloadDataAnimateWithWave(.RightToLeftWaveAnimation)
+
         let selectedIndex = TodoHelper.TabBarIndex.currentIndex
         println("currentTabBar is \(selectedIndex)")
         let docsPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
@@ -157,11 +162,11 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath){
 
 
-       cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1)
-
-        UIView.animateWithDuration(0.25, animations: {
-            cell.layer.transform=CATransform3DMakeScale(1, 1, 1)
-       })
+//       cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1)
+//
+//        UIView.animateWithDuration(0.25, animations: {
+//            cell.layer.transform=CATransform3DMakeScale(1, 1, 1)
+//       })
         
     }
 

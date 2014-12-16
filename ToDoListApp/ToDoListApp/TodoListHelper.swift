@@ -17,6 +17,65 @@ import UIKit
 //    
 //}
 
+extension Int {
+    var f: CGFloat { return CGFloat(self) }
+}
+
+extension Float {
+    var f: CGFloat { return CGFloat(self) }
+}
+
+extension Double {
+    var f: CGFloat { return CGFloat(self) }
+}
+
+//多optional 情况下可用的方法
+func unwrap<T1, T2>(optional1: T1?, optional2: T2?) -> (T1, T2)? {
+    switch (optional1, optional2) {
+    case let (.Some(value1), .Some(value2)):
+        return (value1, value2)
+    default:
+        return nil
+    }
+}
+
+func unwrap<T1, T2, T3>(optional1: T1?, optional2: T2?, optional3: T3?) -> (T1, T2, T3)? {
+    switch (optional1, optional2, optional3) {
+    case let (.Some(value1), .Some(value2), .Some(value3)):
+        return (value1, value2, value3)
+    default:
+        return nil
+    }
+}
+
+func unwrap<T1, T2, T3, T4>(optional1: T1?, optional2: T2?, optional3: T3?, optional4: T4?) -> (T1, T2, T3, T4)? {
+    switch (optional1, optional2, optional3, optional4) {
+    case let (.Some(value1), .Some(value2), .Some(value3), .Some(value4)):
+        return (value1, value2, value3, value4)
+    default:
+        return nil
+    }
+}
+
+//例子：
+/*
+if let (firstName, lastName) = unwrap(optionalFirstName, optionalLastName) {
+    println("Hello \(firstName) \(lastName)!")
+}
+
+
+
+switch (optionalFirstName, optionalLastName) {
+case let (.Some(firstName), .Some(lastName)):
+    println("Hello \(firstName) \(lastName)!")
+case let (.Some(firstName), .None):
+    println("Hi \(firstName)!")
+case let (.None, .Some(lastName)):
+    println("Greetings \(lastName).")
+case let (.None, .None):
+    println("Good day to you!")
+}
+*/
 
 var todoListHelper  = TodoHelper ()
 
