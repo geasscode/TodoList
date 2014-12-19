@@ -9,27 +9,26 @@
 import UIKit
 
 class CustomerTabBarViewController: UITabBarController
- {
+{
     
-      var  currentTabBar = 0
+    var  currentTabBar = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         
         // Do any additional setup after loading the view.
     }
     
-   
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         self.selectedIndex = 3
         
         // Dispose of any resources that can be recreated.
     }
+    
 
-    
-    
     /*
     // MARK: - Navigation
     
@@ -45,34 +44,27 @@ class CustomerTabBarViewController: UITabBarController
         //self.selectedIndex = 3
         currentTabBar = item.tag
         TodoHelper.TabBarIndex.currentIndex = item.tag
-//        let todoList  =  self.storyboard?.instantiateViewControllerWithIdentifier("TodoList") as TodoListTableViewController
-//         self.navigationController?.pushViewController(todoList, animated: true)
+        //        let todoList  =  self.storyboard?.instantiateViewControllerWithIdentifier("TodoList") as TodoListTableViewController
+        //         self.navigationController?.pushViewController(todoList, animated: true)
         
         
-
+        
         if item.tag == 3{
-
-
-            popupActionSheet()
+            TodoHelper.TabBarIndex.selectedSearchTab = true
+            
+            //系统自带的tabBaritem是不能够修改title的
+            
+//            if let string = item.title
+//            {
+//                
+//                println("curent select title is \(string)")
+//            }
+            //popupActionSheet()
             
         }
     }
     
-    /*
-    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool
-    {
-        let selectVC = tabBarController.viewControllers?[tabBarController.selectedIndex] as UIViewController
-        if(selectVC == viewController)
-        {
-            return false
-        }
-        else
-        {
-            return true;
-        }
-        
-    }
-    */
+  
     
     func popupActionSheet()
     {
@@ -82,7 +74,7 @@ class CustomerTabBarViewController: UITabBarController
         let datelineSort = UIAlertAction(title: "按到期日排序", style: .Cancel) { action in
             
             NSNotificationCenter.defaultCenter().postNotificationName("sort", object: "按到期日排序")
-
+            
         }
         
         let createDateSort = UIAlertAction(title: "按创建日期排序", style: .Default) { action in
@@ -91,7 +83,7 @@ class CustomerTabBarViewController: UITabBarController
         
         let prioritSort = UIAlertAction(title: "按优先级排序", style: .Destructive) { action in
             NSNotificationCenter.defaultCenter().postNotificationName("sort", object: "按优先级排序")
-
+            
             NSLog("The \"Other\" alert action sheet's other action occured.")
         }
         

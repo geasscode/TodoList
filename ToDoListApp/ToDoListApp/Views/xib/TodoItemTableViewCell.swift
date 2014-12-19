@@ -17,6 +17,7 @@ class TodoItemTableViewCell: UITableViewCell {
     var hasFinish = false
     
 
+    @IBOutlet weak var taskView: UIView!
     
     @IBOutlet weak var taskName: UILabel!
     @IBOutlet weak var checkbox: UIButton!
@@ -65,11 +66,16 @@ class TodoItemTableViewCell: UITableViewCell {
     
     func startAnimationWithDelay (delayTime: NSTimeInterval)
     {
-        
+        let screenWidth = UIScreen.mainScreen().bounds.size.width
+        taskView.transform = CGAffineTransformMakeTranslation(screenWidth, 0);
+        UIView.animateWithDuration(1, delay: delayTime, usingSpringWithDamping: 0.6, initialSpringVelocity: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+           self.taskView.transform = CGAffineTransformIdentity
+        }, completion: nil)
 
     }
     
  
+
     
     func currentProgress(increase:Int) {
         

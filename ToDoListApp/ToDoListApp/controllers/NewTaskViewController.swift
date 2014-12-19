@@ -44,17 +44,11 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
     override func viewWillAppear(animated: Bool) {
         
         
-        let todo = todoItem
+//        let todo = todoItem
         
-        let pointInTable: CGPoint = startTime.convertPoint(startTime.bounds.origin, toView: self.tableView)
+     
         
-        if let cellIndexPath = self.tableView.indexPathForRowAtPoint(pointInTable)
-        {
-            let currentRow = cellIndexPath.row
-            
-        }
-        
-        println("NewTaskViewVC-QueryTodoListItemTable-startTime:\(todo.startTime),finishTime:\(todo.finishTime),reminderMe:\(todo.reminderTime),currentPriority:\(todo.currentPriority),currentProgress:\(todo.currentProgress),taskName:\(todo.taskName)")
+        println("NewTaskViewVC-QueryTodoListItemTable-startTime:\(todoItem.startTime),finishTime:\(todoItem.finishTime),reminderMe:\(todoItem.reminderTime),currentPriority:\(todoItem.currentPriority),currentProgress:\(todoItem.currentProgress),taskName:\(todoItem.taskName)")
         
         
         startTime.text = todoItem.startTime
@@ -65,7 +59,7 @@ class NewTaskViewController: UITableViewController,UITextViewDelegate,UITextFiel
         taskName.text = todoItem.taskName
         
         
-        if(!todo.isNewTask && todo.startTime != "")
+        if(!todoItem.isNewTask && todoItem.startTime != "")
         {
             let todolist = SqliteHelper.queryDataWithField(todoItem)
             

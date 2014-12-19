@@ -30,6 +30,10 @@
 		F743606E1A01E3FC00B58E66 /* TodoListDateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F743606D1A01E3FC00B58E66 /* TodoListDateTableViewController.swift */; };
 		F74360711A02101300B58E66 /* icon-calendar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F74360701A02101300B58E66 /* icon-calendar@2x.png */; };
 		F7466A251A403C9B0025D42C /* NSObject+Swift.m in Sources */ = {isa = PBXBuildFile; fileRef = F7466A241A403C9B0025D42C /* NSObject+Swift.m */; };
+		F7466A271A416F730025D42C /* SearchShowResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7466A261A416F730025D42C /* SearchShowResultsViewController.swift */; };
+		F7466A291A4280360025D42C /* icon-search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7466A281A4280360025D42C /* icon-search@2x.png */; };
+		F7466A2B1A4282480025D42C /* icon-searchs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7466A2A1A4282480025D42C /* icon-searchs@2x.png */; };
+		F7466A2E1A441E1F0025D42C /* DropDownList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7466A2D1A441E1F0025D42C /* DropDownList.swift */; };
 		F74A338F19FFA04F00F5BA5A /* TodoListBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74A338E19FFA04F00F5BA5A /* TodoListBaseCell.swift */; };
 		F74A339219FFA1D300F5BA5A /* TodoListCheckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74A339119FFA1D300F5BA5A /* TodoListCheckCell.swift */; };
 		F74A339519FFA34800F5BA5A /* TodoListDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74A339419FFA34800F5BA5A /* TodoListDescriptor.swift */; };
@@ -115,6 +119,11 @@
 		F74360701A02101300B58E66 /* icon-calendar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-calendar@2x.png"; sourceTree = "<group>"; };
 		F7466A231A403C9B0025D42C /* NSObject+Swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Swift.h"; sourceTree = "<group>"; };
 		F7466A241A403C9B0025D42C /* NSObject+Swift.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Swift.m"; sourceTree = "<group>"; };
+		F7466A261A416F730025D42C /* SearchShowResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchShowResultsViewController.swift; sourceTree = "<group>"; };
+		F7466A281A4280360025D42C /* icon-search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-search@2x.png"; sourceTree = "<group>"; };
+		F7466A2A1A4282480025D42C /* icon-searchs@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-searchs@2x.png"; sourceTree = "<group>"; };
+		F7466A2C1A42DCF00025D42C /* FunctionalTest.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = FunctionalTest.playground; sourceTree = "<group>"; };
+		F7466A2D1A441E1F0025D42C /* DropDownList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownList.swift; sourceTree = "<group>"; };
 		F74A338E19FFA04F00F5BA5A /* TodoListBaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListBaseCell.swift; sourceTree = "<group>"; };
 		F74A339119FFA1D300F5BA5A /* TodoListCheckCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListCheckCell.swift; sourceTree = "<group>"; };
 		F74A339419FFA34800F5BA5A /* TodoListDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListDescriptor.swift; sourceTree = "<group>"; };
@@ -200,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				D0C299401A13638C006F8786 /* CheckBox.swift */,
+				F7466A2D1A441E1F0025D42C /* DropDownList.swift */,
 			);
 			path = control;
 			sourceTree = "<group>";
@@ -220,6 +230,8 @@
 		F743606F1A020F4600B58E66 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				F7466A2A1A4282480025D42C /* icon-searchs@2x.png */,
+				F7466A281A4280360025D42C /* icon-search@2x.png */,
 				F7EAABDB1A36DBC70054E6C3 /* icon_emergency@2x.png */,
 				F7EAABDC1A36DBC70054E6C3 /* icon_finishTask@2x.png */,
 				F7EAABDD1A36DBC70054E6C3 /* icon_hasFinishTask@2x.png */,
@@ -278,6 +290,7 @@
 				D08241B21A1DF897009FC2A5 /* CustomerTabBarViewController.swift */,
 				F78A8B3D1A3584CA00CBA32E /* SideBarTableViewController.swift */,
 				F78A8B3F1A35894300CBA32E /* SideBarNavigation.swift */,
+				F7466A261A416F730025D42C /* SearchShowResultsViewController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -424,6 +437,7 @@
 			isa = PBXGroup;
 			children = (
 				F7BFCCA71A2704C200596828 /* ExtensionString.swift */,
+				F7466A2C1A42DCF00025D42C /* FunctionalTest.playground */,
 			);
 			path = ExtensionClasses;
 			sourceTree = "<group>";
@@ -530,6 +544,7 @@
 				D0CC8BD41A144F550001A82A /* icon_checkbox_selected@2x.png in Resources */,
 				F7EAABE41A36DBC70054E6C3 /* icon_todoTask@2x.png in Resources */,
 				F79610CF19FF737600F7EC51 /* Main.storyboard in Resources */,
+				F7466A2B1A4282480025D42C /* icon-searchs@2x.png in Resources */,
 				F7F7D84E1A0082D800D3B7B9 /* TodoListDate.storyboard in Resources */,
 				D0DE7C3D1A1B1CB100C206F5 /* icon-afternoon_tea@2x.png in Resources */,
 				D0DE7C3F1A1B1CB100C206F5 /* icon-more@2x.png in Resources */,
@@ -538,6 +553,7 @@
 				F79B6E8B1A2F20DB007880A7 /* Info.plist in Resources */,
 				F79B6E8A1A2F20DB007880A7 /* Images.xcassets in Resources */,
 				D094D5CC1A19C43700BFEB53 /* TodoListTabBar.xib in Resources */,
+				F7466A291A4280360025D42C /* icon-search@2x.png in Resources */,
 				F79610D419FF737600F7EC51 /* LaunchScreen.xib in Resources */,
 				D0DE7C3E1A1B1CB100C206F5 /* icon-contacts@2x.png in Resources */,
 				F7EAABE01A36DBC70054E6C3 /* icon_emergency@2x.png in Resources */,
@@ -571,6 +587,8 @@
 				F78A8B3B1A35847800CBA32E /* ENSideMenu.swift in Sources */,
 				F7BFCCA21A25D89A00596828 /* SqliteHelper.swift in Sources */,
 				F74A339919FFA38000F5BA5A /* TodoListSectionDescriptor.swift in Sources */,
+				F7466A271A416F730025D42C /* SearchShowResultsViewController.swift in Sources */,
+				F7466A2E1A441E1F0025D42C /* DropDownList.swift in Sources */,
 				F7BFCCA01A25C67800596828 /* bridging.m in Sources */,
 				F78A8B401A35894300CBA32E /* SideBarNavigation.swift in Sources */,
 				D0DE7C431A1B50AF00C206F5 /* TableViewController.swift in Sources */,

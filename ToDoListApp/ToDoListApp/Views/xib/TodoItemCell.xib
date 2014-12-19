@@ -79,6 +79,7 @@
                 <outlet property="priority" destination="YQ4-jO-D4G" id="ZKH-tL-Qoi"/>
                 <outlet property="taskName" destination="FBl-dA-ody" id="uSI-tw-Rc5"/>
                 <outlet property="taskProgress" destination="Xfa-h6-nQg" id="Bbd-RT-87e"/>
+                <outlet property="taskView" destination="hMt-1f-Tx0" id="tvF-CG-g1r"/>
             </connections>
             <point key="canvasLocation" x="215.5" y="207"/>
         </tableViewCell>

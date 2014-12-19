@@ -10,7 +10,9 @@ import UIKit
 
 
 
-class TodoListDateTableViewController: UITableViewController,FromViewControllerDelegate {
+class TodoListDateTableViewController: UITableViewController {
+    
+    /*
     
     @IBOutlet weak var startTime: UILabel!
     
@@ -216,5 +218,5 @@ class TodoListDateTableViewController: UITableViewController,FromViewControllerD
     
     }
     */
-    
+    */
 }

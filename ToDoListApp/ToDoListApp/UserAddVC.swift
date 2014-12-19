@@ -10,7 +10,7 @@ import UIKit
 
 class UserAddVC:UIViewController, UITextFieldDelegate {
     
-    
+    /*
     @IBOutlet weak var toDoListTitle: UITextField!
     
     @IBOutlet weak var desc: UITextView!
@@ -83,5 +83,5 @@ class UserAddVC:UIViewController, UITextFieldDelegate {
         dismissViewControllerAnimated(true, completion: nil)
 
     }
-
+*/
  }

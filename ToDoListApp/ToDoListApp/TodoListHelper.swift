@@ -77,9 +77,9 @@ case let (.None, .None):
 }
 */
 
-var todoListHelper  = TodoHelper ()
+//var todoListHelper  = TodoHelper ()
 
-class TodoList  {
+class TodoList : NSObject  {
     
     var taskID = ""
     var taskName = ""
@@ -105,7 +105,9 @@ class TodoList  {
     
     struct TabBarIndex {
         static var currentIndex = 0
+        static var selectedSearchTab = false
+        static var isFirestCreateTable = true
     }
-    var currentTodo = TodoList()
+//    var currentTodo = TodoList()
 
 }

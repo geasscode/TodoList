@@ -15,8 +15,12 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     var myTodoList:[TodoList] = []
     var todoItem = TodoList()
     var selectedIndex = 0;
-    
+    var isShowAnimation = true
+    var isFirstCreatTable = true
+    var tempTodoList:[TodoList] = []
+    var searchController: UISearchController!
     var headerVC  = HeaderVC(nibName: "HeaderVC", bundle: NSBundle.mainBundle())
+    
     var actionMap: [[(selectedIndexPath: NSIndexPath) -> Void]] {
         return [
             // Alert style alerts.
@@ -28,6 +32,61 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
                 self.actionSheet
             ]
         ]
+    }
+    
+    
+    var filterString: String? = nil {
+        didSet {
+            
+            let beforeCount = myTodoList.count
+            
+            
+            if filterString == nil || filterString!.isEmpty {
+                
+                println("current input string is \(filterString)")
+            }
+                
+            else {
+                
+                let elseMytoList = myTodoList.count
+                let  temptodoListcount = tempTodoList.count
+                
+                //Does not implement methodSignatureForSelector: 运行错误是因为类没有继承NSObject
+                //                var searchResults = recipes.filter { name.rangeOfString(searchText) != nil  }
+                
+                //                let filterPredicate = NSPredicate(format: "SELF contains[c] %@", argumentArray: [filterString!])
+                println("filterString is \(filterString!)")
+                
+                if(filterString!.hasPrefix("2014-12-19"))
+                {
+                    myTodoList = tempTodoList.filter {
+                        
+                        let time = $0.startTime
+                        let filterName = self.filterString!
+                        var startTime:NSString = time
+                        let result = startTime.containsString(filterName)
+                        return result
+                    }
+
+                }
+                else
+                {
+                myTodoList = tempTodoList.filter {
+                    
+                    let name = $0.taskName
+                    let filterName = self.filterString!
+                    var taskName:NSString = name
+                    let result = taskName.containsString(filterName)
+                    return result
+                }
+                }
+                
+            }
+            let aftercount =  myTodoList.count
+            println("the filter result is \(aftercount)")
+            
+            tableView.reloadData()
+        }
     }
     
     struct TabBarIndex {
@@ -42,22 +101,18 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     
     @IBOutlet weak var todoTableView: UITableView!
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
+        var searchController: UISearchController!
 
-//        self.tableView.separatorStyle = .None
+        //        self.tableView.separatorStyle = .None
         let longPressEvent = UILongPressGestureRecognizer(target: self, action: "longPressTodo:")
         //        longPressEvent.delegate = self
         longPressEvent.minimumPressDuration = 1.0;
         self.tableView.addGestureRecognizer(longPressEvent)
         loadMySqlite()
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleTextFieldTextDidChangeNotification:", name: "taskName", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleCheckboxDidChangeNotification:", name: "hasFinish", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleSortDidChangeNotification:", name: "sort", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleSideBarDateSortDidChangeNotification:", name: "sideBarDateSort", object: nil)
-        
-        
+
         
         //        var recognizer = UIPanGestureRecognizer(target: self, action: "gestureRecognizerAction")
         //        recognizer.delegate = self
@@ -65,7 +120,7 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+ 
         
         /* 自定义navigation BarButtonItem
         
@@ -83,105 +138,73 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
         
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "burger.png"), style: .Plain, target: self, action: "sideBar")
-        
-        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addItem")
         // let leftBarButton:UIBarButtonItem = UIBarButtonItem(title: "返回", style: UIBarButtonItemStyle.Plain, target: self, action:"returnTodoList")
-        
-        
         
         var nib = UINib(nibName:"TodoItemCell", bundle: nil)
         self.tableView.registerNib(nib, forCellReuseIdentifier: "todoItem")
         
-        //       headerVC = HeaderVC(nibName: "HeaderVC", bundle: NSBundle.mainBundle())
-        //        headerVC.newTask.text = "hello,world"
-        self.tableView.tableHeaderView = headerVC.view
-        //        self.tableView.tableFooterView = tabBarView.view
-        
-        //
-        //       tabBarView.view.frame.origin.y = 430
-        //
-        //        self.view.addSubview(tabBarView.view)
-        //
-        
+        if(!TodoHelper.TabBarIndex.selectedSearchTab)
+        {
+            self.tableView.tableHeaderView = headerVC.view
+            
+        }
+            
+        else
+        {
+            self.navigationItem.leftBarButtonItem = nil
+            self.navigationItem.rightBarButtonItem = nil
+        }
+
     }
-    
-    
     
     
     override func viewWillAppear(animated: Bool) // Called when the view is about to made visible. Default does nothing
         
     {
         
-        tableView.reloadDataAnimateWithWave(.RightToLeftWaveAnimation)
-
-        let selectedIndex = TodoHelper.TabBarIndex.currentIndex
-        println("currentTabBar is \(selectedIndex)")
-        let docsPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
+        //带有霸气阻尼效果的波浪式动画
+        // tableView.reloadDataAnimateWithWave(.RightToLeftWaveAnimation)
         
-        println("sqlite path is \(docsPath)")
+        //赋值的静态变量有问题。
         
-        //        let array = SqliteHelper.queryData(.QueryAllFromTodoList)
+        addObserver()
+        showCurrentTabBarPage()
         
-        if(selectedIndex == TabBarIndex.clickedHistoryTab )
-        {
-            //history
-            //myTodoList = SqliteHelper.queryData(.QueryAllFromTodoList)
-            myTodoList = SqliteHelper.queryType(.QueryAllUndoTask)
-            
-        }
-            
-        else if (selectedIndex == TabBarIndex.clickedFinishTab)
-        {
-            //finish
-            myTodoList = SqliteHelper.queryType(.QueryFinishedTask)
-            
-        }
-            
-        else if (selectedIndex == TabBarIndex.clickedEmergencyTab)
-        {
-            //emergency
-            myTodoList = SqliteHelper.queryType(.QueryEmergencyTask)
-            
-        }
-            
-        else if (selectedIndex == TabBarIndex.clickedSortTab)
-        {
-            //sort
-            myTodoList = SqliteHelper.queryData(.QueryAllFromTodoList)
-            // popupActionSheet()
-            
-            
-        }
-        
-        
-        todoTableView.reloadData()
     }
     
-    
+
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath){
-
-
-//       cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1)
-//
-//        UIView.animateWithDuration(0.25, animations: {
-//            cell.layer.transform=CATransform3DMakeScale(1, 1, 1)
-//       })
         
-    }
-
-    /*
-    func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        if (operation != .None) {
+        //波浪式动画。
+        
+        let initialDelay = 0.2
+        let stutter = 0.06
+        let multiplier = Double(indexPath.row) * stutter
+        let delaytime  = initialDelay + multiplier
+        
+        if(isShowAnimation)
+        {
+            let cardCell = cell as TodoItemTableViewCell
+            cardCell.startAnimationWithDelay(delaytime)
             
-//            AMWaveViewController.animationControllerForOperation(operation)
-//           AMWaveViewController.
-        
-//            return [AMWaveTransition transitionWithOperation:operation andTransitionType:AMWaveTransitionTypeBounce];
+            if(indexPath.row == 10)
+            {
+                isShowAnimation = false
+            }
         }
-        return nil;
+        
+        
+        //另一种动画
+        
+        //       cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1)
+        //
+        //        UIView.animateWithDuration(0.25, animations: {
+        //            cell.layer.transform=CATransform3DMakeScale(1, 1, 1)
+        //       })
+        
     }
-    */
+    
 
     override func tableView(tableView: UITableView, shouldShowMenuForRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
@@ -233,7 +256,7 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
             
             UIPasteboard.generalPasteboard().string = myTodoList[indexPath.row].startTime
             
-//            [arrayValue  replaceObjectAtIndex:indexPath.rowwithObject:@""];
+            //            [arrayValue  replaceObjectAtIndex:indexPath.rowwithObject:@""];
             tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
             
             
@@ -245,17 +268,75 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
             
             
             tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
-
             
-//            NSString *pasteString = [UIPasteboard  generalPasteboard].string;
-//            
-//            NSString *tmpString = [NSString  stringWithFormat:@"%@%@",[arrayValue  objectAtIndex:indexPath.row],pasteString];
-//            
-//            [arrayValue   replaceObjectAtIndex:indexPath.rowwithObject:tmpString];
-//            
-//            [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]withRowAnimation:UITableViewRowAnimationNone];
+            
+            //            NSString *pasteString = [UIPasteboard  generalPasteboard].string;
+            //
+            //            NSString *tmpString = [NSString  stringWithFormat:@"%@%@",[arrayValue  objectAtIndex:indexPath.row],pasteString];
+            //
+            //            [arrayValue   replaceObjectAtIndex:indexPath.rowwithObject:tmpString];
+            //
+            //            [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]withRowAnimation:UITableViewRowAnimationNone];
             
         }
+    }
+    
+    func showCurrentTabBarPage()
+    {
+        let selectedIndex = TodoHelper.TabBarIndex.currentIndex
+        
+        println("currentTabBar is \(selectedIndex)")
+        let docsPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
+        
+        println("sqlite path is \(docsPath)")
+        
+        //        let array = SqliteHelper.queryData(.QueryAllFromTodoList)
+        
+        if(selectedIndex == 0 )
+        {
+            //history
+            //myTodoList = SqliteHelper.queryData(.QueryAllFromTodoList)
+            myTodoList = SqliteHelper.queryType(.QueryAllUndoTask)
+            
+        }
+            
+        else if (selectedIndex == 1)
+        {
+            //finish
+            myTodoList = SqliteHelper.queryType(.QueryFinishedTask)
+            
+        }
+            
+        else if (selectedIndex == 2)
+        {
+            //emergency
+            myTodoList = SqliteHelper.queryType(.QueryEmergencyTask)
+            
+        }
+            
+        else if (selectedIndex == 3)
+        {
+            //sort
+            myTodoList = SqliteHelper.queryData(.QueryAllFromTodoList)
+            // popupActionSheet()
+            
+            
+        }
+        
+        tempTodoList = myTodoList
+        
+        println("mytodoList count is \(myTodoList.count)")
+        todoTableView.reloadData()
+        
+    }
+    
+    
+    func addObserver()
+    {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleTextFieldTextDidChangeNotification:", name: "taskName", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleCheckboxDidChangeNotification:", name: "hasFinish", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleSortDidChangeNotification:", name: "sort", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleSideBarDateSortDidChangeNotification:", name: "sideBarDateSort", object: nil)
     }
     
     func longPressTodo(gestureRecognizer:UIGestureRecognizer)    {
@@ -321,21 +402,31 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     }
     
     override func viewDidDisappear(animated: Bool) {
-        
-        //        let notificationCenter = NSNotificationCenter.defaultCenter()
-        //        notificationCenter.removeObserver(self, name: "taskName", object: nil)
-        //        notificationCenter.removeObserver(self, name: "hasFinish", object: nil)
-        
-    }
-    
-    deinit
-    {
+        //出现的问题：当插入第二条数据时候，然后选择搜索tabItem 会出现4条数据。一开始debug，找到重复创建table，共4次以为这就是引起重复插入的原因，
+        //于是继续寻找所有有Insert 数据的地方。 最后定位到taskName 通知。怀疑是deinit没有删除通知，结果一次命中。最终问题解决。
+        //要注意的地方。
+        //之前以为deinit会移除，结果没移除通知，导致存在重复insert数据的bug
+        println("已经触发viewDidDisappear方法")
         let notificationCenter = NSNotificationCenter.defaultCenter()
         notificationCenter.removeObserver(self, name: "taskName", object: nil)
         notificationCenter.removeObserver(self, name: "hasFinish", object: nil)
         notificationCenter.removeObserver(self, name: "sort", object: nil)
         notificationCenter.removeObserver(self, name: "sideBarDateSort", object: nil)
+        myTodoList = []
         
+    }
+    
+    deinit
+    {
+        /*
+        println("已经触发deinit方法")
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.removeObserver(self, name: "taskName", object: nil)
+        notificationCenter.removeObserver(self, name: "hasFinish", object: nil)
+        notificationCenter.removeObserver(self, name: "sort", object: nil)
+        notificationCenter.removeObserver(self, name: "sideBarDateSort", object: nil)
+        myTodoList = []
+        */
     }
     
     override func didReceiveMemoryWarning() {
@@ -346,16 +437,16 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     
     // MARK: - Table view data source
     
-    //    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-    //        // #warning Potentially incomplete method implementation.
-    //        // Return the number of sections.
-    //        return 0
-    //    }
-    
     
     func loadMySqlite()
     {
-        SqliteHelper.createTable()
+        println("isFirstCreatTable \(TodoHelper.TabBarIndex.isFirestCreateTable)")
+        
+        if(TodoHelper.TabBarIndex.isFirestCreateTable)
+        {
+            TodoHelper.TabBarIndex.isFirestCreateTable = false
+            SqliteHelper.createTable()
+        }
     }
     
     
@@ -363,56 +454,93 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     func handleTextFieldTextDidChangeNotification(notification: NSNotification) {
         let textField = notification.object as UITextField
         let todo = TodoList()
-        //        todo.currentPriority = "!"
         todo.taskName = textField.text
         todo.taskID = GenID("Task")
         let formatter = NSDateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
-        //            formatter.dateFromString("yyyy-MM-dd")
+        
         let date = NSDate()
         todo.finishTime = formatter.stringFromDate(date)
-        
-        //        todo.finishTime = "明天"
         todo.isShortcut = true
         todo.isNewTask = false
+        
         myTodoList.append(todo)
-//        todo.isNewTask = false
         SqliteHelper.insertData(.InsertAllFromTodoList,model: todo)
         SqliteHelper.insertData(.InsertAllFromTodoListItem, model: todo)
-        
+
         todoTableView.reloadData()
     }
     
     func handleSideBarDateSortDidChangeNotification(notification: NSNotification)
     {
-        let currentRow = notification.object as Int
         
-        switch(currentRow)
+        let index = notification.object as NSIndexPath
+        let currentSection = index.section
+        let currentRow = index.row
+        
+        if(currentSection == 0)
         {
-            //0 is today, 1 is tomorroy, 2 is 7days.
+            switch(currentRow)
+            {
+                //0 is today, 1 is tomorroy, 2 is 7days.
+                
+            case 0:
+                myTodoList = SqliteHelper.queryType(.QueryTodayTask)
+                
+                sideMenuController()?.sideMenu?.hideSideMenu()
+                
+                todoTableView.reloadData()
+                
+                
+            case 1:
+                myTodoList = SqliteHelper.queryType(.QueryTomorrow)
+                sideMenuController()?.sideMenu?.hideSideMenu()
+                
+                todoTableView.reloadData()
+                
+            case 2:
+                myTodoList = SqliteHelper.queryType(.QueryOneWeek)
+                sideMenuController()?.sideMenu?.hideSideMenu()
+                
+                todoTableView.reloadData()
+                
+            default :
+                return
+            }
             
-        case 0:
-            myTodoList = SqliteHelper.queryType(.QueryTodayTask)
+        }
             
-            sideMenuController()?.sideMenu?.hideSideMenu()
+        else
+        {
             
-            todoTableView.reloadData()
+            switch(currentRow)
+            {
+                //0 is today, 1 is tomorroy, 2 is 7days.
+                
+            case 0:
+                myTodoList = SqliteHelper.queryType(.QueryCreateDateTask)
+                
+                sideMenuController()?.sideMenu?.hideSideMenu()
+                
+                todoTableView.reloadData()
+                
+                
+            case 1:
+                myTodoList = SqliteHelper.queryType(.QueryPriority)
+                sideMenuController()?.sideMenu?.hideSideMenu()
+                
+                todoTableView.reloadData()
+                
+            case 2:
+                myTodoList = SqliteHelper.queryType(.QueryDeadLineTask)
+                sideMenuController()?.sideMenu?.hideSideMenu()
+                
+                todoTableView.reloadData()
+                
+            default :
+                return
+            }
             
-            
-        case 1:
-            myTodoList = SqliteHelper.queryType(.QueryTomorrow)
-            sideMenuController()?.sideMenu?.hideSideMenu()
-            
-            todoTableView.reloadData()
-            
-        case 2:
-            myTodoList = SqliteHelper.queryType(.QueryOneWeek)
-            sideMenuController()?.sideMenu?.hideSideMenu()
-            
-            todoTableView.reloadData()
-            
-        default :
-            return
         }
     }
     
@@ -455,11 +583,6 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
             
         }
         
-        
-        
-        
-        
-        //        todoTableView.reloadData()
         
     }
     
@@ -553,7 +676,7 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     {
         
         //let buttonTitle = NSLocalizedString("Button", comment: "")
-    
+        
         
         // Set the button's title for normal state.
         let normalTitleAttributes = [
@@ -662,37 +785,16 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        // let  selectedCell = tableView.cellForRowAtIndexPath(indexPath)
         
         todoTableView.deselectRowAtIndexPath(indexPath, animated: false)
-        //var tappedItem = SingletonClass.sharedInstance.todoList[indexPath.row] as TodoList
-        //        var tappedItem = todoListHelper.lists[indexPath.row] as TodoList
-        
         var todoItem = myTodoList[indexPath.row] as TodoList
-        
-        
-        
         todoItem.hascomplete = !todoItem.hascomplete
-        //SingletonClass.sharedInstance.todoList[indexPath.row].hascomplete = tappedItem.hascomplete
-        //        todoListHelper.lists[indexPath.row].hascomplete = tappedItem.hascomplete
         myTodoList[indexPath.row].hascomplete = todoItem.hascomplete
-        
-        
         tableView.moveRowAtIndexPath(indexPath, toIndexPath: NSIndexPath(forRow: myTodoList.count - 1, inSection: 0))
-        
         let newTaskVC = self.storyboard?.instantiateViewControllerWithIdentifier("newTask") as NewTaskViewController
-        
         todoItem.currentRow = indexPath.row
         newTaskVC.todoItem = todoItem
-        
-        
         self.navigationController?.pushViewController(newTaskVC, animated: true)
-        
-        // taskInfo()
-        
-        //todoListHelper.lists = SingletonClass.sharedInstance.todoList
-        //        println("diselect result is\(tappedItem.hascomplete)")
-        //todoTableView.reloadData()
         
     }
     override func setEditing(editing: Bool, animated: Bool) {
@@ -744,53 +846,7 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
         
         itemCell.finishTime.text = "预计完成时间:" + currentTodoItem.finishTime
         
-        /*
-        // Configure the cell...
-        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "todolist")
         
-        todoListHelper.currentTodo = todoListHelper.lists[indexPath.row]
-        //cell.textLabel.text = SingletonClass.sharedInstance.todoList[indexPath.row].name
-        cell.textLabel.text =  todoListHelper.lists[indexPath.row].name
-        
-        cell.imageView.image = UIImage(named: "icon-calendar.png")
-        //cell.imageView.image = UIImage(named: "uncheck.png")
-        
-        // cell.detailTextLabel?.text = SingletonClass.sharedInstance.todoList[indexPath.row].desc
-        cell.detailTextLabel?.text = todoListHelper.lists[indexPath.row].desc
-        cell.accessoryType =  .DisclosureIndicator
-        */
-        //        let taskcheck = todoListHelper.currentTodo.taskfinish
-        //        if(taskcheck)
-        //        {
-        //            itemCell.checkbox.selected = taskcheck
-        //            itemCell.taskName.attributedText = strikeThrough()
-        //        }
-        /*
-        if(currentTodoItem.finishTime != "")
-        {
-        itemCell.finishTime.text = "预计完成时间:" + currentTodoItem.finishTime
-        //            cell.detailTextLabel?.text = "预计完成时间:" + todoListHelper.currentTodo.finishTime
-        }
-        
-        else
-        {
-        itemCell.finishTime.text = "预计完成时间:" + "明天"
-        
-        }*/
-        //        let check = SingletonClass.sharedInstance.todoList[indexPath.row] as TodoList
-        //        let check = todoListHelper.lists[indexPath.row] as TodoList
-        
-        
-        //        if check.hascomplete{
-        //  cell.accessoryType = .Checkmark
-        //
-        //        }
-        //        else{
-        //            cell.accessoryType = .None
-        //
-        //        }
-        //
-        //        return cell
         return itemCell
     }
     
