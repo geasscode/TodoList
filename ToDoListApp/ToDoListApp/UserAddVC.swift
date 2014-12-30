@@ -8,12 +8,14 @@
 
 import UIKit
 
-class UserAddVC:UIViewController, UITextFieldDelegate {
+class UserAddVC:UIViewController, UITextFieldDelegate,IGLDropDownMenuDelegate {
     
-    /*
-    @IBOutlet weak var toDoListTitle: UITextField!
+    @IBOutlet weak var cardView: UIView!
     
-    @IBOutlet weak var desc: UITextView!
+//    @IBOutlet weak var toDoListTitle: UITextField!
+//    
+//    @IBOutlet weak var desc: UITextView!
+      var dropDownMenu = IGLDropDownMenu()
 
     
     override func viewDidLoad() {
@@ -23,12 +25,80 @@ class UserAddVC:UIViewController, UITextFieldDelegate {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         
-    
-        
+       
+        showDropDownList()
          self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
+    func dropDownMenu(dropDownMenu:IGLDropDownMenu, selectedItemAtIndex index:Int)
+    {
+        var item = dropDownMenu.dropDownItems[index] as IGLDropDownItem
+    }
     
+    func showDropDownList()
+    {
+        var dataArray = [["image":"sun.png","title":"Sun"],["image":"clouds.png","title":"Clouds"],["image":"rain.png","title":"Rain"],["image":"clouds.png","title":"Clouds"]]
+        
+        var dropdownItems:NSMutableArray = []
+        
+        for var i = 0 ;i<dataArray.count;i++
+        {
+            var dict = dataArray[i]
+            var dropDownItem = IGLDropDownItem()
+            
+            //            dropDownItem.setIconImages(UIImage(named: dict["image"]!))
+            
+            if let image = dict["image"]
+            {
+                dropDownItem.setIconImages(UIImage(named: image))
+
+            }
+            let value = dict["title"]
+            
+            println(" value is \(value!)")
+            dropDownItem.setTexts(dict["title"]!)
+            
+            dropdownItems.addObject(dropDownItem)
+            
+            
+        }
+        
+      
+     
+            dropDownMenu.menuButton.text = "非常长的文本查看"
+            
+            dropDownMenu.dropDownItems = dropdownItems
+            dropDownMenu.paddingLeft = 15
+            dropDownMenu.frame = CGRectMake(60, 30, 200, 45)
+            dropDownMenu.delegate = self
+            
+            dropDownMenu.gutterY = 5;
+            dropDownMenu.type = IGLDropDownMenuType.SlidingInBoth
+            
+            
+            dropDownMenu.reloadView()
+           cardView.addSubview(dropDownMenu)
+        
+      
+//       self..addSubview(dropDownMenu)
+        //        tableView.tableFooterView = dropDownMenu
+        
+        //
+        //
+        //
+        //        [self setUpParamsForDemo1];
+        //
+        //        [self.dropDownMenu reloadView];
+        //
+        //        [self.view addSubview:self.dropDownMenu];
+        //        
+        
+        
+        
+        
+    }
+
+    /*
     @IBAction func addText(sender: AnyObject) {
         
 //        todoListHelper.addTask(toDoListTitle.text, dateline: desc.text,complete:false)

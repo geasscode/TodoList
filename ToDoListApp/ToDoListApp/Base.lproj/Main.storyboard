@@ -754,10 +754,10 @@
             </objects>
             <point key="canvasLocation" x="4473" y="1436"/>
         </scene>
-        <!--View Controller-->
+        <!--User AddVC-->
         <scene sceneID="XK5-hm-VXv">
             <objects>
-                <viewController id="HY9-O7-Qrt" sceneMemberID="viewController">
+                <viewController id="HY9-O7-Qrt" customClass="UserAddVC" customModule="ToDoListApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vw2-En-WXl"/>
                         <viewControllerLayoutGuide type="bottom" id="nba-ld-AtC"/>
@@ -765,9 +765,12 @@
                     <view key="view" contentMode="scaleToFill" id="0nW-ZP-5it">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.79607850309999995" green="0.82352948189999997" blue="0.86274516580000005" alpha="1" colorSpace="deviceRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" tag="4" systemItem="more" id="0Zi-39-Wtb"/>
+                    <connections>
+                        <outlet property="cardView" destination="0nW-ZP-5it" id="Zbm-MM-jEK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J1D-9J-PoL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

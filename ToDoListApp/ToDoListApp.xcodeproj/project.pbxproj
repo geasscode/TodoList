@@ -34,6 +34,8 @@
 		F7466A291A4280360025D42C /* icon-search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7466A281A4280360025D42C /* icon-search@2x.png */; };
 		F7466A2B1A4282480025D42C /* icon-searchs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F7466A2A1A4282480025D42C /* icon-searchs@2x.png */; };
 		F7466A2E1A441E1F0025D42C /* DropDownList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7466A2D1A441E1F0025D42C /* DropDownList.swift */; };
+		F7466A341A480AA60025D42C /* IGLDropDownItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F7466A311A480AA60025D42C /* IGLDropDownItem.m */; };
+		F7466A351A480AA60025D42C /* IGLDropDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F7466A331A480AA60025D42C /* IGLDropDownMenu.m */; };
 		F74A338F19FFA04F00F5BA5A /* TodoListBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74A338E19FFA04F00F5BA5A /* TodoListBaseCell.swift */; };
 		F74A339219FFA1D300F5BA5A /* TodoListCheckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74A339119FFA1D300F5BA5A /* TodoListCheckCell.swift */; };
 		F74A339519FFA34800F5BA5A /* TodoListDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74A339419FFA34800F5BA5A /* TodoListDescriptor.swift */; };
@@ -124,6 +126,10 @@
 		F7466A2A1A4282480025D42C /* icon-searchs@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-searchs@2x.png"; sourceTree = "<group>"; };
 		F7466A2C1A42DCF00025D42C /* FunctionalTest.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = FunctionalTest.playground; sourceTree = "<group>"; };
 		F7466A2D1A441E1F0025D42C /* DropDownList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownList.swift; sourceTree = "<group>"; };
+		F7466A301A480AA60025D42C /* IGLDropDownItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGLDropDownItem.h; sourceTree = "<group>"; };
+		F7466A311A480AA60025D42C /* IGLDropDownItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGLDropDownItem.m; sourceTree = "<group>"; };
+		F7466A321A480AA60025D42C /* IGLDropDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGLDropDownMenu.h; sourceTree = "<group>"; };
+		F7466A331A480AA60025D42C /* IGLDropDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGLDropDownMenu.m; sourceTree = "<group>"; };
 		F74A338E19FFA04F00F5BA5A /* TodoListBaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListBaseCell.swift; sourceTree = "<group>"; };
 		F74A339119FFA1D300F5BA5A /* TodoListCheckCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListCheckCell.swift; sourceTree = "<group>"; };
 		F74A339419FFA34800F5BA5A /* TodoListDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListDescriptor.swift; sourceTree = "<group>"; };
@@ -265,6 +271,17 @@
 				F7466A241A403C9B0025D42C /* NSObject+Swift.m */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		F7466A2F1A480AA60025D42C /* IGLDropDownMenu */ = {
+			isa = PBXGroup;
+			children = (
+				F7466A301A480AA60025D42C /* IGLDropDownItem.h */,
+				F7466A311A480AA60025D42C /* IGLDropDownItem.m */,
+				F7466A321A480AA60025D42C /* IGLDropDownMenu.h */,
+				F7466A331A480AA60025D42C /* IGLDropDownMenu.m */,
+			);
+			path = IGLDropDownMenu;
 			sourceTree = "<group>";
 		};
 		F74A338D19FFA03800F5BA5A /* cells */ = {
@@ -422,6 +439,7 @@
 		F7BFCC981A25C4B700596828 /* thirdpart */ = {
 			isa = PBXGroup;
 			children = (
+				F7466A2F1A480AA60025D42C /* IGLDropDownMenu */,
 				F7466A221A403C9B0025D42C /* Extension */,
 				F7466A1E1A40369B0025D42C /* animation */,
 				F7A5F3681A3AC85F00B69D84 /* AMWaveTransition */,
@@ -596,6 +614,7 @@
 				F7BFCCAB1A27085B00596828 /* NSString+MessageDigest.m in Sources */,
 				F79610EE19FF74C800F7EC51 /* UserAddVC.swift in Sources */,
 				F74A339B19FFA8F300F5BA5A /* TodoListPickerCell.swift in Sources */,
+				F7466A351A480AA60025D42C /* IGLDropDownMenu.m in Sources */,
 				D056686C1A1DC4CC002FEC80 /* TestViewController.swift in Sources */,
 				F79610EC19FF74C800F7EC51 /* TodoListHelper.swift in Sources */,
 				F74A339D19FFA92600F5BA5A /* TodoListDateCell.swift in Sources */,
@@ -603,6 +622,7 @@
 				F74A339219FFA1D300F5BA5A /* TodoListCheckCell.swift in Sources */,
 				F7466A251A403C9B0025D42C /* NSObject+Swift.m in Sources */,
 				F7A5F36E1A3AC85F00B69D84 /* AMWaveViewController.m in Sources */,
+				F7466A341A480AA60025D42C /* IGLDropDownItem.m in Sources */,
 				F74A339519FFA34800F5BA5A /* TodoListDescriptor.swift in Sources */,
 				F7BFCC9A1A25C4B700596828 /* SwiftData.swift in Sources */,
 				F79610CA19FF737600F7EC51 /* AppDelegate.swift in Sources */,

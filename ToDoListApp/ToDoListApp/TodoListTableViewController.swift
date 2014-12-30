@@ -9,7 +9,7 @@
 import UIKit
 
 
-class TodoListTableViewController: UITableViewController,UIGestureRecognizerDelegate {
+class TodoListTableViewController: UITableViewController,UIGestureRecognizerDelegate,IGLDropDownMenuDelegate{
     
     
     var myTodoList:[TodoList] = []
@@ -18,8 +18,16 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     var isShowAnimation = true
     var isFirstCreatTable = true
     var tempTodoList:[TodoList] = []
+    var chooseArray = []
     var searchController: UISearchController!
     var headerVC  = HeaderVC(nibName: "HeaderVC", bundle: NSBundle.mainBundle())
+    
+//    @IBOutlet weak var dropDownMenu:IGLDropDownMenu?
+
+    
+    
+//    @property (nonatomic, strong) IGLDropDownMenu *dropDownMenu;
+//    @property (nonatomic, strong) UILabel *textLabel;
     
     var actionMap: [[(selectedIndexPath: NSIndexPath) -> Void]] {
         return [
@@ -67,18 +75,18 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
                         let result = startTime.containsString(filterName)
                         return result
                     }
-
+                    
                 }
                 else
                 {
-                myTodoList = tempTodoList.filter {
-                    
-                    let name = $0.taskName
-                    let filterName = self.filterString!
-                    var taskName:NSString = name
-                    let result = taskName.containsString(filterName)
-                    return result
-                }
+                    myTodoList = tempTodoList.filter {
+                        
+                        let name = $0.taskName
+                        let filterName = self.filterString!
+                        var taskName:NSString = name
+                        let result = taskName.containsString(filterName)
+                        return result
+                    }
                 }
                 
             }
@@ -104,15 +112,27 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
         
         super.viewDidLoad()
         
-        var searchController: UISearchController!
+        //showDropDownList()
+        
 
+//        
+//        DropDownListView * dropDownView = [[DropDownListView alloc] initWithFrame:CGRectMake(0,60, self.view.frame.size.width, 40) dataSource:self delegate:self];
+//        dropDownView.mSuperView = self.view;
+//        
+//        
+//        [self.view addSubview:dropDownView];
+        
+      
+        
+        var searchController: UISearchController!
+        
         //        self.tableView.separatorStyle = .None
         let longPressEvent = UILongPressGestureRecognizer(target: self, action: "longPressTodo:")
         //        longPressEvent.delegate = self
         longPressEvent.minimumPressDuration = 1.0;
         self.tableView.addGestureRecognizer(longPressEvent)
         loadMySqlite()
-
+        
         
         //        var recognizer = UIPanGestureRecognizer(target: self, action: "gestureRecognizerAction")
         //        recognizer.delegate = self
@@ -120,7 +140,7 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
- 
+        
         
         /* 自定义navigation BarButtonItem
         
@@ -152,12 +172,75 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
             
         else
         {
+//             chooseArray = [["任务进度","开始时间","提醒时间","结束时间","任务名"],["包含","匹配","于开始","于结束"]]
+//            let dropDownView = DropDownList()
+//            let dropDownListView = dropDownView.initWithFrame(CGRectMake(0, 60, self.view.frame.size.width, 40), dataSource: self, delegate: self) as DropDownList
+//            dropDownView.superView = self.view
+//            
+//             self.tableView.tableFooterView = dropDownListView.view
+
             self.navigationItem.leftBarButtonItem = nil
             self.navigationItem.rightBarButtonItem = nil
         }
-
+        
+        
+        tableView.tableFooterView = UIView()
+        
     }
     
+    
+    func showDropDownList()
+    {
+        var dataArray = [["image":"sun.png","title":"Sun"],["image":"clouds.png","title":"Clouds"],["image":"rain.png","title":"Rain"],["image":"clouds.png","title":"Clouds"]]
+        
+        var dropdownItems:NSMutableArray = []
+        
+        for var i = 0 ;i<dataArray.count;i++
+        {
+            var dict = dataArray[i]
+            var dropDownItem = IGLDropDownItem()
+            
+//            dropDownItem.setIconImages(UIImage(named: dict["image"]!))
+            
+            let value = dict["title"]
+            
+            println(" value is \(value!)")
+            dropDownItem.setTexts(dict["title"]!)
+            
+            dropdownItems.addObject(dropDownItem)
+
+
+        }
+        
+        let dropDownMenu = IGLDropDownMenu()
+        dropDownMenu.menuText = "查看"
+        dropDownMenu.dropDownItems = dropdownItems
+        dropDownMenu.paddingLeft = 15
+        dropDownMenu.frame = CGRectMake(60, 400, 200, 45)
+        dropDownMenu.delegate = self
+        
+        dropDownMenu.gutterY = 5;
+        dropDownMenu.type = IGLDropDownMenuType.SlidingInBoth
+        
+        
+        dropDownMenu.reloadView()
+        tableView.addSubview(dropDownMenu)
+//        tableView.tableFooterView = dropDownMenu
+        
+//        
+//    
+//        
+//        [self setUpParamsForDemo1];
+//        
+//        [self.dropDownMenu reloadView];
+//        
+//        [self.view addSubview:self.dropDownMenu];
+//        
+
+
+        
+
+    }
     
     override func viewWillAppear(animated: Bool) // Called when the view is about to made visible. Default does nothing
         
@@ -173,7 +256,7 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
         
     }
     
-
+    
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath){
         
         //波浪式动画。
@@ -205,7 +288,13 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
         
     }
     
-
+    
+    func dropDownMenu(dropDownMenu:IGLDropDownMenu, selectedItemAtIndex index:Int)
+    {
+        var item = dropDownMenu.dropDownItems[index] as IGLDropDownItem
+    }
+    
+    
     override func tableView(tableView: UITableView, shouldShowMenuForRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
@@ -467,7 +556,7 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
         myTodoList.append(todo)
         SqliteHelper.insertData(.InsertAllFromTodoList,model: todo)
         SqliteHelper.insertData(.InsertAllFromTodoListItem, model: todo)
-
+        
         todoTableView.reloadData()
     }
     
@@ -921,7 +1010,36 @@ class TodoListTableViewController: UITableViewController,UIGestureRecognizerDele
     }
     
     
+    /*
+    func chooseAtSection(section:Int, index:Int)
+    {
+        println("your choose section\(section),index:\(index)")
+    }
     
+    
+    func numberOfSections() -> Int
+    {
+        return  chooseArray.count
+    }
+    
+    func numberOfRowsInSection(section:Int) -> Int
+    {
+        let array: AnyObject = chooseArray[section]
+        return array.count
+    }
+    
+    func titleInSection(section: Int, index: Int) -> String
+    {
+        let title = chooseArray[section][index] as String
+         return title
+    }
+    
+    func defaultShowSection(section:Int)-> Int
+    {
+        return 0;
+    }
+    
+    */
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
